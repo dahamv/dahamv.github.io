@@ -3,20 +3,24 @@ Container = Spring container - where objects are stored for Dependency injection
 ### class annotatinos
 
 ```@Componenet``` - creates a bean object in Spring container (a sigleton is made when without @Scope i.e. use same obj all the time)
+
 ```@Componenet("name")``` - to change the name of the bean obj made in container. default name is class name
+
 ```@Scope("prototype")```  - creates an obj everytime asked contex.getBean(className)
 
->>spring MVC>>
+spring MVC
 ```@Controler```  - In spring MVC take this class as a Spring Contriler. 
 
 ### method annotations
 
 ```@RequestMapping``` - map a request to a method in a Controller. 
+
 ```@ResponseBody``` - when this is NOT used, spring MVC will think (since return type of method is String) that you are returning a View name.
                 so it will search for the View (jsp file). This annotation is used when you want to return a data and SpringMVC 
 		DispatcherServlet will simply pass that data to the client(browser) in the response.
 		```return repo.findAll().toString();```
-@PathVariable - When wildcards are used as ```@RequestMapping("/alian/{aid}")```
+		
+```@PathVariable``` - When wildcards are used as ```@RequestMapping("/alian/{aid}")```
 
 ### variable annotations
 
