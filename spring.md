@@ -79,3 +79,4 @@ public interface MyRepo extends CrudRepository<MyPOJO, Integer(i.e. primaryKey)>
 
 
 ```
+see [Spring data jpa - querry creation](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation)
