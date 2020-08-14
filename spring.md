@@ -8,38 +8,67 @@ Container = Spring container - where objects are stored for Dependency injection
 
 ```@Scope("prototype")```  - creates an obj everytime asked contex.getBean(className)
 
+```java
+// a Model
+@Componenet
+@Scope(value="prototype")
+public class Alien {
+	private int aId;
+	private String aName;
+	private String tech;
+	@Autowired  // the componenet Laptop will be Autowired with Dependency injection
+	@Qualifire("laptop")
+	private Laptop laptop; // There is another Componenet (A model - bean class) called Laptop
+	// getters and setters
+}
+```
 spring MVC
-```@Controler```  - In spring MVC take this class as a Spring Contriler. 
-
-### method annotations
-
-```@RequestMapping``` - map a request to a method in a Controller. 
-
-```@ResponseBody``` - when this is NOT used, spring MVC will think (since return type of method is String) that you are returning a View name.
-                so it will search for the View (jsp file). This annotation is used when you want to return a data and SpringMVC 
-		DispatcherServlet will simply pass that data to the client(browser) in the response.
-		```return repo.findAll().toString();```
-		
-```@PathVariable``` - When wildcards are used as ```@RequestMapping("/alian/{aid}")```
+```@Controler```  - In spring MVC take this class as a Spring Controler to get HTTP requests. There is a servlet running underlying. 
 
 ### variable annotations
 
-```@Autowired``` - spring searchs for an object of the variable type in container.
-```@Qualifire("name to search in the container")```  - every bean object in spring container has a name
-```@RequestParam``` - to get URL parameters assigned to method arguments.
-
+```@Autowired``` - spring searchs for an object of the variable type in container.  
+```@Qualifire("name to search in the container")```  - every bean object in spring container has a name.  
+```@RequestParam``` - to get URL parameters assigned to method arguments.  
 
 ModleAndView class send data(model) from Controler to View. get that data from View(jsp file) with ${varName} i.e. JSTL format
 in the controler request dispatch method >> mv.addObject(key,value) ; mv.setViewName(nameOfJSPFile)
 
+```java
+@Controler
+public class HomeControler {
+	@RequestMapping("home")
+	public ModelAndView home(@RequestParam("name") String myName) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("name",myName);
+		mv.setViewName("home"); // now myName can be read from home.jsp file ${name}		
+	}
+}
+```
+### method annotations
+
+```@RequestMapping``` - map a request to a method in a Controller.   
+```@ResponseBody``` - when this is NOT used, spring MVC will think (since return type of method is String) that you are returning a View name.   
+                so it will search for the View (jsp file). This annotation is used when you want to return a data and SpringMVC   
+		DispatcherServlet will simply pass that data to the client(browser) in the response.   
+		```return repo.findAll().toString();```    	
+```@PathVariable``` - When wildcards are used as ```@RequestMapping("/alian/{aid}")```   
+
+```java
+@RequestMapping("/alian/{aid}")
+@ResponseBody
+public String getAlien(@PathVariable("aid") int aid) {
+	return repo.findById(aid).toString();
+}
+```
 
 
 ### JPA accotations
 
-```@Entity```    - For Spring Modelclasses when need to be persisted by JPA
-```@Id``` - primary key
-```@Query("the query in JPQL")``` - above a method name in the repo interface do run a custom querry. 
-
-in JPA you need a Repository interface as a DAO to deal with a database
-
+```@Entity```    - For Spring Modelclasses when need to be persisted by JPA   
+```@Id``` - primary key   
+```@Query("the query in JPQL")``` - above a method name in the repo interface do run a custom querry.    
+   
+in JPA you need a Repository interface as a DAO to deal with a database   
+   
 ```public interface MyRepo extends CrudRepository<MyPOJO, Integer(i.e. primaryKey)>```
