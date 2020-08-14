@@ -1,15 +1,15 @@
 Container = Spring container - where objects are stored for Dependency injection
 
-###class annotatinos
+### class annotatinos
 
-@Componenet - creates a bean object in Spring container (a sigleton is made when without @Scope i.e. use same obj all the time)
-@Componenet("name") - to change the name of the bean obj made in container. default name is class name
-@Scope("prototype")  - creates an obj everytime asked contex.getBean(className)
+```@Componenet``` - creates a bean object in Spring container (a sigleton is made when without @Scope i.e. use same obj all the time)
+```@Componenet("name")``` - to change the name of the bean obj made in container. default name is class name
+```@Scope("prototype")```  - creates an obj everytime asked contex.getBean(className)
 
 >>spring MVC>>
-@Controler  - In spring MVC take this class as a Spring Contriler. 
+```@Controler```  - In spring MVC take this class as a Spring Contriler. 
 
-###method annotations
+### method annotations
 
 ```@RequestMapping``` - map a request to a method in a Controller. 
 ```@ResponseBody``` - when this is NOT used, spring MVC will think (since return type of method is String) that you are returning a View name.
@@ -18,7 +18,7 @@ Container = Spring container - where objects are stored for Dependency injection
 		```return repo.findAll().toString();```
 @PathVariable - When wildcards are used as ```@RequestMapping("/alian/{aid}")```
 
-###variable annotations
+### variable annotations
 
 ```@Autowired``` - spring searchs for an object of the variable type in container.
 ```@Qualifire("name to search in the container")```  - every bean object in spring container has a name
@@ -30,7 +30,7 @@ in the controler request dispatch method >> mv.addObject(key,value) ; mv.setView
 
 
 
-###JPA accotations
+### JPA accotations
 
 ```@Entity```    - For Spring Modelclasses when need to be persisted by JPA
 ```@Id``` - primary key
