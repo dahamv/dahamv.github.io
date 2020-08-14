@@ -31,8 +31,7 @@ spring MVC
 ```@Qualifire("name to search in the container")```  - every bean object in spring container has a name.  
 ```@RequestParam``` - to get URL parameters assigned to method arguments.  
 
-ModleAndView class send data(model) from Controler to View. get that data from View(jsp file) with ${varName} i.e. JSTL format
-in the controler request dispatch method >> mv.addObject(key,value) ; mv.setViewName(nameOfJSPFile)
+**ModleAndView** class sends data(model) from **Controler to View**. get that data from **view(jsp file)** with **${varName}** i.e. JSTL format
 
 ```java
 @Controler
@@ -67,8 +66,16 @@ public String getAlien(@PathVariable("aid") int aid) {
 
 ```@Entity```    - For Spring Modelclasses when need to be persisted by JPA   
 ```@Id``` - primary key   
-```@Query("the query in JPQL")``` - above a method name in the repo interface do run a custom querry.    
-   
+```@Query("the query in JPQL")``` - above a method name in the repo interface do run a custom querry.       
+     
 in JPA you need a Repository interface as a DAO to deal with a database   
-   
-```public interface MyRepo extends CrudRepository<MyPOJO, Integer(i.e. primaryKey)>```
+    
+```java
+public interface MyRepo extends CrudRepository<MyPOJO, Integer(i.e. primaryKey)> {
+	//The magic is no Implementation is needed.
+	List<Alien> findByTech(String tech) // note that there is a var called tech in Alien class (model)
+	List<Alien> findByAidGreaterThan(int aid) // there is a var called aid in the model
+}
+
+
+```
