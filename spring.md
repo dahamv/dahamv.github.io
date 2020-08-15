@@ -61,7 +61,8 @@ public String getAlien(@PathVariable("aid") int aid) {
 }
 ```
 
-to get a JSON response. return a Model object (a bean/POJO)
+to get a **JSON** response. return a Model object (a bean/POJO) or a list of Model objections  
+eg: return a ```Optional<Alien>``` or ```List<Alien>```. Now the response will be JSON 
 
 ### JPA annotations
 
