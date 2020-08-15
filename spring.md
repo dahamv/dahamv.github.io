@@ -1,4 +1,4 @@
-##Spring MVC
+## Spring MVC
 
 **Container** = Spring container - where objects are stored for **Dependency injection**
 
@@ -33,8 +33,9 @@ public class Alien {
 ```@ResponseBody``` - when this is NOT used, spring MVC will think (since return type of method is String) that you are returning a View name.   
                 so it will search for the View (jsp file). This annotation is used when you want to return a data and SpringMVC   
 		DispatcherServlet will simply pass that data to the client(browser) in the response.   
-		```return repo.findAll().toString();```    	
-```@PathVariable``` - When wildcards are used as ```@RequestMapping("/alian/{aid}")```   
+		```return repo.findAll().toString();```    
+```@RestController``` - when the controller is annotated with this, ```@ResponseBody``` isn't required.  
+
 
 **ModleAndView** class sends data(model) from **Controler to View**. get that data from **view(jsp file)** with **${varName}** i.e. JSTL format
 
@@ -50,6 +51,7 @@ public class HomeControler {
 }
 ```
 
+```@PathVariable``` - When wildcards are used as ```@RequestMapping("/alian/{aid}")```   
 
 ```java
 @RequestMapping("/alian/{aid}")
@@ -59,6 +61,7 @@ public String getAlien(@PathVariable("aid") int aid) {
 }
 ```
 
+to get a JSON response. return a Model object (a bean/POJO)
 
 ### JPA annotations
 
