@@ -84,6 +84,16 @@ public Alien addAlien(@RequestBody Alien alien) {
 ```@Entity```    - For Spring Model classes(eg Alien class) when need to be persisted by JPA   
 ```@Id``` - primary key   
 ```@GeneratedValue``` - auto increment.
+```java
+@Entity
+public class Alien {
+	@Id
+	@GeneratedValue
+	private int aid;
+	.....
+}
+```
+
 ```@Query("the query in JPQL")``` - above a method name in the repo interface do run a custom querry.       
      
 in JPA you need a Repository interface as a DAO to deal with a database   
@@ -117,14 +127,6 @@ You don't need a Controler to do the CRUD operations. You can do that in the Rep
 @RepositoryRestResource(collectionResourceRel="aliens", path="aliens")
 public interface AlienRepo extends JpaRepository<Alien, Integer> { // primaryKey is Alien
 	//No Implementation is needed
-}
-
-@Entity
-public class Alien {
-	@Id
-	@GeneratedValue
-	private int aid;
-	.....
 }
 
 ```
