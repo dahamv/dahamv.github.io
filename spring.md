@@ -33,8 +33,7 @@ public class Alien {
 ```@ResponseBody``` - when this is NOT used, spring MVC will think (since return type of method is String) that you are returning a View name.   
                 so it will search for the View (jsp file). This annotation is used when you want to return a data and SpringMVC   
 		DispatcherServlet will simply pass that data to the client(browser) in the response.   
-		```return repo.findAll().toString();```    
-```@RestController``` - when the controller is annotated with this, ```@ResponseBody``` isn't required.  
+		```return repo.findAll().toString();```      
 
 
 **ModleAndView** class sends data(model) from **Controler to View**. get that data from **view(jsp file)** with **${varName}** i.e. JSTL format
@@ -64,6 +63,20 @@ public String getAlien(@PathVariable("aid") int aid) {
 to get a **JSON** response. return a Model object (a bean/POJO) or a list of Model objections  
 eg: return a ```Optional<Alien>``` or ```List<Alien>```. Now the response will be JSON 
 
+#### RestControler annotations
+
+```@RestController``` - when the controller is annotated with this, ```@ResponseBody``` isn't required.   
+```@GetMappting``` - same as ```@RequestMapping(method = RequestMethod.GET).```
+```@PostMappting```
+```@RequestBody``` - To send JSON POST requests, this annotation should be used. But when the POST request data type is **form data** this is not needed. But in REST the request data type should be raw data. 
+```java
+//uses @RestControler
+@PostMapping("/alian")
+public Alien addAlien(@RequestBody Alien alien) {
+	repo.save(alien);
+	return alien;
+}
+```
 ### JPA annotations
 
 ```@Entity```    - For Spring Modelclasses when need to be persisted by JPA   
@@ -84,3 +97,10 @@ public interface MyRepo extends CrudRepository<MyPOJO, Integer(i.e. primaryKey)>
 see [Spring data jpa - querry creation](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation)
 
 **JpaRepository** interface has more features than CrudRepository. eg. findAll() returns a List. the other one returns an Iterable
+
+#### Content negotiation
+- HTTP request should send header ```Accept:application/json``` or ```application/xml``` by default spring provides only json. 
+- Spring uses Jackson-core dependency to get JSON support.
+- To add xml support add Jackson-dataformat-xml dependency to pom.xml
+- To restrict json use @RquestParam(path="/aliens",produces={"application/xml"})
+
