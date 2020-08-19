@@ -67,7 +67,7 @@ eg: return a ```Optional<Alien>``` or ```List<Alien>```. Now the response will b
 
 ```@RestController``` - when the controller is annotated with this, ```@ResponseBody``` isn't required.   
 ```@GetMappting``` - same as ```@RequestMapping(method = RequestMethod.GET).```
-```@PostMappting```
+```@PostMapping```
 ```@RequestBody``` - To send JSON POST requests, this annotation should be used. But when the POST request data type is **form data** this is not needed. But in REST the request data type should be raw data. 
 ```java
 //uses @RestControler
@@ -77,10 +77,13 @@ public Alien addAlien(@RequestBody Alien alien) {
 	return alien;
 }
 ```
+
+
 ### JPA annotations
 
-```@Entity```    - For Spring Modelclasses when need to be persisted by JPA   
+```@Entity```    - For Spring Model classes(eg Alien class) when need to be persisted by JPA   
 ```@Id``` - primary key   
+```@GeneratedValue``` - auto increment.
 ```@Query("the query in JPQL")``` - above a method name in the repo interface do run a custom querry.       
      
 in JPA you need a Repository interface as a DAO to deal with a database   
@@ -102,5 +105,26 @@ see [Spring data jpa - querry creation](https://docs.spring.io/spring-data/jpa/d
 - HTTP request should send header ```Accept:application/json``` or ```application/xml``` by default spring provides only json. 
 - Spring uses Jackson-core dependency to get JSON support.
 - To add xml support add Jackson-dataformat-xml dependency to pom.xml
-- To restrict json use @RquestParam(path="/aliens",produces={"application/xml"})
+- To restrict json use ```@RquestMaping(path="/aliens",produces={"application/xml"})```
+- to specify that the server method only accepts XML ```@PostMapping(path="/alien", consumes="{application/xml}")``` 
 
+## Spring Data REST
+
+You don't need a Controler to do the CRUD operations. You can do that in the Repository itself.
+@RepositoryRestResource(collectionResourceRel="aliens", path="aliens")
+
+```java
+@RepositoryRestResource(collectionResourceRel="aliens", path="aliens")
+public interface AlienRepo extends JpaRepository<Alien, Integer> { // primaryKey is Alien
+	//No Implementation is needed
+}
+
+@Entity
+public class Alien {
+	@Id
+	@GeneratedValue
+	private int aid;
+	.....
+}
+
+```
