@@ -120,8 +120,7 @@ see [Spring data jpa - querry creation](https://docs.spring.io/spring-data/jpa/d
 
 ## Spring Data REST
 
-You don't need a Controler to do the CRUD operations. You can do that in the Repository itself.
-@RepositoryRestResource(collectionResourceRel="aliens", path="aliens")
+You don't need a Controler to do the CRUD operations. You can do that in the Repository itself. using ```@RepositoryRestResource```
 
 ```java
 @RepositoryRestResource(collectionResourceRel="aliens", path="aliens")
