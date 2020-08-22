@@ -10,7 +10,7 @@ public Bike implements Vehicle {...}
 
 public static void main(..) {
   ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-  Vehicle obj = context.getBean("vehicle")
+  Vehicle obj = (Vehicle)context.getBean("vehicle")
   obj.drive();
 }
 ```
@@ -31,6 +31,12 @@ public Car implements Vehicle {...}
 
 @Component
 public Bike implements Vehicle {...}
+
+public static void main(..) {
+  ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+  Vehicle obj = (Vehicle)context.getBean("car")
+  obj.drive();
+}
 ```
 ```xml
 <beans xmlns="http://....">
@@ -45,8 +51,10 @@ public Bike implements Vehicle {...}
 public Tyre{
   private String brand;
   
-  //These are used for Property Depency Injection
-  getters() and setters();
+  
+  getter() {}
+  //This is used to do Property Depency Injection - called Setter Injection
+  setter() {}
 }
 ```
 ```xml
