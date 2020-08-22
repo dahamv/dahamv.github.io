@@ -146,8 +146,16 @@ To get rid of @Bean annotation.
 @Configuration
 @ComponenetScan(baspackages="package.name.of.beans")
 public class AppConfig {}
+
 @Componenet
 public class Samsung {...}
-Componenet
+
+@Componenet
 public class Intel implements MobileProcessor {...}
 ```
+
+If there are two classes which implements MobileProcessor (Intel, AMD), then @Autowired will be confuced. In that case use ```@Primary``` tag.  
+Spring framework will get the Primary componenet. or else..
+use ```@Qualifire("beanId")``` with ```@Autowired```. Note that defualt Bean id is Bean class name with first letter simple. e.g. intel, aMD;  
+Bean id can be specified ```@Component(name="amd")```
+
