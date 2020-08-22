@@ -5,9 +5,12 @@ alien.setValues(....);
 
 //hibernate configuration. hibernate.cfg.xml is the default name so no need to specify it. 
 Configuration con = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Alien.class);
-//deprecated. but for the time being
+/*
+this way is deprecated. but for the time being
 SessionFactory sf = con.buildSessionFactory();
 session session = sf.openSession();
+*/
+ServiceRegistry reg  = new ServiceRegistryBuilder().applySettings(con.getProperties)
 Transaction tx = session.beginTransaction();
 session.save(alien);
 tx.commit();
