@@ -59,7 +59,7 @@ public Tyre{
 ```xml
 <beans xmlns="http://....">
   
-  <bean id="vehicle" class="package.name.of.bean.class">
+  <bean id="tyre" class="package.name.of.bean.class">
     <!-- can change the Bean property value - dependency injection -->
     <property name="brand" value="MRF"></property>
   </bean>
@@ -80,9 +80,19 @@ public Tyre{
 ```xml
 <beans xmlns="http://....">
   
-  <bean id="vehicle" class="package.name.of.bean.class">
+  <bean id="tyre" class="package.name.of.bean.class">
     <!-- can inject value throug the constructor - constructor injection-->
     <constructor-arg value="MRF"></constructor-arg>
   </bean>
 </beans>
+```
+
+## Autowired Configuaration
+
+```java
+@Component
+public Car implements Vehicle {
+  @Autowired
+  private Tyre tyre;
+}
 ```
