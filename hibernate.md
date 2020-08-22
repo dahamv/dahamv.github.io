@@ -7,12 +7,13 @@ alien.setValues(....);
 Configuration con = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Alien.class);
 //deprecated. but for the time being
 SessionFactory sf = con.buildSessionFactory();
-Transaction...
 session session = sf.openSession();
-
-session.save(alien)
+Transaction tx = session.beginTransaction();
+session.save(alien);
+tx.commit();
 ```
 in **hibernate.cfg.xml** specify driver.class, connection-url, username, password, hibernate-dialect
+Add ```<property name="hbm2ddl.auto">update</property>"``` so that hibernate will create tables if not exist.
 
 the bean class should be a JPA entity
 
