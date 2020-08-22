@@ -96,3 +96,46 @@ public Car implements Vehicle {
   private Tyre tyre;
 }
 ```
+
+# Configuration | Bean
+
+```java
+// we need a configuration class since we dont use XML based configuration. Configuration is done in the class.
+@Configuration
+public class AppConfig {
+  @Bean // this is returning a Bean
+  public Samsung getPhone() {
+    return new Samsung();
+  }  
+  
+  @Bean // this is returning a Bean
+  public MobileProcessor getPrcessor() {
+    return new SnapDraggon();
+  } 
+}
+
+public interface MobileProcessor{ public void process(); } ;
+
+public class SnapDraggon implements MobileProcessor { public void process() { ....} }
+
+public class Samsung {
+  @Autowired
+  private MobileProcessor processor;
+  
+  getter();
+  
+  public void config() {
+    processor.process();
+  }
+}
+
+//main method
+main() {
+  //Specify the configuration class
+  ApplicationContext factory = new AnnotationConfigApplicationContext(AppConfig.class);
+  Samsung s7 = factory.getBean(Samsung.class);
+  s7.config();
+}
+```
+
+use ```@AutoWired``` annotation just like in previous examples to inject dependent Beans. Spring feamework searches in the Configuration class for Beans with required types.
