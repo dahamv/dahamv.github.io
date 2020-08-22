@@ -97,7 +97,7 @@ public Car implements Vehicle {
 }
 ```
 
-# Configuration | Bean
+## Configuration | Bean
 
 ```java
 // we need a configuration class since we dont use XML based configuration. Configuration is done in the class.
@@ -138,4 +138,16 @@ public static void main() {
   Samsung s7 = factory.getBean(Samsung.class);
   s7.config();
 }
+```
+
+## Annotation Component AutoWired Primary Qualifier
+To get rid of @Bean annotation.
+```java
+@Configuration
+@ComponenetScan(baspackages="package.name.of.beans")
+public class AppConfig {}
+@Componenet
+public class Samsung {...}
+Componenet
+public class Intel implements MobileProcessor {...}
 ```
