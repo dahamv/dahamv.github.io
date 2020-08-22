@@ -110,19 +110,20 @@ public class AppConfig {
   
   @Bean // this is returning a Bean
   public MobileProcessor getPrcessor() {
-    return new SnapDraggon();
+    return new Intel();
   } 
 }
 
-public interface MobileProcessor{ public void process(); } ;
+public interface MobileProcessor{ public void process(); } 
 
-public class SnapDraggon implements MobileProcessor { public void process() { ....} }
+public class Intel implements MobileProcessor { public void process() { ....} }
 
 public class Samsung {
+  //Spring feamework searches in the Configuration class for Beans with required types.
   @Autowired
   private MobileProcessor processor;
   
-  getter();
+  getter(); setter();
   
   public void config() {
     processor.process();
@@ -133,9 +134,8 @@ public class Samsung {
 main() {
   //Specify the configuration class
   ApplicationContext factory = new AnnotationConfigApplicationContext(AppConfig.class);
+  //Spring framework calls the getPone() method to get the Samsung Bean.
   Samsung s7 = factory.getBean(Samsung.class);
   s7.config();
 }
 ```
-
-use ```@AutoWired``` annotation just like in previous examples to inject dependent Beans. Spring feamework searches in the Configuration class for Beans with required types.
