@@ -50,8 +50,7 @@ public static void main(..) {
 @Component
 public Tyre{
   private String brand;
-  
-  
+   
   getter() {}
   //This is used to do Property Depency Injection - called Setter Injection
   setter() {}
@@ -68,4 +67,22 @@ public Tyre{
 ```
 
 ## Constructor Injection
+```java
+@Component
+public Tyre{
+  private String brand;
 
+  public Tyre(String brand) {
+    this.brand = brand;
+  }
+}
+```
+```xml
+<beans xmlns="http://....">
+  
+  <bean id="vehicle" class="package.name.of.bean.class">
+    <!-- can inject value throug the constructor - constructor injection-->
+    <constructor-arg value="MRF"></constructor-arg>
+  </bean>
+</beans>
+```
