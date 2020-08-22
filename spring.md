@@ -131,7 +131,7 @@ public class Samsung {
 }
 
 //main method
-main() {
+public static void main() {
   //Specify the configuration class
   ApplicationContext factory = new AnnotationConfigApplicationContext(AppConfig.class);
   //Spring framework calls the getPone() method to get the Samsung Bean.
