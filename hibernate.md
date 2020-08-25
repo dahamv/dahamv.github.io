@@ -1,3 +1,4 @@
+### Create
 SessionFactory - has information to connect to DB. i.e. the db-url, username, password, db-driver etc.  
 ```java
 Alien alien = new Alien();
@@ -39,4 +40,13 @@ public class Alien {
 }
 ```
 
+### Read
+
+To fetch values
+```java
+Alien alien = new Alien()
+//.....transaction begin
+alien = (Alien) session.get(Alien.class, 101); // give primary key value
+//.....
+```
 
