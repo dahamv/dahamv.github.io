@@ -17,17 +17,17 @@ Transaction tx = session.beginTransaction();
 session.save(alien);
 tx.commit();
 ```
-in **hibernate.cfg.xml** specify driver.class, connection-url, username, password, hibernate-dialect
+in **hibernate.cfg.xml** specify driver.class, connection-url, username, password, hibernate-dialect  
 Add ```<property name="hbm2ddl.auto">update</property>"``` so that hibernate will create tables if not exist and update the existing table.  
 If ```create``` is used a new table will be created everytime.   
-```show_sql - true``` will show the sql query executed underneeth. 
+```show_sql - true``` will show the sql query executed underneeth.  
 
-the bean class should be a JPA entity
+The bean class should be a JPA entity
 
 ```java
 //to change entity name @Entity(name="entityName"). If @Table isn't used entityName is assigned to tableName
 @Entity
-@Table(name="tableName")
+@Table(name="changedTableName")
 public class Alien {
   //JPA annotation for primary key 
   @Id
