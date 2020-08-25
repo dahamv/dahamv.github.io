@@ -44,7 +44,7 @@ public class Alien {
 
 To fetch values
 ```java
-Alien alien = new Alien()
+Alien alien = null;
 //.....transaction begin
 alien = (Alien) session.get(Alien.class, 101); // give primary key value
 //.....
