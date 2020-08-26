@@ -103,7 +103,7 @@ public class Student {
   @Id
   private int sId;
   private String sName;
-  //Another table student_laptop (with columns student_sId and laptop_lid) will be created.
+  //Another table Student_Laptop (with columns student_sId and laptop_lid) will be created.
   @OneToMany 
   private List<Laptop> sLaptops = new ArrayList<Laptop>();
 
@@ -126,7 +126,7 @@ public class Student {
   @Id
   private int sId;
   private String sName;
-  //If mappedBy is not used, Hibernate will create student_laptop table. 
+  //If mappedBy is not used, Hibernate will create Student_Laptop table. 
   //We don't need that since Laptop table has student_sId.
   @OneToMany(mappedBy="laptopOwner")
   private List<Laptop> sLaptops = new ArrayList<Laptop>();
@@ -134,13 +134,14 @@ public class Student {
 ```
 #### Many-to-Many
 One Laptop can be used by many Students. One Student can have Many Laptops. E.g. College computer lab.  
+**We MUST need a another seperate table (Laptop_Student) to store the mapping.
 ```java
 @Entity
 public class Laptop {
   @Id
   private int lId;
   private String lName;
-  //A table laptop_student will be made to have the mappings.
+  //A table Laptop_Student will be made to have the mappings.
   @ManyToMany 
   private List<Student> laptopOwners = new ArrayList<Student>();
 }
@@ -150,8 +151,8 @@ public class Student {
   @Id
   private int sId;
   private String sName;
-  //If mappedBy is not used, hibernate will create a student_laptop table as well. 
-  //We don't need two tables. Only laptop_student table will be enough.
+  //If mappedBy is not used, hibernate will create a Student_Laptop table as well. 
+  //We don't need two tables. Only Laptop_Student table will be enough.
   @ManyToMany(mappedBy="laptopOwners")
   private List<Laptop> sLaptops = new ArrayList<Laptop>();
 }
