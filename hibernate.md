@@ -105,7 +105,7 @@ public class Student {
 
 }
 ```
-##### Approach 2
+##### Approach 2 (Prefered)
 ```java
 @Entity
 public class Laptop {
@@ -127,5 +127,28 @@ public class Student {
   private List<Laptop> sLaptops;
 }
 ```
+#### Many-to-Many
+One Laptop can be used by many Students. One Student can have Many Laptops.
+```java
+@Entity
+public class Laptop {
+  @Id
+  private int lId;
+  private String lName;
+  //A table laptop_student will be made to have the mappings.
+  @ManyToMany 
+  private List<Student> laptopOwners;
+}
 
+@Entity
+public class Student {
+  @Id
+  private int sId;
+  private String sName;
+  //If mappedBy is not used, hibernate will create a student_laptop table as well. We don't need two tables
+  //to do the same job.
+  @ManyToMany(mappedBy="laptopOwners")
+  private List<Laptop> sLaptops;
+}
+```
 
