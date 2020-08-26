@@ -82,7 +82,7 @@ public class Student {
   @Id
   private int sId;
   private String sName;
-  @OneToOne // Student tablt will have a forignKey colomn to Laptop.
+  @OneToOne // Student table will have a forignKey colomn laptop_lid.
   private Laptop sLaptop;
 
 }
@@ -92,7 +92,8 @@ public class Student {
 One Student can have many Laptops. there are two approaches.  
 1. Create another table **student_laptop** and have the mappings there.
 2. Create a column **laptopOwner** in the Laptop table having sId s. Since **one Laptop is owned by one Student** and **one Student has many Laptops.**
-
+When you say ```@...ToMany``` a table will be made;  
+When you say ```@...ToOne``` a column will be made;   
 ##### Approach 1
 ```java
 @Entity
@@ -100,8 +101,9 @@ public class Student {
   @Id
   private int sId;
   private String sName;
-  @OneToMany // Another table student_laptop (with columns lId and sId) will be created.
-  private List<Laptop> sLaptops;
+  //Another table student_laptop (with columns student_sId and laptop_lid) will be created.
+  @OneToMany 
+  private List<Laptop> sLaptops = new ArrayList<Laptop>();
 
 }
 ```
@@ -112,7 +114,7 @@ public class Laptop {
   @Id
   private int lId;
   private String lName;
-  //a column will be made in Laptop table to store the sId of the Studends who are the laptop owners
+  //a column student_sId will be made in Laptop table to store the sId of the Studends who own that.
   @ManyToOne 
   private Student laptopOwner;
 }
@@ -122,13 +124,14 @@ public class Student {
   @Id
   private int sId;
   private String sName;
-  //If mappedBy is not used, the student_laptop table will be made by hibernate. So do this to prevent that.
+  //If mappedBy is not used, Hibernate will create student_laptop table. 
+  //We don't need that since Laptop table has student_sId.
   @OneToMany(mappedBy="laptopOwner")
-  private List<Laptop> sLaptops;
+  private List<Laptop> sLaptops = new ArrayList<Laptop>();
 }
 ```
 #### Many-to-Many
-One Laptop can be used by many Students. One Student can have Many Laptops.
+One Laptop can be used by many Students. One Student can have Many Laptops. E.g. College computer lab.  
 ```java
 @Entity
 public class Laptop {
@@ -137,7 +140,7 @@ public class Laptop {
   private String lName;
   //A table laptop_student will be made to have the mappings.
   @ManyToMany 
-  private List<Student> laptopOwners;
+  private List<Student> laptopOwners = new ArrayList<Student>();
 }
 
 @Entity
@@ -145,10 +148,10 @@ public class Student {
   @Id
   private int sId;
   private String sName;
-  //If mappedBy is not used, hibernate will create a student_laptop table as well. We don't need two tables
-  //to do the same job.
+  //If mappedBy is not used, hibernate will create a student_laptop table as well. 
+  //We don't need two tables. Only laptop_student will be enough.
   @ManyToMany(mappedBy="laptopOwners")
-  private List<Laptop> sLaptops;
+  private List<Laptop> sLaptops = new ArrayList<Laptop>();
 }
 ```
 
