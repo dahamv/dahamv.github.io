@@ -68,6 +68,7 @@ public class AlienName {
 ```
 
 ### Mapping Relations
+#### One-to-One
 ```java
 @Entity
 public class Laptop {
@@ -83,5 +84,46 @@ public class Student {
   private String sName;
   @OneToOne // Student tablt will have a forignKey colomn to Laptop.
   private Laptop sLaptop;
+
 }
 ```
+
+#### One-to-Many and Many-to-One
+One Student can have many Laptops. there are two approaches. 
+1- Create another table student_laptop and have the mappings there.
+2- Create a column in the Laptop table having sId. Since **one Laptop is owned by one Student** and **one Student has many Laptops.**
+##### Approach 1
+```java
+@Entity
+public class Student {
+  @Id
+  private int sId;
+  private String sName;
+  @OneToMany // Another table student_laptop (with columns lId and sId) will be created.
+  private List<Laptop> sLaptops;
+
+}
+```
+##### Approach 2
+```java
+@Entity
+public class Laptop {
+  @Id
+  private int lId;
+  private String lName;
+  @ManyToOne // a column will be made in Laptop table to store the sId of the Studends who are the laptop owners
+  private Student laptopOwner;
+}
+
+@Entity
+public class Student {
+  @Id
+  private int sId;
+  private String sName;
+  @OneToMany(mappedBy="laptopOwner") // If mappedBy is not used, the student_laptop table will be made by hibernate. So do this to prevent that.
+  private List<Laptop> sLaptops;
+
+}
+```
+
+
