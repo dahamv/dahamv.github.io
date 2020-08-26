@@ -50,3 +50,38 @@ alien = (Alien) session.get(Alien.class, 101); // give primary key value
 //.....
 ```
 
+###  Embeddable Objects
+```java
+@Entity
+public class Alien {
+  @Id
+  private int aid;
+  private AlienName name;
+}
+
+@Embeddable
+public class AlienName {
+  private String fName;
+  private String mName;
+  private String lName;
+}
+```
+
+### Mapping Relations
+```java
+@Entity
+public class Laptop {
+  @Id
+  private int lId;
+  private String lName;
+}
+
+@Entity
+public class Student {
+  @Id
+  private int sId;
+  private String sName;
+  @OneToOne // Student tablt will have a forignKey colomn to Laptop.
+  private Laptop sLaptop;
+}
+```
