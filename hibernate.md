@@ -89,9 +89,10 @@ public class Student {
 ```
 
 #### One-to-Many and Many-to-One
-One Student can have many Laptops. there are two approaches. 
-1- Create another table student_laptop and have the mappings there.
-2- Create a column in the Laptop table having sId. Since **one Laptop is owned by one Student** and **one Student has many Laptops.**
+One Student can have many Laptops. there are two approaches.  
+1. Create another table **student_laptop** and have the mappings there.
+2. Create a column **laptopOwner** in the Laptop table having sId s. Since **one Laptop is owned by one Student** and **one Student has many Laptops.**
+
 ##### Approach 1
 ```java
 @Entity
