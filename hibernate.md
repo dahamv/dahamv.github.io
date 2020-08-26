@@ -149,7 +149,7 @@ public class Student {
   private int sId;
   private String sName;
   //If mappedBy is not used, hibernate will create a student_laptop table as well. 
-  //We don't need two tables. Only laptop_student will be enough.
+  //We don't need two tables. Only laptop_student table will be enough.
   @ManyToMany(mappedBy="laptopOwners")
   private List<Laptop> sLaptops = new ArrayList<Laptop>();
 }
