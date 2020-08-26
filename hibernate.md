@@ -112,7 +112,8 @@ public class Laptop {
   @Id
   private int lId;
   private String lName;
-  @ManyToOne // a column will be made in Laptop table to store the sId of the Studends who are the laptop owners
+  //a column will be made in Laptop table to store the sId of the Studends who are the laptop owners
+  @ManyToOne 
   private Student laptopOwner;
 }
 
@@ -121,9 +122,9 @@ public class Student {
   @Id
   private int sId;
   private String sName;
-  @OneToMany(mappedBy="laptopOwner") // If mappedBy is not used, the student_laptop table will be made by hibernate. So do this to prevent that.
+  //If mappedBy is not used, the student_laptop table will be made by hibernate. So do this to prevent that.
+  @OneToMany(mappedBy="laptopOwner")
   private List<Laptop> sLaptops;
-
 }
 ```
 
