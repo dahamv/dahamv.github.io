@@ -18,7 +18,7 @@ Transaction tx = session.beginTransaction();
 session.save(alien);
 tx.commit();
 ```
-in **hibernate.cfg.xml** specify driver.class, connection-url, username, password, hibernate-dialect  
+in **hibernate.cfg.xml** specify **driver.class, connection-url, username, password, hibernate-dialect**   
 Add ```<property name="hbm2ddl.auto">update</property>"``` so that hibernate will create tables if not exist and update the existing table.  
 If ```create``` is used a new table will be created everytime.   
 ```show_sql - true``` will show the sql query executed underneeth.  
@@ -92,9 +92,11 @@ public class Student {
 One Student can have many Laptops. there are two approaches.  
 1. Create another table **student_laptop** and have the mappings there.
 2. Create a column **laptopOwner** in the Laptop table having sId s. Since **one Laptop is owned by one Student** and **one Student has many Laptops.**
-When you say ```@...ToMany``` a table will be made;  
-When you say ```@...ToOne``` a column will be made;   
-##### Approach 1
+* When you say ```@...ToMany``` a table will be made.  
+* When you say ```@...ToOne``` a column will be made.
+
+##### Approach 1  
+
 ```java
 @Entity
 public class Student {
