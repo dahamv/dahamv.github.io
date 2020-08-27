@@ -159,9 +159,9 @@ public class Student {
 ```
 ### Eager and Lazy Fetch
 - **FetchType.EAGER** - Hibernate runs the sql before hand. If a Student is read, all properties 
-sId, sName and sLaptops (the List of Laptops) will be read right away at ```session.get(Student.class, studentId);```
-- **FetchType.LAZY** - runs the sql only when its needed. When a Student is read only sId and sName will be read.
-The List of Laptops will be read only when its asked for. ```student.getLaptops(); ``` 
+**sId, sName and sLaptops** (the List of Laptops) will be read right away at ```session.get(Student.class, studentId);```
+- **FetchType.LAZY** - runs the sql only when its needed. When a Student is read only **sId and sName** will be read.
+The List of **sLaptops** will be read only when its asked for. ```student.getLaptops(); ``` 
 ```java
 @Entity
 public class Student {
@@ -174,3 +174,4 @@ public class Student {
   private List<Laptop> sLaptops = new ArrayList<Laptop>();
 }
 ```
+
