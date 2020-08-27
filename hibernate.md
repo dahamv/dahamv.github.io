@@ -157,18 +157,19 @@ public class Student {
   private List<Laptop> sLaptops = new ArrayList<Laptop>();
 }
 ```
-### Fetch Eager and Lazy
+### Eager and Lazy Fetch
 - **FetchType.EAGER** - Hibernate runs the sql before hand. If a Student is read, all properties  
 &nbsp;&nbsp;&nbsp;                  sId, sName and sLaptops (the List of Laptops) will be read right away.  
 - **FetchType.LAZY** - runs the sql only when its needed. When a Student is read only sId and sName will be read.  
-&nbsp;&nbsp;&nbsp;                The List of Laptops will be read only when its asked for. ```student.getLaptops();  
+&nbsp;&nbsp;&nbsp;                The List of Laptops will be read only when its asked for. ```student.getLaptops(); ``` 
 ```java
 @Entity
 public class Student {
   @Id
   private int sId;
   private String sName;
-  // default fetch type is L
+  // default fetch type is LAZY. when EAGER hibernage sql query will 
+  //left outer join selected student table and the selected laptop table.
   @OneToMany(mappedBy="laptopOwner", fetch=FetchType.EAGER)
   private List<Laptop> sLaptops = new ArrayList<Laptop>();
 }
