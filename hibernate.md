@@ -179,8 +179,15 @@ public class Student {
 - **First Level caching** - cache for each hibernate session. This caching is not shared among hibernate sessions. Enabled by default.
 - **Second Level caching** - can have a thirdparty (like Ehcache) cache to share among sessions.
 
-@Cacheble
-@Cache(Stratergy)
+For Ehcache second level caching add dependencies **ehcache** and **hibernate-ehcache.** and properties in in **hibernate.cfg.xml** file    
+```<property name="hibernate.cache.use_second_level_cache">true</property>``` and    
+```<property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>```
+```java
+@Entity
+@Cacheble // To tell hibernate that this entity is cacheble in secondlevel cacheing. 
+@Cache(usage=CacheConcurrencyStratergy.READ_ONLY) // define the caching stratergy. default is NONE
+public class Alien {}
+```
 
 
 //hibernage inheritence https://www.baeldung.com/hibernate-inheritance
