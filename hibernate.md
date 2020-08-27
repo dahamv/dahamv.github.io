@@ -134,7 +134,7 @@ public class Student {
 ```
 #### Many-to-Many
 One Laptop can be used by many Students. One Student can have Many Laptops. E.g. College computer lab.  
-**We MUST need a another seperate table (Laptop_Student) to store the mapping.
+**We MUST** have another seperate table (Laptop_Student) to store the mapping.
 ```java
 @Entity
 public class Laptop {
@@ -188,6 +188,6 @@ For Ehcache second level caching add dependencies **ehcache** and **hibernate-eh
 @Cache(usage=CacheConcurrencyStratergy.READ_ONLY) // define the caching stratergy. default is NONE
 public class Alien {}
 ```
-
+## Hibernate Caching with queries
 
 //hibernage inheritence https://www.baeldung.com/hibernate-inheritance
