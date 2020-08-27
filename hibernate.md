@@ -175,3 +175,12 @@ public class Student {
 }
 ```
 
+## Hibernate Caching
+- **First Level caching** - cache for each hibernate session. This caching is not shared among hibernate sessions. Enabled by default.
+- **Second Level caching** - can have a thirdparty (like Ehcache) cache to share among sessions.
+
+@Cacheble
+@Cache(Stratergy)
+
+
+//hibernage inheritence https://www.baeldung.com/hibernate-inheritance
