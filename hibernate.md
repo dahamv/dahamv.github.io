@@ -178,6 +178,10 @@ public class Student {
 ## Hibernate Inheritence
 * Use ```@MappedSuperclass``` when several ```@Entity``` classes have a parent class. All Parent attributes are shown in corresponding child tables.
 * To get all child Entities in a **single table** use ```@Inheritance``` and ```@DiscriminatorColumn```. A Discriminator column called **DTYPE** will be made to store the names of the child entities as a value: so that we can differentiate between them
+There are different Inheritence stratergies
+```@Inheritance(strategy = InheritanceType.SINGLE_TABLE)```  
+```@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)```  
+```@Inheritance(strategy = InheritanceType.JOINED)```  
 
 Read more at [https://www.baeldung.com/hibernate-inheritance]
 
