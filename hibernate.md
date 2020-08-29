@@ -223,11 +223,13 @@ q.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 List<Map> students = q.list();
 ```
 
-## Hibernate Object States Persistence Life Cycle
-Three states of Hibernate objects
-* Transient - by default all entities
-* Persistent - when ```session.save()``` or ```session.persist()``` is called. 
-* Detatched - call ```session.detatch()``` or ```session.close()```;
+## Hibernate Object States | Persistence Life Cycle
+Four states of Hibernate Entity objects   
+* **Transient** - by default all **new** entity objects.
+* **Persistent** - when ```session.save()``` or ```session.persist()``` is called. Or when you get data from the DB ```get()``` or ```find()``` its in Persistent state
+* **Detatched** - call ```session.detatch()```, ```session.commit()``` or ```session.close()```;
+* **Removed** - from Persistent state call ```remove()``` and data is removed from the DB but its in the JVM.  
+Transient, Removed and Detatched objects are garbage collected. 
 Note - When the entity object is in **Persistent** state and when you change values ```alien.setTech("python")``` will **change the value in the DB**.
 
 //hibernage inheritence https://www.baeldung.com/hibernate-inheritance
