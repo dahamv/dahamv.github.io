@@ -68,6 +68,9 @@ public class AlienName {
 ```
 
 ## Mapping Relations
+
+Use ```@Cascade``` to tell hibernate when Relation Owner (Student) is saved, its related Entities(Laptops) will also be saved automatically.  
+
 ### One-to-One
 ```java
 @Entity
@@ -83,8 +86,8 @@ public class Student {
   private int sId;
   private String sName;
   @OneToOne // Student table will have a forignKey colomn laptop_lid.
+  @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE}) 
   private Laptop sLaptop;
-
 }
 ```
 
@@ -104,7 +107,7 @@ public class Student {
   private int sId;
   private String sName;
   //Another table Student_Laptop (with columns student_sId and laptop_lid) will be created.
-  @OneToMany 
+  @OneToMany
   private List<Laptop> sLaptops = new ArrayList<Laptop>();
 
 }
