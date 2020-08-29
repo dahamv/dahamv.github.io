@@ -2,6 +2,7 @@
 **[Home](index.md)**
 
 ## Create
+_________
 SessionFactory - has information to connect to DB. i.e. the db-url, username, password, db-driver etc.  
 ```java
 Alien alien = new Alien();
