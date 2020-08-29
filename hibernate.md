@@ -69,7 +69,7 @@ public class AlienName {
 
 ## Mapping Relations
 
-Use ```@Cascade``` to tell hibernate when Relation Owner (Student) is saved, its related Entities(Laptops) will also be saved automatically.  
+Use ```@Cascade``` to tell hibernate when Relation Owner (Student) is saved, its related Entities(Laptops) will also be saved automatically. Can be used with One-to-One, One-to-Many, Many-to-One and Many-to-Many.
 
 ### One-to-One
 ```java
@@ -135,6 +135,8 @@ public class Student {
   private List<Laptop> sLaptops = new ArrayList<Laptop>();
 }
 ```
+You can create the Join table manually by using  ```@JoinTable and @JoinColumn``` annotations.
+
 ### Many-to-Many
 One Laptop can be used by many Students. One Student can have Many Laptops. E.g. College computer lab.  
 **We MUST** have another seperate table (Laptop_Student) to store the mapping.
