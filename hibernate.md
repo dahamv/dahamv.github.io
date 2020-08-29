@@ -1,3 +1,6 @@
+# Hibernate
+**[Home](index.md)**
+
 ## Create
 SessionFactory - has information to connect to DB. i.e. the db-url, username, password, db-driver etc.  
 ```java
