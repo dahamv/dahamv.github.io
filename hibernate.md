@@ -180,7 +180,7 @@ public class Student {
 - **Second Level caching** - can have a thirdparty (like Ehcache) cache to share among sessions.
 
 For Ehcache second level caching add dependencies **ehcache** and **hibernate-ehcache.** in pom.xml and the following properties in **hibernate.cfg.xml** file.   
-*Note - This is applicable only for ```session.get()``` method and not for Queries.*
+*Note - This is applicable only for ```session.get()``` method and not for Queries.*   
 ```<property name="hibernate.cache.use_second_level_cache">true</property>``` and    
 ```<property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>```
 ```java
@@ -193,10 +193,35 @@ Alien a = (Alien) session1.get(Alien.class, 101);
 Alien b = (Alien) session2.get(Alien.class, 101);
 ```
 ### Hibernate Caching with queries
+Add this property in the hibernate.cfg.xml file and setCacheble in Query object.
+```<property name="hibernate.cache.use_query_cache">true</property>``` This is false by default.      
 ```java
 Query q1 = session1.createQuery("from Alien where aid = 101");
+q1.setCacheble(true);
 Alien a = (Alien)q1.uniqueResult();
 Query q2 = session2.createQuery("from Alien where aid = 101");
+q2.setCacheble(true);
 Alien b = (Alien)q2.uniqueResult(); 
 ```
+
+## HQL - hibernate query language
+in SQL ````select column_name from table```       
+in HQL ```select property_name from Entity```   
+Can use builtin functions in HQL.   
+``` "select sum(marks) from Student s where s.marks>60" ```
+
+You can also run SQL queries(Native queries) in hibernate.
+```java
+SQLQuery q = session.createSQLQuery("select * from student where marks > 60");
+//Only if you are getting the entire row (select *) and you have to tell that the result set should be mapped to Student entities.
+q.addEntity(Student.class);
+List<Student> students = q.list();
+//If you are geting only a couple of columns (select name, marks), then you cant map that to Student entity. 
+//So map the results to key value pairs
+q.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+//key = culumn_name, value = column_value
+List<Map> students = q.list();
+
+```
+
 //hibernage inheritence https://www.baeldung.com/hibernate-inheritance
