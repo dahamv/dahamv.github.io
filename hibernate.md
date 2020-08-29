@@ -224,10 +224,11 @@ List<Map> students = q.list();
 ```
 
 ## Hibernate Object States | Persistence Life Cycle
+![](https://cdn.jstobigdata.com/wp-content/uploads/2019/08/Entity-instance-states-1024x536.png)
 Four states of Hibernate Entity objects   
 * **Transient** - by default all **new** entity objects.
-* **Persistent** - when ```session.save(obj)``` or ```session.persist()``` is called, Or when you get data from the DB with ```get()``` or ```find()```, the entity objects are in Persistent state. **Only Persistent objects will be stored in the DB when  ```session.getTransaction.commit()``` is called.** 
-* **Detatched** - by calling ```session.detatch(obj)```, ```session.commit()``` or ```session.close()```;
+* **Persistent** - when ```session.save(obj)``` or ```session.persist(obj);``` is called, Or when you get data from the DB with ```get(id)``` or ```find(id)```, the entity objects are in Persistent state. **Only Persistent objects will be stored in the DB when**  ```session.getTransaction.commit()``` **is called.** 
+* **Detatched** - by calling ```session.detatch(obj);```
 * **Removed** - from Persistent state call ```remove()``` and data is removed from the DB but its in the JVM.  
 *Transient, Removed and Detatched objects are garbage collected.*
 Note - When the entity object is in **Persistent** state and when you change values ```alien.setTech("python")``` will **change the value in the DB**.
