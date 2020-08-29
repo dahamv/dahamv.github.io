@@ -221,7 +221,13 @@ List<Student> students = q.list();
 q.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 //key = culumn_name, value = column_value
 List<Map> students = q.list();
-
 ```
+
+## Hibernate Object States Persistence Life Cycle
+Three states of Hibernate objects
+* Transient - by default all entities
+* Persistent - when ```session.save()``` or ```session.persist()``` is called. 
+* Detatched - call ```session.detatch()``` or ```session.close()```;
+Note - When the entity object is in **Persistent** state and when you change values ```alien.setTech("python")``` will **change the value in the DB**.
 
 //hibernage inheritence https://www.baeldung.com/hibernate-inheritance
