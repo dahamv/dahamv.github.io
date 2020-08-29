@@ -227,10 +227,10 @@ List<Map> students = q.list();
 ![](https://cdn.jstobigdata.com/wp-content/uploads/2019/08/Entity-instance-states-1024x536.png)
 Four states of Hibernate Entity objects   
 * **Transient** - by default all **new** entity objects.
-* **Persistent** - when ```session.save(obj)``` or ```session.persist(obj);``` is called, Or when you get data from the DB with ```get(id)``` or ```find(id)```, the entity objects are in Persistent state. **Only Persistent objects will be stored in the DB when**  ```session.getTransaction.commit()``` **is called.** 
-* **Detatched** - by calling ```session.detatch(obj);``` or ```session.getTransaction.commit()```. Changes to object are not reflected on the DB. call ```merge(obj)``` to reattach the object to persistent state.
-* **Removed** - from Persistent state call ```remove()``` and data is removed from the DB but its in the JVM.  
-*Transient, Removed and Detatched objects are garbage collected.*
-Note - When the entity object is in **Persistent** state and when you change values ```alien.setTech("python")``` will **change the value in the DB**.
+* **Persistent** - when ```session.save(obj);``` or ```session.persist(obj);``` is called, Or when you get data from the DB with ```session.get(id);``` or ```session.find(id);```, the entity objects are in Persistent state. **Only Persistent objects will be stored in the DB when**  ```session.getTransaction.commit();``` **is called.** 
+* **Detatched** - by calling ```session.detatch(obj);```. Changes to object are not reflected on the DB. call ```session.merge(obj);``` to reattach the object to persistent state. When ```session.getTransaction.commit();``` is called **All entity objects in that session will be Detatched.**
+* **Removed** - from Persistent state call ```session.remove(obj);``` and data is removed from the DB but its in the JVM.  
+** *Note -Transient, Removed and Detatched objects are garbage collected.*   
+** *Note - When the entity object is in **Persistent** state and when you change values ```alien.setTech("python")``` will **change the value in the DB**.*  
 
 //hibernage inheritence https://www.baeldung.com/hibernate-inheritance
