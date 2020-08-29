@@ -179,7 +179,8 @@ public class Student {
 - **First Level caching** - cache for each hibernate session. This caching is not shared among hibernate sessions. Enabled by default.
 - **Second Level caching** - can have a thirdparty (like Ehcache) cache to share among sessions.
 
-For Ehcache second level caching add dependencies **ehcache** and **hibernate-ehcache.** and properties in in **hibernate.cfg.xml** file    
+For Ehcache second level caching add dependencies **ehcache** and **hibernate-ehcache.** in pom.xml and the following properties in **hibernate.cfg.xml** file.   
+*Note - This is applicable only for ```session.get()``` method and not for Queries.*
 ```<property name="hibernate.cache.use_second_level_cache">true</property>``` and    
 ```<property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>```
 ```java
@@ -187,7 +188,15 @@ For Ehcache second level caching add dependencies **ehcache** and **hibernate-eh
 @Cacheble // To tell hibernate that this entity is cacheble in secondlevel cacheing. 
 @Cache(usage=CacheConcurrencyStratergy.READ_ONLY) // define the caching stratergy. default is NONE
 public class Alien {}
+//Now the select query will be executed only once because of seconlevel caching.
+Alien a = (Alien) session1.get(Alien.class, 101);
+Alien b = (Alien) session2.get(Alien.class, 101);
 ```
-## Hibernate Caching with queries
-
+### Hibernate Caching with queries
+```java
+Query q1 = session1.createQuery("from Alien where aid = 101");
+Alien a = (Alien)q1.uniqueResult();
+Query q2 = session2.createQuery("from Alien where aid = 101");
+Alien b = (Alien)q2.uniqueResult(); 
+```
 //hibernage inheritence https://www.baeldung.com/hibernate-inheritance
