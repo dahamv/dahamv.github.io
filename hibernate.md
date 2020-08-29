@@ -227,9 +227,9 @@ List<Map> students = q.list();
 ![](https://cdn.jstobigdata.com/wp-content/uploads/2019/08/Entity-instance-states-1024x536.png)
 Four states of Hibernate Entity objects   
 * **Transient** - by default all **new** entity objects.
-* **Persistent** - when ```session.save(obj);``` or ```session.persist(obj);``` is called, Or when you get data from the DB with ```session.get(id);``` or ```session.find(id);```, the entity objects are in Persistent state. **Only Persistent objects will be stored in the DB when**  ```session.getTransaction.commit();``` **is called.** 
-* **Detatched** - by calling ```session.detatch(obj);``` Changes to detached objects are not reflected on the DB. Call ```session.merge(obj);``` to reattach the object to persistent state. When ```session.getTransaction.commit();``` is called **All entity objects in that session will be Detatched.**
-* **Removed** - from Persistent state call ```session.remove(obj);``` and data is removed from the DB but its in the JVM.  
+* **Persistent** - when ```session.save(obj)``` or ```session.persist(obj)``` is called, Or when you get data from the DB with ```session.get(id)``` or ```session.find(id)```, the entity objects are in Persistent state. **Only Persistent objects will be stored in the DB when**  ```transaction.commit()``` **is called.** 
+* **Detatched** - when ```session.detatch(obj)``` is called. Changes to detached objects are not reflected on the DB. Call ```session.merge(obj)``` to reattach the object to persistent state. Once all data is stored in DB by calling ```transaction.commit()```, **All entity objects in that session will be Detatched.**
+* **Removed** - from Persistent state call ```session.remove(obj)``` and data is removed from the DB but its in the JVM.  
 ** *Note -Transient, Removed and Detatched objects are garbage collected.*   
 ** *Note - When the entity object is in **Persistent** state and when you change values ```alien.setTech("python")``` will **change the value in the DB**.*  
 
