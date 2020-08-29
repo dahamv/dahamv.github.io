@@ -174,6 +174,12 @@ public class Student {
   private List<Laptop> sLaptops = new ArrayList<Laptop>();
 }
 ```
+## Hibernate Inheritence
+
+* Use ```@MappedSuperclass``` when several ```@Entity``` classes have a parent class. All Parent attributes are shown in corresponding child tables.
+* To get all child Entities in a **single table** use ```@Inheritance``` and ```@DiscriminatorColumn```. A Discriminator column called **DTYPE** will be made to store the names of the child entities as a value: so that we can differentiate between them
+
+Read more at https://www.baeldung.com/hibernate-inheritance
 
 ## Hibernate Caching
 - **First Level caching** - cache for each hibernate session. This caching is not shared among hibernate sessions. Enabled by default.
@@ -233,4 +239,6 @@ Four states of Hibernate Entity objects
 ** *Note -Transient, Removed and Detatched objects are garbage collected.*   
 ** *Note - When the entity object is in **Persistent** state and when you change values ```alien.setTech("python")``` will **change the value in the DB**.*  
 
-//hibernage inheritence https://www.baeldung.com/hibernate-inheritance
+## Hibernate Get vs Load
+
+Both will give the same output but ```session.get(obj)``` will fire the SQL rightaway and ```session.load(obj)``` will first give a **Proxy** object and will actually fire the SQL and get the real object when the object is used e.g. ```obj.toString()```.
