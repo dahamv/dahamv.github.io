@@ -1,8 +1,9 @@
 # Hibernate
 **[Home](index.md)**
 
-## Create
+## CRUD
 _________
+### Create
 SessionFactory - has information to connect to DB. i.e. the db-url, username, password, db-driver etc.  
 ```java
 Alien alien = new Alien();
@@ -44,7 +45,7 @@ public class Alien {
 }
 ```
 
-## Read
+### Read
 
 To fetch values
 ```java
@@ -53,8 +54,12 @@ Alien alien = null;
 alien = (Alien) session.get(Alien.class, 101); // give primary key value
 //.....
 ```
+### Update and Delete
+- To update: ```session.saveOrUpdate(alien)``` 
+- To delete: ```Session.delete(alien)```
 
 ##  Embeddable Objects
+_________
 ```java
 @Entity
 public class Alien {
@@ -72,6 +77,7 @@ public class AlienName {
 ```
 
 ## Mapping Relations
+_________
 
 Use ```@Cascade``` to tell hibernate when Relation Owner (Student) is saved, its related Entities(Laptops) will also be saved automatically. Can be used with One-to-One, One-to-Many, Many-to-One and Many-to-Many.
 
@@ -167,6 +173,7 @@ public class Student {
 }
 ```
 ## Eager and Lazy Fetch
+_________
 - **FetchType.EAGER** - Hibernate runs the sql before hand. If a Student is read, all properties 
 **sId, sName and sLaptops** (the List of Laptops) will be read right away at ```session.get(Student.class, studentId);```
 - **FetchType.LAZY** - runs the sql only when its needed. When a Student is read only **sId and sName** will be read.
@@ -185,6 +192,7 @@ public class Student {
 ```
 
 ## Hibernate Inheritence
+_________
 * Use ```@MappedSuperclass``` when several ```@Entity``` classes have a parent class. All Parent attributes are shown in corresponding child tables.
 * To get all child Entities in a **single table** use ```@Inheritance``` and ```@DiscriminatorColumn```. A Discriminator column called **DTYPE** will be made to store the names of the child entities as a value: so that we can differentiate between them
 There are different Inheritence stratergies
@@ -195,6 +203,7 @@ There are different Inheritence stratergies
 Read more at [https://www.baeldung.com/hibernate-inheritance]
 
 ## Hibernate Caching
+_________
 - **First Level caching** - cache for each hibernate session. This caching is not shared among hibernate sessions. Enabled by default.
 - **Second Level caching** - can have a thirdparty (like Ehcache) cache to share among sessions.
 
@@ -224,6 +233,7 @@ Alien b = (Alien)q2.uniqueResult();
 ```
 
 ## HQL - hibernate query language
+_________
 in SQL ````select column_name from table```       
 in HQL ```select property_name from Entity```   
 Can use builtin functions in HQL.   
@@ -243,6 +253,7 @@ List<Map> students = q.list();
 ```
 
 ## Hibernate Object States | Persistence Life Cycle
+_________
 ![](https://cdn.jstobigdata.com/wp-content/uploads/2019/08/Entity-instance-states-1024x536.png)
 Four states of Hibernate Entity objects   
 * **Transient** - by default all **new** entity objects.
@@ -253,5 +264,6 @@ Four states of Hibernate Entity objects
 ** *Note - When the entity object is in **Persistent** state and when you change values ```alien.setTech("python")``` will **change the value in the DB**.*  
 
 ## Hibernate Get vs Load
+_________
 
 Both will give the same output but ```session.get(obj)``` will fire the SQL rightaway and ```session.load(obj)``` will first give a **Proxy** object and will actually fire the SQL and get the real object when the object is used e.g. ```obj.toString()```.
