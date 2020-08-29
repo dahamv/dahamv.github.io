@@ -1,4 +1,4 @@
-### Create
+## Create
 SessionFactory - has information to connect to DB. i.e. the db-url, username, password, db-driver etc.  
 ```java
 Alien alien = new Alien();
@@ -40,7 +40,7 @@ public class Alien {
 }
 ```
 
-### Read
+## Read
 
 To fetch values
 ```java
@@ -50,7 +50,7 @@ alien = (Alien) session.get(Alien.class, 101); // give primary key value
 //.....
 ```
 
-###  Embeddable Objects
+##  Embeddable Objects
 ```java
 @Entity
 public class Alien {
@@ -67,8 +67,8 @@ public class AlienName {
 }
 ```
 
-### Mapping Relations
-#### One-to-One
+## Mapping Relations
+### One-to-One
 ```java
 @Entity
 public class Laptop {
@@ -88,14 +88,14 @@ public class Student {
 }
 ```
 
-#### One-to-Many and Many-to-One
+### One-to-Many and Many-to-One
 One Student can have many Laptops. there are two approaches.  
 1. Create another table **student_laptop** and have the mappings there.
 2. Create a column **laptopOwner** in the Laptop table having sId s. Since **one Laptop is owned by one Student** and **one Student has many Laptops.**
 * When you say ```@...ToMany``` a table will be made.  
 * When you say ```@...ToOne``` a column will be made.
 
-##### Approach 1  
+#### Approach 1  
 
 ```java
 @Entity
@@ -109,7 +109,7 @@ public class Student {
 
 }
 ```
-##### Approach 2 (Prefered)
+#### Approach 2 (Prefered)
 ```java
 @Entity
 public class Laptop {
@@ -132,7 +132,7 @@ public class Student {
   private List<Laptop> sLaptops = new ArrayList<Laptop>();
 }
 ```
-#### Many-to-Many
+### Many-to-Many
 One Laptop can be used by many Students. One Student can have Many Laptops. E.g. College computer lab.  
 **We MUST** have another seperate table (Laptop_Student) to store the mapping.
 ```java
@@ -157,7 +157,7 @@ public class Student {
   private List<Laptop> sLaptops = new ArrayList<Laptop>();
 }
 ```
-### Eager and Lazy Fetch
+## Eager and Lazy Fetch
 - **FetchType.EAGER** - Hibernate runs the sql before hand. If a Student is read, all properties 
 **sId, sName and sLaptops** (the List of Laptops) will be read right away at ```session.get(Student.class, studentId);```
 - **FetchType.LAZY** - runs the sql only when its needed. When a Student is read only **sId and sName** will be read.
