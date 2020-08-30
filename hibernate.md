@@ -267,3 +267,33 @@ Four states of Hibernate Entity objects
 _________
 
 Both will give the same output but ```session.get(obj)``` will fire the SQL rightaway and ```session.load(obj)``` will first give a **Proxy** object and will actually fire the SQL and get the real object when the object is used e.g. ```obj.toString()```.
+
+## Hibernate + JPA
+
+Import hibernate-jpa, mysql-connector in th pom.xml file. hibernate-jpa jar has the javax package.    
+JPA interface EntityManager === Hibernate Session.    
+
+```java 
+EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
+EntityManager em = emf.createEntityManager();
+//fetch Alien with id = 4 from the DB. similler to hibernate session.get()
+Alien a = em.find(Alien.class, 4);
+Alien b = new Alien(...);
+Transaction tx = em.getTransaction();
+tx.begin();
+//persist() is similer to hibernate session.save();
+em.persist(b);
+tx.commit();
+```
+in java/resources/META_INF/persistence.xml
+
+```xml
+<persistence .....>
+  <persistence-unit name="pu">
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="mysql.DriverClass"/>
+      //URL, Uname, Passwd
+    </properties>
+  </persistence-unit/>  
+</persistence>
+```
