@@ -2,15 +2,15 @@
 ## PSQL
 
 Magic words:
-```bash
-psql -U postgres
-```
+
+`psql -U postgres` : login with user postgres  
 Some interesting flags (to see all, use `-h` or `--help` depending on your psql version):
 - `-E`: will describe the underlaying queries of the `\` commands (cool for learning!)
 - `-l`: psql will list all databases and then exit (useful if the user you connect with doesn't has a default database, like at AWS RDS)
 
 Most `\d` commands support additional param of `__schema__.name__` and accept wildcards like `*.*`
 
+- `create user postgres;`: creates a new user named postgres
 - `create database __dbname__`: creates a new database  
 - `\q`: Quit/Exit
 - `\c __database__`: Connect to a database
