@@ -1,4 +1,4 @@
-**[Home](index.md)**  
+**[Home](../index.md)**  
 # Spring - some important concepts
 
 Dependency injection is for Loose Coupling. If you use **new** keyword its tight coupling. Therefor use configuration using xml.
