@@ -1,5 +1,5 @@
 **[Home](index.md)**  
-Commands
+## Commands
 --------
 * ```git status``` : show status of uncommited files
 * ```git add xxx``` : add files (use . for everything, __folder__/.. for folder recursive children)
@@ -82,14 +82,14 @@ git push origin <label>
 * Push to a different remote branch: `git push origin <localb-ranch>:<remote-branch>`
 * Rename a branch: `git branch -m <old-name> <new-name>`
 
-Searches
+## Searches
 --------
 * [Issues in which you're mentioned](https://github.com/issues/mentioned)
 * [Pull requests in which you're mentioned](https://github.com/pulls/mentioned)
 * [All open issues and pull requests of organization `TEST`](https://github.com/issues?utf8=%E2%9C%93&q=is%3Aopen+org%3ATEST+sort%3Aupdated-desc+): Change to proper organization name, and for example can filter to all assigned to you
 
 
-Third-party Tools
+## Third-party Tools
 -----------------
 * [tig](http://blogs.atlassian.com/2013/05/git-tig/): to navigate commits & branches
 * Github:
@@ -105,7 +105,7 @@ Third-party Tools
   ```
 
 
-Tutorials
+## Tutorials
 ---------
 * [Atlassian Git tutorial](http://www.atlassian.com/git/tutorial/)
 * [9 useful tricks of git branch](https://gitbetter.substack.com/p/9-useful-tricks-of-git-branch-you)
