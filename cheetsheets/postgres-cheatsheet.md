@@ -1,5 +1,6 @@
-## PSQL
 **[Home](index.md)**  
+## PSQL
+
 Magic words:
 ```bash
 psql -U postgres
