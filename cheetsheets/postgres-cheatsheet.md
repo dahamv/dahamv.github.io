@@ -11,7 +11,7 @@ Some interesting flags (to see all, use `-h` or `--help` depending on your psql 
 
 Most `\d` commands support additional param of `__schema__.name__` and accept wildcards like `*.*`
 
-- `create database __dbname__`: creates a new database
+- `create database __dbname__`: creates a new database  
 - `\q`: Quit/Exit
 - `\c __database__`: Connect to a database
 - `\d __table__`: Show table definition (columns, etc.) including triggers
