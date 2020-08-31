@@ -1,3 +1,6 @@
+# Spring - some important concepts
+**[Home](index.md)**
+
 Dependency injection is for Loose Coupling. If you use **new** keyword its tight coupling. Therefor use configuration using xml.
 ## Dependency Injection using XML configuration 
 ```java
