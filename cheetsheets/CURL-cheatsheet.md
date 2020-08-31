@@ -1,3 +1,5 @@
+**[Home](index.md)**  
+
 * XML GET
 ```bash
 curl -H "Accept: application/xml" -H "Content-Type: application/xml" -X GET "http://hostname/resource"
