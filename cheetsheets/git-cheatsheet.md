@@ -1,5 +1,13 @@
 Commands
 --------
+* ```git status``` : show status of uncommited files
+* ```git add xxx``` : add files (use . for everything, __folder__/.. for folder recursive children)
+* ```git commit -m "type message"``` : commit added changes
+* ```git push origin __destinationbranch__``` : push merges/changesets to the branch in remote repository
+* ```git pull origin __branchname__```
+* ```git diff``` : Show changes in files
+* ```git diff __branch__ origin/__remotebranch__``` : show a diff between a local branch and a remote one
+* ```git branch``` : display local branches, active one is with a *
 * ```git checkout -b __newbranch__``` : get a new branch and switch to it
 * ```git checkout -b __branchname__ / __branchname__``` : get a local copy of a remote existing branch
 * ```git checkout __branchname__  ``` : switch branch
@@ -8,26 +16,18 @@ Commands
 * ```git log __branchA__ ^__branchB__``` : commits in branch A that aren't in branch B
 * ```git log --pretty=oneline --stat --all __foldername__``` : modified files under a given folder
 * ```git fetch```
-* ```git pull origin __branchname__```
 * ```git pull --rebase```: Avoid having a merge commit if you had changes and origin had commits too (rewrites your local history)
 * ```git merge --no-ff __sourcebranch__``` : merge into current branch source one without rebase/FF
-* ```git push origin __destinationbranch__``` : push merges/changesets to a branch
 * ```git remote show origin``` : display the path of the repository
 * ```git remote set-url origin xxx``` : Change remote URI to xxx
 * ```git remote rm origin``` : Remove remote URI
 * ```git remote add origin git@github.com:CartoDB/cartodb.js.git``` : Add remote URI (for example after adding SSH key with ```ssh-add ~/.ssh/id_rsa```). Must first `git remote rm origin` to remove previous one.
-* ```git add xxx``` : add files (use . for everything, __folder__/.. for folder recursive children)
-* ```git commit``` : commit changes
-* ```git status``` : show status of uncommited files
 * ```git checkout __file__``` : revert a file
 * ```git checkout __branchname__ __file__``` : Checkout all changes to __file__ from branch __branchname__ into current
 * ```git checkout __revision__ .``` : revert a full branch to specified revision if not commited
 * ```git revert __commit1__ __commit2__ ...```: Reverts certain commits if commited
 * ```git reset __revision__ .```: revert a full branch to specified revision if commited
 * ```git clean -f``` : remove all local uncommited modifications
-* ```git branch``` : display local branches, active one is with a *
-* ```git diff``` : Show changes in files
-* ```git diff __branch__ origin/__remotebranch__``` : show a diff between a local branch and a remote one
 * ```git rebase __branchname__``` : rebases current branch with specified branch (fetches remote branch changes and then adds yours at the tip)
 * ```git rm __filename__``` : delete a file from branch and filesystem
 * ```git branch -d __branchname__``` : delete a local branch
