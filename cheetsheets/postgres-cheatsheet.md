@@ -3,7 +3,10 @@
 
 Magic words:
 
-`psql -U postgres` : login with user postgres  
+```bash
+# login with user postgres  
+psql -U postgres
+```
 Some interesting flags (to see all, use `-h` or `--help` depending on your psql version):
 - `-E`: will describe the underlaying queries of the `\` commands (cool for learning!)
 - `-l`: psql will list all databases and then exit (useful if the user you connect with doesn't has a default database, like at AWS RDS)
