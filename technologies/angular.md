@@ -23,7 +23,7 @@
  - **angular-cli.json** - Has things like - source code root folder/ where the build files should go to / whats the home page(index.html) / whats the first script that starts up (main.ts)
  
 ## Big picture 
-![](/assets/images/AngularBigPicture.png=250x)
+![](/assets/images/AngularBigPicture.png =250x)
 App Module --> Routes (to dynamically load ) --> Componenets -->> HTML template and Typescript Code  
 Typescript Code <--> Services  
 HTML template --> Derectives/child componenets to do the redering   
