@@ -3,6 +3,7 @@
 [Spring Boot](technologies/spring-boot.md)  
 [Spring Security](technologies/spring-security.md)  
 [Hibernate](technologies/hibernate.md)  
+[Angular](technologies/angular.md) 
 
 ## Cheetsheets
 
