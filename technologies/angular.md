@@ -2,12 +2,12 @@
 # Angular
 
 ## Course Agenda
-- Componenets - For the UI  
-- Modules - Organize the code  
-- Data Binding - get data in and out of the screen
+- **Componenets** - For the UI  
+- **Services and Http** - For any reusable code. eg. Fontend calculations / validations / Http calls to server. / use websckets with the server.
+- **Modules** - Like buckets to organize the code.( to put services and components in - they are going to be registers/declared with a Module ). AppModule is the main module. 
+- **Data Binding** - get data in and out of the screen
   - input and output properties - eg parent and child componenet  
-- Services and Http - For any reusable code
-- Routing 
+- **Routing** 
   - load different screens dynamically without refreshing the entire page.
   - How Routes can be defined /  How routes are registered with modules / how to use routes to load different componenets dynamically.
 
@@ -21,3 +21,8 @@
  - **karma.conf.json** - for unit testing. *Karma* is a test runner.
  - **.editerconfig** - config for code editers. Some editers understand this and some don't. ( eg: Do I want spaces vs tabs when I press Tab)
  - **angular-cli.json** - Has things like - source code root folder/ where the build files should go to / whats the home page(index.html) / whats the first script that starts up (main.ts)
+ 
+## Big picture 
+App Module --> Routes (to dynamically load ) --> Componenets -->> HTML template and Typescript Code  
+Typescript Code <--> Services  
+HTML template --> Derectives/child componenets to do the redering  
