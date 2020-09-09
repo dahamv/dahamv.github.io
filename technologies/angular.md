@@ -25,4 +25,5 @@
 ## Big picture 
 App Module --> Routes (to dynamically load ) --> Componenets -->> HTML template and Typescript Code  
 Typescript Code <--> Services  
-HTML template --> Derectives/child componenets to do the redering  
+HTML template --> Derectives/child componenets to do the redering   
+App Module <-- Other modules that angular provides.
