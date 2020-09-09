@@ -24,8 +24,7 @@
  
 ## Big picture 
 <img src="/assets/images/AngularBigPicture.png" alt="drawing" width="400" height="300"/>
-
-
+   
 App Module --> Routes (to dynamically load ) --> Componenets -->> HTML template and Typescript Code     
 Typescript Code <--> Services      
 HTML template --> Derectives/child componenets to do the redering       
