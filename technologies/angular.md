@@ -111,3 +111,15 @@ export class CustomersComponent implements OnInit {...}
 --------------
 <img src="/assets/images/AngularDataBinding.png" alt="drawing" width="300" height="200"/>
 
+### Property Binding
+```typescript
+@Componenet({metadata..})
+class MyComponent {
+isVisible=true;
+}
+```
+```HTML
+<div [hidden]="!isVisible">
+</div>
+```
+
