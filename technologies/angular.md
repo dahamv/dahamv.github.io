@@ -96,7 +96,7 @@ import { CustomersComponent }  from './customers.component';
 })
 export class CustomersModule { }
 ```
-
+### Customers Componenet
 ```typescript
 @Component({
     selector: 'app-customers',
