@@ -46,9 +46,12 @@ import { NgModule }      from '@angular/core';     // is a decorator
 import { BrowserModule } from '@angular/platform-browser';  //has Derectives functionality used in databinding
 import { AppComponent }  from './app.component';
 @NgModule({
-  imports:      [ BrowserModule ],   // We get another bucket(module) that angular provides.
-  declarations: [ AppComponent, FooComponenet, BarComponenet ], // This is declaring what's inside this module.
-  bootstrap:    [ AppComponent ]  // Whats the first Componenet to be fired up? The first to be displayed in the UI?
+  // We get another bucket(module) that angular provides.
+  imports:      [ BrowserModule ],  
+  // This is declaring what's inside this module. The registered Componenets in this Module
+  declarations: [ AppComponent, CustomersComponenet ], 
+  // Whats the first Componenet to be fired up? The first to be displayed in the UI?
+  bootstrap:    [ AppComponent ]  
 })
 export class AppModule { }
 ```
