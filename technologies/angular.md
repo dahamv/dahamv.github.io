@@ -40,7 +40,7 @@ First thing that really fires up at runtime is **main.ts**. (Normally don't have
 ```typescript
 platformBrowserDynamic().bootstrapModule(AppModule).catch(err => console.log(err)); // Whats the first bucket(module) to fire up ?
 ```
-### App Module
+## App Module
 ______________
 ```typescript
 import { NgModule }      from '@angular/core';     // is a decorator
@@ -80,7 +80,7 @@ title = HelloWorld
 }
 ```
 
-### Customers Module ( a seperate child module)
+## Customers Module ( a seperate child module)
 _______________________________________________
 ```typescript
 import { NgModule }      from '@angular/core';
@@ -107,6 +107,6 @@ export class CustomersModule { }
 export class CustomersComponent implements OnInit {...}
 ```
 
-### Shared Module
+## Shared Module
 -----------------
 
