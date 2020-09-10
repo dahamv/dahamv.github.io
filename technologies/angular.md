@@ -65,7 +65,7 @@ export class AppModule { }
   selector: 'app-root',
   //use double curly braces (interpaltion) to push data from code to HTML template.
   template: `
-    <h1>{{ title }}</h1> 
+    <h1> {{ title }} </h1> 
   `
 })
 export class AppComponent implements OnInit { 
