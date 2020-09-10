@@ -28,4 +28,13 @@
 App Module --> Routes (to dynamically load ) --> Componenets -->> HTML template and Typescript Code     
 Typescript Code <--> Services      
 HTML template --> Derectives/child componenets to do the redering       
-App Module <-- Other modules that angular provides.    
+App Module <-- Other modules that angular provides.     
+
+Selector = ```<app-custormer></app-custormer>```
+
+### Componenet
+- Imports - ES2015 import statements
+- Decorators - Matadata about the components. ```@Componenet({selector:..,templateUrl:..})```
+  - selector - tag name for this componenet.```selector:app-custormers```
+  - template - ```templateUrl:./customers/componenet.html```
+- Class - Get data in and out of the template thats rendered in the UI. ```export class CustomersComponenet```. Another componenet can import.
