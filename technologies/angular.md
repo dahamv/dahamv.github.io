@@ -107,6 +107,7 @@ export class CustomersModule { }
 export class CustomersComponent implements OnInit {...}
 ```
 
-## Shared Module
------------------
+## DataBinding
+--------------
+<img src="/assets/images/AngularDataBinding.png" alt="drawing" width="300" height="250"/>
 
