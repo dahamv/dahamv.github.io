@@ -63,8 +63,9 @@ export class AppModule { }
 ```typescript
 @Component({ 
   selector: 'app-root',
+  //use double curly braces (interpaltion) to push data from code to HTML template.
   template: `
-    <h1>{{ title }}</h1> //use double curly braces (interpaltion) to push data from code to HTML template.
+    <h1>{{ title }}</h1> 
   `
 })
 export class AppComponent implements OnInit { 
