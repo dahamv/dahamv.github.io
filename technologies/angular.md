@@ -43,13 +43,14 @@ platformBrowserDynamic().bootstrapModule(AppModule).catch(err => console.log(err
 ### App Module
 ```typescript
 import { NgModule }      from '@angular/core';     // is a decorator
-import { BrowserModule } from '@angular/platform-browser';  //has Derectives functionality used in databinding
+//has Derectives functionality used in databinding. The other sub modules in the app can use this import.No need to import again.
+import { BrowserModule } from '@angular/platform-browser';  
 import { AppComponent }  from './app.component';
 @NgModule({
   // We get another bucket(module) that angular provides.
-  imports:      [ BrowserModule ],  
+  imports:      [ BrowserModule, , CustomersModule ],  
   // This is declaring what's inside this module. The registered Componenets in this Module
-  declarations: [ AppComponent, CustomersComponenet ], 
+  declarations: [ AppComponent, FooComponenet ], 
   // Whats the first Componenet to be fired up? The first to be displayed in the UI?
   bootstrap:    [ AppComponent ]  
 })
@@ -68,7 +69,8 @@ export class AppModule { }
   selector: 'app-root',
   //use double curly braces (interpaltion) to push data from code to HTML template.
   template: `
-    <h1> {{ title }} </h1> 
+    <h1> \{\{ title \}\} </h1> 
+    <app-customers></app-customers>
   `
 })
 export class AppComponent implements OnInit { 
@@ -77,6 +79,29 @@ title = HelloWorld
 }
 ```
 
+### Customers Module ( a seperate child module)
+```typescript
+import { NgModule }      from '@angular/core';
+// Browsermodule is already inherited from App module.
+//  CommonModule is where Derectives live in
+import { CommonModule } from '@angular/common';
+import { CustomersComponent }  from './customers.component';
+
+@NgModule({
+  imports:      [ CommonModule ],
+  declarations: [ CustomersComponent ]
+  //bootsrap is not needed. There should be only one 
+})
+export class CustomersModule { }
+```
+
+```typescript
+@Component({
+    selector: 'app-customers',
+    templateUrl: './customers.component.html'
+})
+export class CustomersComponent implements OnInit {...}
+```
 
 
 
