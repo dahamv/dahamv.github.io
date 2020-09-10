@@ -41,6 +41,7 @@ First thing that really fires up at runtime is **main.ts**. (Normally don't have
 platformBrowserDynamic().bootstrapModule(AppModule).catch(err => console.log(err)); // Whats the first bucket(module) to fire up ?
 ```
 ### App Module
+______________
 ```typescript
 import { NgModule }      from '@angular/core';     // is a decorator
 //has Derectives functionality used in databinding. The other sub modules in the app can use this import.No need to import again.
@@ -80,6 +81,7 @@ title = HelloWorld
 ```
 
 ### Customers Module ( a seperate child module)
+_______________________________________________
 ```typescript
 import { NgModule }      from '@angular/core';
 // Browsermodule is already inherited from App module.
@@ -105,5 +107,6 @@ export class CustomersModule { }
 export class CustomersComponent implements OnInit {...}
 ```
 
-
+### Shared Module
+-----------------
 
