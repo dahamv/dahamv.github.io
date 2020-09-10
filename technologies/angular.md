@@ -151,6 +151,13 @@ Structural directives - changes the structure of the DOM. Directives with star \
   <span>{{customer.lastName}}</span>
 </div>
 <div *ngIf="customer">{{ customer.details }}</div>
-<!-- two way databinding. name variable in componenet is shown in input fild. When its changed componenet property dynamically changes. -->
+<!-- two way databinding. name variable in componenet is shown in input fild. 
+When its changed componenet property dynamically changes. -->
 <input type="text" [(ngModel)]="customer.firstname" />
 ```
+## SimpleChanges
+```typescript
+ngOnChanges(changes: SimpleChanges) { }
+```
+## Input property
+To get data from a parent component to a child component. **(Hey I as a child accept input from my parent)**
