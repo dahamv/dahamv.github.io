@@ -47,14 +47,14 @@ import { BrowserModule } from '@angular/platform-browser';  //has Derectives fun
 import { AppComponent }  from './app.component';
 @NgModule({
   imports:      [ BrowserModule ],   // We get another bucket(module) that angular provides.
-  declarations: [ AppComponent ], // This is declaring what is inside this module.
+  declarations: [ AppComponent, FooComponenet, BarComponenet ], // This is declaring what's inside this module.
   bootstrap:    [ AppComponent ]  // Whats the first Componenet to be fired up? The first to be displayed in the UI?
 })
 export class AppModule { }
 ```
 ### index.html
 ```html
-   <app-root>   <!-- UI renders this. Has to be declared in an angular componenet -->
+   <app-root>   <!-- UI renders this first. Has to be declared in an angular componenet selector-->
        Loading...
    </app-root>
 ```
