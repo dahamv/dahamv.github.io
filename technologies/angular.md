@@ -35,6 +35,23 @@
   - **template** - ```templateUrl:./customers/componenet.html```
 - **Class** - Get data in and out of the template thats rendered in the UI. ```export class CustomersComponenet```. Another componenet can import.
 
+### main.ts
+First thing that really fires up at runtime is **main.ts**. (Normally don't have to mess with this much).
+```typescript
+platformBrowserDynamic().bootstrapModule(AppModule).catch(err => console.log(err)); // Whats the first bucket(module) to fire up ?
+```
+### App Module
+```typescript
+import { NgModule }      from '@angular/core';     // is a decorator
+import { BrowserModule } from '@angular/platform-browser';  //has Derectives functionality used in databinding
+import { AppComponent }  from './app.component';
+@NgModule({
+  imports:      [ BrowserModule ],   // We get another bucket(module) that angular provides.
+  declarations: [ AppComponent ], // This is declaring what is inside this module.
+  bootstrap:    [ AppComponent ]  // Whats the first Componenet to be fired up? The first to be displayed in the UI?
+})
+export class AppModule { }
+```
 ### index.html
 ```html
    <app-root>   <!-- UI renders this. Has to be declared in an angular componenet -->
@@ -56,21 +73,6 @@ title = HelloWorld
 }
 ```
 
-### App Module
-```typescript
-import { NgModule }      from '@angular/core';     // is a decorator
-import { BrowserModule } from '@angular/platform-browser';  //has Derectives functionality used in databinding
-import { AppComponent }  from './app.component';
-@NgModule({
-  imports:      [ BrowserModule ],   // We get another bucket(module) that angular provides.
-  declarations: [ AppComponent ], // This is declaring what is inside this module.
-  bootstrap:    [ AppComponent ]  // if we have bunch of componenets which one should be the first to be displayed in the UI?
-})
-export class AppModule { }
-```
 
-### main.ts
-first thing that really fires up at runtime is main.ts. (Normally don't have to mess with this much).
-```typescript
-platformBrowserDynamic().bootstrapModule(AppModule).catch(err => console.log(err)); // Whats the first bucket(module) to fire up ?
-```
+
+
