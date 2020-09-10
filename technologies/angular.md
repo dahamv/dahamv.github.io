@@ -91,6 +91,8 @@ import { CustomersComponent }  from './customers.component';
   imports:      [ CommonModule ],
   declarations: [ CustomersComponent ]
   //bootsrap is not needed. There should be only one 
+  // export CustomersComponenet so that App component HTML template can use it as <app-customers></app-customers>
+  exports: [ CustomersComponent ]
 })
 export class CustomersModule { }
 ```
