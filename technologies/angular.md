@@ -111,15 +111,20 @@ export class CustomersComponent implements OnInit {...}
 --------------
 <img src="/assets/images/AngularDataBinding.png" alt="drawing" width="300" height="200"/>
 
-### Property Binding
+### Property and EventBinding
 ```typescript
 @Componenet({metadata..})
 class MyComponent {
 isVisible=true;
+clickMe() { ..impl.. }
 }
 ```
+```hidden``` is a Dom property. Use square brackets [] for propety biding. ```click``` is an event. Use () for event binding. clickMe() is the callback function.
 ```HTML
 <div [hidden]="!isVisible">
+  <span (click)="clickMe()">
+    Section3
+  </span>
 </div>
 ```
 
