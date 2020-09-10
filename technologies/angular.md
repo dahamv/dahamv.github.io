@@ -110,21 +110,46 @@ export class CustomersComponent implements OnInit {...}
 ## DataBinding
 --------------
 <img src="/assets/images/AngularDataBinding.png" alt="drawing" width="300" height="200"/>
+-Write value using Interpolation: ```{{ propName }}```  
+-Bind DOM properties using ```[property]``` or ```bind-property```  
+-Bind DOM events using ```(event)``` or ```on-event```  
 
-### Property and EventBinding
+### Property and Event Binding
 ```typescript
 @Componenet({metadata..})
-class MyComponent {
-isVisible=true;
+class Customer {
+firstName= 'John';
+lastName= 'Doe';
+details='Customer details ...'
+isVisible=true; isActive=true; showIcon=true; isEnabled=true;
+textColor=#f44336; // Red 
 clickMe() { ..impl.. }
+save() { ..impl.. }
 }
 ```
-```hidden``` is a Dom property. Use square brackets [] for propety biding. ```click``` is an event. Use () for event binding. clickMe() is the callback function.
+```hidden``` is a DOM property. Use square brackets [] for propety biding. ```click``` is a DOM event. Use () for event binding. **clickMe()** is the callback function.
 ```HTML
 <div [hidden]="!isVisible">
   <span (click)="clickMe()">
     Section3
   </span>
 </div>
+Interpolation: {{ customer.firstName }}
+<button [disabled]="!isEnabled" [style.color]="textColor" (click)="save()"> Save </button>
+<!-- add and remove a css class-->
+<div [hidden]="!isVisible" [class.active]="isActive">...</div>
 ```
 
+## Angular Directives
+ngFor, ngIf, ngClass, ngStyle, ngModel
+Structural directives - changes the structure of the DOM. Directives with star \* eg: ngFor, ngIf
+```HTML
+<div *ngFor="let customer of customers">
+  <!-- active and icon are CSS classes. isActive and showIcon are variables in componenet class-->
+  <span [ngClass]="{active: isActive, icon: showIcon}">{{customer.firstName}}</span>
+  <span>{{customer.lastName}}</span>
+</div>
+<div *ngIf="customer">{{ customer.details }}</div>
+<!-- two way databinding. name variable in componenet is shown in input fild. When its changed componenet property dynamically changes. -->
+<input type="text" [(ngModel)]="customer.firstname" />
+```
