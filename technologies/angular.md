@@ -28,9 +28,49 @@
 **HTML template** --> Derectives/child componenets to do the redering       
 **Selector** = ```<app-custormer></app-custormer>```
 
-### Componenets
+### Componenets and Modules
 - **Imports** - ES2015 import statements
 - **Decorators** - Matadata about the components. ```@Componenet({selector:..,templateUrl:..})```
   - **selector** - tag name for this componenet.```selector:app-custormers```
   - **template** - ```templateUrl:./customers/componenet.html```
 - **Class** - Get data in and out of the template thats rendered in the UI. ```export class CustomersComponenet```. Another componenet can import.
+
+### index.html
+```html
+   <app-root>   <!-- UI renders this. Has to be declared in an angular componenet -->
+       Loading...
+   </app-root>
+```
+### App Componenet
+
+```typescript
+@Component({ 
+  selector: 'app-root',
+  template: `
+    <h1>{{ title }}</h1> //use double curly braces (interpaltion) to push data from code to HTML template.
+  `
+})
+export class AppComponent implements OnInit { 
+title = HelloWorld
+...
+}
+```
+
+### App Module
+```typescript
+import { NgModule }      from '@angular/core';     // is a decorator
+import { BrowserModule } from '@angular/platform-browser';  //has Derectives functionality used in databinding
+import { AppComponent }  from './app.component';
+@NgModule({
+  imports:      [ BrowserModule ],   // We get another bucket(module) that angular provides.
+  declarations: [ AppComponent ], // This is declaring what is inside this module.
+  bootstrap:    [ AppComponent ]  // if we have bunch of componenets which one should be the first to be displayed in the UI?
+})
+export class AppModule { }
+```
+
+### main.ts
+first thing that really fires up at runtime is main.ts. (Normally don't have to mess with this much).
+```typescript
+platformBrowserDynamic().bootstrapModule(AppModule).catch(err => console.log(err)); // Whats the first bucket(module) to fire up ?
+```
