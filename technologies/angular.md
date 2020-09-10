@@ -25,12 +25,12 @@
 ## Big picture 
 <img src="/assets/images/AngularBigPicture.png" alt="drawing" width="400" height="300"/>
   
-HTML template --> Derectives/child componenets to do the redering       
-Selector = ```<app-custormer></app-custormer>```
+**HTML template** --> Derectives/child componenets to do the redering       
+**Selector** = ```<app-custormer></app-custormer>```
 
-### Componenet
-- Imports - ES2015 import statements
-- Decorators - Matadata about the components. ```@Componenet({selector:..,templateUrl:..})```
-  - selector - tag name for this componenet.```selector:app-custormers```
-  - template - ```templateUrl:./customers/componenet.html```
-- Class - Get data in and out of the template thats rendered in the UI. ```export class CustomersComponenet```. Another componenet can import.
+### Componenets
+- **Imports** - ES2015 import statements
+- **Decorators** - Matadata about the components. ```@Componenet({selector:..,templateUrl:..})```
+  - **selector** - tag name for this componenet.```selector:app-custormers```
+  - **template** - ```templateUrl:./customers/componenet.html```
+- **Class** - Get data in and out of the template thats rendered in the UI. ```export class CustomersComponenet```. Another componenet can import.
