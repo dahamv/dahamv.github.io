@@ -109,5 +109,5 @@ export class CustomersComponent implements OnInit {...}
 
 ## DataBinding
 --------------
-<img src="/assets/images/AngularDataBinding.png" alt="drawing" width="300" height="250"/>
+<img src="/assets/images/AngularDataBinding.png" alt="drawing" width="300" height="200"/>
 
