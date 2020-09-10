@@ -110,6 +110,7 @@ export class CustomersComponent implements OnInit {...}
 ## DataBinding
 --------------
 <img src="/assets/images/AngularDataBinding.png" alt="drawing" width="300" height="200"/>
+
 -Write value using Interpolation: ```{{ propName }}```  
 -Bind DOM properties using ```[property]``` or ```bind-property```  
 -Bind DOM events using ```(event)``` or ```on-event```  
@@ -141,10 +142,10 @@ Interpolation: {{ customer.firstName }}
 ```
 
 ## Angular Directives
-ngFor, ngIf, ngClass, ngStyle, ngModel
-Structural directives - changes the structure of the DOM. Directives with star \* eg: ngFor, ngIf
+**ngFor, ngIf, ngClass, ngStyle, ngModel**  
+Structural directives - changes the structure of the DOM. Directives with star \* eg: **ngFor, ngIf**
 ```HTML
-<div *ngFor="let customer of customers">
+<div \*ngFor="let customer of customers">
   <!-- active and icon are CSS classes. isActive and showIcon are variables in componenet class-->
   <span [ngClass]="{active: isActive, icon: showIcon}">{{customer.firstName}}</span>
   <span>{{customer.lastName}}</span>
