@@ -289,3 +289,29 @@ Note that changed is an event because of @Output. not a propery. so its event bi
 <filter-textbox (changed)="filterFunction($event)"></filter-textbox>
 ```
 
+## Services
+
+Acts as a singleton. We don't declare services. We provide them. Service singletons are stored in the Angular injecter container.   
+- Provider = cheff
+- Injector container = waiter who delivers the food.
+
+The waiter (Injecter container) will contact the cheff (the provider) and say "Hey I need a data service instance". He will pass the serivice singleton to the waiter (injector container). And then the waiter will pass that into who ever request the object.
+```typescript
+//The module which has the services registerd.
+@NgModule({
+    imports: [  ],
+    providers: [ DataService, SorterService ]
+})
+export class CoreModule { }
+...............
+
+//The services should be injectable so that we can inject other services into the constructor.
+@Injectable()
+export class DataService {
+    constructor(private http: HttpClient) { }
+    //we need observables for async operations.
+    getCustomers() : Observable<ICustomer[]> { }
+}
+    
+
+```
