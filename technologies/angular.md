@@ -227,3 +227,29 @@ You can pass values to Pipes. currency is an angular pipe.
 <td>{{ cust.orderTotal | currency: curencyCode:'symbol' }}</td> <!-- use the symbol ($) for the currencyCode=USD -->
 <td>{{ cust.orderTotal | currency: curencyCode:'code' }}</td> <!-- use the code (USD) for the currencyCode=USD -->
 ```
+
+## Input, Output, EventEmitter
+```typescript
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
+@Component({
+    selector: 'filter-textbox',
+    template: `
+        Filter: <input type="text" />
+    `
+})
+export class FilterTextboxComponent implements OnInit {    
+    private _filter: string;
+
+@Input() get filter() {
+        return this._filter;
+    }    
+    set filter(val: string) { 
+        this._filter = val;
+        this.changed.emit(this.filter); //Raise changed event
+    }
+
+    @Output() changed: EventEmitter<string> = new EventEmitter<string>();
+    ....
+}
+```
