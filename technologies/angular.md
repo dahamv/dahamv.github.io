@@ -253,7 +253,8 @@ export class FilterTextboxComponent implements OnInit {
     
     set filter(val: string) { 
         this._filter = val;
-        this.changed.emit(this.filter); //Raise changed event
+        //Emits the changed data to the parent componenet as an event
+        this.changed.emit(this.filter); 
     }
 
     @Output() changed: EventEmitter<string> = new EventEmitter<string>();
@@ -262,6 +263,7 @@ export class FilterTextboxComponent implements OnInit {
 ```
 Filter function in customersList component
 ```typescript
+    //To process the data in the event sent by the child componenet FilterTextBox
     filterFunction(data: string) {
         if (data) {
             this.filteredCustomers = this.customers.filter((cust: ICustomer) => {
@@ -269,7 +271,6 @@ Filter function in customersList component
                        cust.city.toLowerCase().indexOf(data.toLowerCase()) > -1 ||
                        cust.orderTotal.toString().indexOf(data) > -1;
             });
-            this.calculateOrders();
         } else {
             this.filteredCustomers = this.customers;
         }
@@ -279,8 +280,8 @@ In Customers List HTML template.
 ```HTML
 <!-- set value to filter property in filter text box component -->
 <filter-textbox [filter]="'Phoenix'"></filter-textbox>
-<!-- for changed output event in Filtertextbox component call filterFunction() in parent
-component CustomersList. -->
-<filter-textbox (changed)="filterFunction"></filter-textbox>
+<!-- the emited output event in Filtertextbox component is $event. call filterFunction($evnet) in parent
+component CustomersList. this event object has the changed data sent by the child component. -->
+<filter-textbox (changed)="filterFunction($event)"></filter-textbox>
 ```
 
