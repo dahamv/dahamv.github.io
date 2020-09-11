@@ -30,7 +30,7 @@
 
 ### Componenets and Modules
 - **Imports** - ES2015 import statements
-- **Decorators** - Matadata about the components. ```@Componenet({selector:..,templateUrl:..})```
+- **Decorators** - Matadata about the components. ```@Componenet({selector:..,templateUrl:..})```. All decorators are functions.
   - **selector** - tag name for this componenet.```selector:app-custormers```
   - **template** - ```templateUrl:./customers/componenet.html```
 - **Class** - Get data in and out of the template thats rendered in the UI. ```export class CustomersComponenet```. Another componenet can import.
@@ -50,7 +50,8 @@ import { AppComponent }  from './app.component';
 @NgModule({
   // We get another bucket(module) that angular provides.
   imports:      [ BrowserModule, , CustomersModule ],  
-  // This is declaring what's inside this module. The registered Componenets in this Module
+  // This is declaring what's inside this module. The registered Componenets in this Module.
+  // We can declare Pipes, Componenets and Directives.
   declarations: [ AppComponent, FooComponenet ], 
   // Whats the first Componenet to be fired up? The first to be displayed in the UI?
   bootstrap:    [ AppComponent ]  
@@ -173,7 +174,7 @@ export class CustomersListComponent implements OnInit {
         }    
     }
 ```
-Now from the parents HTML template
+Now from the parents HTML template we can pass the people array into customers property in the child componenet.
 ```HTML
 <!-- customers is the input property in the child componenet-->
 <app-customers-list [customers]="people"></app-customers-list>
@@ -184,8 +185,42 @@ Usually when there are many properties that we have to check for changes. If the
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 export class CustomersListComponent implements OnInit {
     @Input() customers: any[];
-    
     //watch for changes in a property.
     ngOnChanges(changes: SimpleChanges) { .. }
 }
+```
+
+## Pipes
+Using pipes in the HTML templeate. **uppercase** is an angular pipe to make all charactors to upercase. We can use that with | (pipe symbol)
+```HTML
+<a> {{ cust.name | uppercase }} </a>
+<a> {{ cust.name | titlecase }} </a> <!-- first letter of words are uppercase -->
+```
+
+## Custom Pipes.
+Creating **capitalize.pipe.ts** same behavior as with titlecase angular pipe.
+```typescript
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({ name: 'capitalize' })
+export class CapitalizePipe implements PipeTransform {
+    transform(value: any) {
+        if (value) {
+            return value.charAt(0).toUpperCase() + value.slice(1);
+        }
+        return value;
+    }
+}
+
+//The pipe should be registered in a Module so that other modules can import it.
+@NgModule({
+    declarations: [ CapitalizePipe ],
+    exports: [ CapitalizePipe ]
+})
+export class SharedModule { }
+```
+You can pass values to Pipes. currency is a custom pipe.
+```HTML
+<td>{{ cust.orderTotal | currency:'USD' }}</td>
+<td>{{ cust.orderTotal | currency: curencyCode }}</td> <!-- a property in the class-->
 ```
