@@ -155,9 +155,37 @@ Structural directives - changes the structure of the DOM. Directives with star \
 When its changed componenet property dynamically changes. -->
 <input type="text" [(ngModel)]="customer.firstname" />
 ```
-## SimpleChanges
-```typescript
-ngOnChanges(changes: SimpleChanges) { }
-```
-## Input property
+
+## Input properties (getters and setters) 
 To get data from a parent component to a child component. **(Hey I as a child accept input from my parent)**
+```typescript
+import { Component, OnInit, Input } from '@angular/core';
+//This is the app-customers-list child componenet of Customer Componenet.
+export class CustomersListComponent implements OnInit {
+    private _customers: ICustomer[] = [];
+    @Input() get customers(): ICustomer[] {
+      return this._customers;    
+    }
+    
+    set customers(value: ICustomer[]) {
+        if (value) {
+            this.filteredCustomers = this._customers = value;
+        }    
+    }
+```
+Now from the parents HTML template
+```HTML
+<!-- customers is the input property in the child componenet-->
+<app-customers-list [customers]="people"></app-customers-list>
+```
+## SimpleChanges
+Usually when there are many properties that we have to check for changes. If there is only one, then use Input property getter and setter.
+```typescript
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+export class CustomersListComponent implements OnInit {
+    @Input() customers: any[];
+    
+    //watch for changes in a property.
+    ngOnChanges(changes: SimpleChanges) { .. }
+}
+```
