@@ -229,21 +229,28 @@ You can pass values to Pipes. currency is an angular pipe.
 ```
 
 ## Input, Output, EventEmitter
+EventEmitter is used to send data from a child up to a parent.
 ```typescript
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
+//This is a child componenet of CustomerList componenet.
 @Component({
     selector: 'filter-textbox',
+    //Two way databinding. Value property of input filed should be <-- filter. The value got from the getter().
+    //input event of input fild should be --> filter. The value set from the setter().
     template: `
-        Filter: <input type="text" />
+        Filter: <input type="text" [value]="filter" (input)="filter=$event.target.value" />
+        //The same as this. ngModel is from the FormsModule in angular.
+        <input type="text" [(ngModel)]="filter" />
     `
 })
-export class FilterTextboxComponent implements OnInit {    
+export class FilterTextboxComponent implements OnInit {
+    
     private _filter: string;
-
-@Input() get filter() {
+    @Input() get filter() {
         return this._filter;
-    }    
+    }
+    
     set filter(val: string) { 
         this._filter = val;
         this.changed.emit(this.filter); //Raise changed event
@@ -253,3 +260,27 @@ export class FilterTextboxComponent implements OnInit {
     ....
 }
 ```
+Filter function in customersList component
+```typescript
+    filterFunction(data: string) {
+        if (data) {
+            this.filteredCustomers = this.customers.filter((cust: ICustomer) => {
+                return cust.name.toLowerCase().indexOf(data.toLowerCase()) > -1 ||
+                       cust.city.toLowerCase().indexOf(data.toLowerCase()) > -1 ||
+                       cust.orderTotal.toString().indexOf(data) > -1;
+            });
+            this.calculateOrders();
+        } else {
+            this.filteredCustomers = this.customers;
+        }
+    }
+```
+In Customers List HTML template.
+```HTML
+<!-- set value to filter property in filter text box component -->
+<filter-textbox [filter]="'Phoenix'"></filter-textbox>
+<!-- for changed output event in Filtertextbox component call filterFunction() in parent
+component CustomersList. -->
+<filter-textbox (changed)="filterFunction"></filter-textbox>
+```
+
