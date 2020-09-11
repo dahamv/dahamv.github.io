@@ -322,7 +322,7 @@ Walking up to a convayer belt at airport. You are subscribing to the convayer be
 want as it flows arround the convayer belt. **We are observing the luggage as it flows by**  
 You can also use **Promisses**. you can convert an Observable to a Promise. But Observables work in angular.
 
-## Typescript
+## Typescript Arrow functions
 In the above example, the sum is an arrow function, "a: number, b: number" is a parameter type, ": number" is the return type, the arrow notation => separates the function parameter and the function body.
 ```typescript
 let sum = (a: number, b: number): number => {  
