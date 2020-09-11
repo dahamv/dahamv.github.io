@@ -312,6 +312,25 @@ export class DataService {
     //we need observables for async operations.
     getCustomers() : Observable<ICustomer[]> { }
 }
-    
-
 ```
+
+## Obervables
+Not part of angular, but from rxjs (reactive extention for java script). Used for Async operations. You can subscribe to observables.   
+With HTTP observable observes for 1 response. But observables can be used with WebSockets and can observe a stream of data.
+Simily:  
+Walking up to a convayer belt at airport. You are subscribing to the convayer belt. In case of HTTP there is only one piece of luggage that drops on the convayer belt. In case of WebSockets where data is pushed to the client by the server, that'd be like luggage flowing arround and we pick off what luggage we want and we ignore the luggage we dont
+want as it flows arround the convayer belt. **We are observing the luggage as it flows by**  
+You can also use **Promisses**. you can convert an Observable to a Promise. But Observables work in angular.
+
+## Typescript
+In the above example, the sum is an arrow function, "a: number, b: number" is a parameter type, ": number" is the return type, the arrow notation => separates the function parameter and the function body.
+```typescript
+let sum = (a: number, b: number): number => {  
+            return a + b;  
+}  
+console.log(sum(20, 30)); //returns 50  
+```
+## pipe() function.
+Simily:  
+Think of it as a phisical pipe that water can flow through and as the water flows we can plug in different types of filters(in RxJs - pipable Operators). ```observableInstance.pipe(operator())``` eg: ```map(), catchError()```
+see [list of RsJs operators](https://rxjs-dev.firebaseapp.com/guide/operators)
