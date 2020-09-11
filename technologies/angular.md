@@ -219,8 +219,11 @@ export class CapitalizePipe implements PipeTransform {
 })
 export class SharedModule { }
 ```
-You can pass values to Pipes. currency is a custom pipe.
+You can pass values to Pipes. currency is an angular pipe.
 ```HTML
-<td>{{ cust.orderTotal | currency:'USD' }}</td>
-<td>{{ cust.orderTotal | currency: curencyCode }}</td> <!-- a property in the class-->
+<td>{{ cust.orderTotal | currency:'USD' }}</td> <!-- you can hard code the currency code -->
+<td>{{ cust.orderTotal | currency: curencyCode }}</td> <!-- curencyCode='USD' is a property in the class-->
+<!-- symbol and code are angular currency pipe parameters.
+<td>{{ cust.orderTotal | currency: curencyCode:'symbol' }}</td> <!-- use the symbol ($) for the currencyCode=USD -->
+<td>{{ cust.orderTotal | currency: curencyCode:'code' }}</td> <!-- use the code (USD) for the currencyCode=USD -->
 ```
