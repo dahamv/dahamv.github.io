@@ -174,7 +174,7 @@ export class CustomersListComponent implements OnInit {
         }    
     }
 ```
-Now from the parents HTML template we can pass the people array into customers property in the child componenet.
+Now from the parents HTML template we can pass the people array into customers property in the child componenet. uses the Setter method.
 ```HTML
 <!-- customers is the input property in the child componenet-->
 <app-customers-list [customers]="people"></app-customers-list>
@@ -228,18 +228,19 @@ You can pass values to Pipes. currency is an angular pipe.
 <td>{{ cust.orderTotal | currency: curencyCode:'code' }}</td> <!-- use the code (USD) for the currencyCode=USD -->
 ```
 
-## Input, Output, EventEmitter
+## Output, EventEmitter
 EventEmitter is used to send data from a child up to a parent.
 ```typescript
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-//This is a child componenet of CustomerList componenet.
+//FilterTextBox is a child componenet of CustomerList componenet.
 @Component({
     selector: 'filter-textbox',
-    //Two way databinding. Value property of input filed should be <-- filter. The value got from the getter().
-    //input event of input fild should be --> filter. The value set from the setter().
     template: `
-        Filter: <input type="text" [value]="filter" (input)="filter=$event.target.value" />
+        Filter text box: 
+        //Two way databinding. Value property of input filed should be <-- filter. The value got from the getter().
+        //input event of input fild should be --> filter. The value set from the setter().
+        <input type="text" [value]="filter" (input)="filter=$event.target.value" />
         //The same as this. ngModel is from the FormsModule in angular.
         <input type="text" [(ngModel)]="filter" />
     `
@@ -256,32 +257,35 @@ export class FilterTextboxComponent implements OnInit {
         //Emits the changed data to the parent componenet as an event
         this.changed.emit(this.filter); 
     }
-
+    //The characters typed in the Filter text box are pushed in to the customersList componenet using the event emitter..
     @Output() changed: EventEmitter<string> = new EventEmitter<string>();
     ....
 }
 ```
-Filter function in customersList component
+When the filtering string is got from the FilterTextBox componenet, filterFunction() in CustomersList component should be called. 
 ```typescript
-    //To process the data in the event sent by the child componenet FilterTextBox
+    //This is in CustomersList component. To process the data in the event sent by FilterTextBox child componenet
     filterFunction(data: string) {
         if (data) {
+            //customers is an array ICustomer[]. It has all the customers. use the array filter() function to filter. And
+            // fill the filteredCustomers ICustomer[] array.
             this.filteredCustomers = this.customers.filter((cust: ICustomer) => {
                 return cust.name.toLowerCase().indexOf(data.toLowerCase()) > -1 ||
                        cust.city.toLowerCase().indexOf(data.toLowerCase()) > -1 ||
                        cust.orderTotal.toString().indexOf(data) > -1;
             });
-        } else {
+        } else { //if nothing is typed in the filterTextBox(child componenet) show all the customers.
             this.filteredCustomers = this.customers;
         }
     }
 ```
-In Customers List HTML template.
+In CustomersList HTML template.
 ```HTML
-<!-- set value to filter property in filter text box component -->
+<!-- You can set a starting value to in the filterTextBox component. Uses the @Input setter().  -->
 <filter-textbox [filter]="'Phoenix'"></filter-textbox>
 <!-- the emited output event in Filtertextbox component is $event. call filterFunction($evnet) in parent
-component CustomersList. this event object has the changed data sent by the child component. -->
+component CustomersList. this event object has the changed data sent by the child component. 
+Note that changed is an event because of @Output. not a propery. so its event binding-->
 <filter-textbox (changed)="filterFunction($event)"></filter-textbox>
 ```
 
