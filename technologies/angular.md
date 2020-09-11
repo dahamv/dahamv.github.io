@@ -263,7 +263,7 @@ export class FilterTextboxComponent implements OnInit {
 }
 ```
 When the filtering string is got from the FilterTextBox componenet, filterFunction() in CustomersList component should be called. 
-```typescript
+```TypeScript
     //This is in CustomersList component. To process the data in the event sent by FilterTextBox child componenet
     filterFunction(data: string) {
         if (data) {
