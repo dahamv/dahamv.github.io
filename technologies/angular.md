@@ -119,14 +119,14 @@ export class CustomersComponent implements OnInit {...}
 ### Property and Event Binding
 ```typescript
 @Componenet({metadata..})
-class Customer {
-firstName= 'John';
-lastName= 'Doe';
-details='Customer details ...'
-isVisible=true; isActive=true; showIcon=true; isEnabled=true;
-textColor=#f44336; // Red 
-clickMe() { ..impl.. }
-save() { ..impl.. }
+  class Customer {
+  firstName= 'John';
+  lastName= 'Doe';
+  details='Customer details ...'
+  isVisible=true; isActive=true; showIcon=true; isEnabled=true;
+  textColor=#f44336; // Red 
+  clickMe() { ..impl.. }
+  save() { ..impl.. }
 }
 ```
 ```hidden``` is a DOM property. Use square brackets [] for propety biding. ```click``` is a DOM event. Use () for event binding. **clickMe()** is the callback function.
@@ -276,7 +276,7 @@ When the filtering string is got from the FilterTextBox componenet, filterFuncti
                        cust.orderTotal.toString().indexOf(data) > -1;
             });
         } else { //if nothing is typed in the filterTextBox(child componenet) show all the customers.
-            this.filteredCustomers = this.customers;
+            this.filteredCustomers = this.customers; // customers[] has all the customers 
         }
     }
 ```
@@ -353,11 +353,13 @@ myObservable.subscribe(myObserver);
 myObservable.subscribe( (value) => console.log(value))
 ```
 
-## pipe() function.
+## pipe() function with RxJs operators.
 
 Simily:  
-Think of it as a phisical pipe that water can flow through and as the water flows we can plug in different types of filters(in RxJs - pipable Operators). ```observableInstance.pipe(operator())``` eg: import { map } from 'rxjs/operators'; from 'rxjs/operators';```filter(), map(), scan(), catchError()``` etc.  
-Note: all these functions get observables and return observables.
+Think of it as a phisical pipe that water can flow through and as the water flows we can plug in different types of filters(in RxJs - pipable Operators). ```observableInstance.pipe(operator())```   
+eg: ```import { filter, map, scan, catchError } from 'rxjs/operators';```.    
+These ```filter(), map(), scan(), catchError()``` etc are RxJs operator functions.   
+Note: Operators take **configuration options**, and they return a **function that takes a source observable**. When executing this returned function, the operator observes the source observable’s emitted values, transforms them, and returns a **new observable of those transformed values**.
 see [list of RsJs operators](https://rxjs-dev.firebaseapp.com/guide/operators)
 
 ### Observable.pipe with filter(), map() and scan()
