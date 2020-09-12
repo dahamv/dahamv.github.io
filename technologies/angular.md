@@ -315,7 +315,7 @@ export class DataService {
 }
 ```
 ## Typescript Arrow functions
-In the above example, the sum is an arrow function, "a: number, b: number" is a parameter type, ": number" is the return type, the arrow notation => separates the function parameter and the function body.
+In the above example, **sum** is an arrow function, **"a: number, b: number"** is a parameter type, **"number"** is the return type, the arrow notation **=>** separates the function parameter and the function body.
 ```typescript
 let sum = (a: number, b: number): number => {  
             return a + b;  
@@ -350,10 +350,23 @@ var myObserver = {
 // Execute with the observer object
 myObservable.subscribe(myObserver);
 // Using arrow functions
-myObservable.subscribe(value => console.log(value))
+myObservable.subscribe( (value) => console.log(value))
 ```
 
 ## pipe() function.
+
 Simily:  
-Think of it as a phisical pipe that water can flow through and as the water flows we can plug in different types of filters(in RxJs - pipable Operators). ```observableInstance.pipe(operator())``` eg: ```map(), catchError()```
+Think of it as a phisical pipe that water can flow through and as the water flows we can plug in different types of filters(in RxJs - pipable Operators). ```observableInstance.pipe(operator())``` eg: import { map } from 'rxjs/operators'; from 'rxjs/operators';```filter(), map(), scan(), catchError()``` etc.  
+Note: all these functions get observables and return observables.
 see [list of RsJs operators](https://rxjs-dev.firebaseapp.com/guide/operators)
+
+### Observable.pipe with filter(), map() and scan()
+```typescript
+  observable : Observable<number> = of(1, 2, 3, 4, 5, 6, 7);
+  observable.pipe(
+    filter(n => n % 2 === 1),  // At this point the result is 1,3,5,7. 
+    map(n => n + 10),          // At this point the result is 11, 13, 15, 17
+    scan((sum, n) => sum + n)  // At this point the result is 11, 24, 39, 56
+  ).subscribe(result => console.log(result));
+```
+
