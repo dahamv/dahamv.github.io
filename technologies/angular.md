@@ -236,12 +236,13 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 //FilterTextBox is a child componenet of CustomerList componenet.
 @Component({
     selector: 'filter-textbox',
+    //Two way databinding. Value property of input filed should be <-- filter. The value got from the getter().
+    //input event of input fild should be --> filter. The value set from the setter().
+    //Can also use [(ngModel)] to do the same thing. its from FormsModule in angular.
     template: `
-        Filter text box: 
-        //Two way databinding. Value property of input filed should be <-- filter. The value got from the getter().
-        //input event of input fild should be --> filter. The value set from the setter().
+        Filter text box:        
         <input type="text" [value]="filter" (input)="filter=$event.target.value" />
-        //The same as this. ngModel is from the FormsModule in angular.
+        .....
         <input type="text" [(ngModel)]="filter" />
     `
 })
