@@ -313,15 +313,6 @@ export class DataService {
     getCustomers() : Observable<ICustomer[]> { }
 }
 ```
-
-## Obervables
-Not part of angular, but from rxjs (reactive extention for java script). Used for Async operations. You can subscribe to observables.   
-With HTTP observable observes for 1 response. But observables can be used with WebSockets and can observe a stream of data.
-Simily:  
-Walking up to a convayer belt at airport. You are subscribing to the convayer belt. In case of HTTP there is only one piece of luggage that drops on the convayer belt. In case of WebSockets where data is pushed to the client by the server, that'd be like luggage flowing arround and we pick off what luggage we want and we ignore the luggage we dont
-want as it flows arround the convayer belt. **We are observing the luggage as it flows by**  
-You can also use **Promisses**. you can convert an Observable to a Promise. But Observables work in angular.
-
 ## Typescript Arrow functions
 In the above example, the sum is an arrow function, "a: number, b: number" is a parameter type, ": number" is the return type, the arrow notation => separates the function parameter and the function body.
 ```typescript
@@ -330,6 +321,37 @@ let sum = (a: number, b: number): number => {
 }  
 console.log(sum(20, 30)); //returns 50  
 ```
+
+## Obervables
+Not part of angular, but from rxjs (reactive extention for java script). Used for Async operations. You can subscribe to observables. Its a wrapper arround some data source(stream of values). Can be **synchronous and asynchronous.**  
+With HTTP observable observes for 1 response. But observables can be used with WebSockets and can observe a stream of data.   
+Simily:    
+Walking up to a convayer belt at airport. You are subscribing to the convayer belt. In case of HTTP there is only one piece of luggage that drops on the convayer belt. In case of WebSockets where data is pushed to the client by the server, that'd be like luggage flowing arround and we pick off what luggage we want and we ignore the luggage we dont
+want as it flows arround the convayer belt. **We are observing the luggage as it flows by**   
+You can also use **Promisses**. you can convert an Observable to a Promise. But Observables work in angular.  
+### **Observer**s can subscribe to observables
+Observers subscribe to Observables. An Observer has 3 methods. ```next(), error() and complete()```. Observable calls these methods accordingly. Observable calls the ```next()``` method when it gets a new value. Some observables never finish, so ```complete()``` is never called. eg. If the observable is wrapped arround a click listner on a button you don't know when it will finish, since the user could always click the button. 
+```typescript
+const myObservable = of(1, 2, 3);
+// Create observer object
+const myObserver = {
+  next: val => console.log('Observer got a next value: ' + val),
+  error: err => console.error('Observer got an error: ' + err),
+  complete: () => console.log('Observer got a complete notification'),
+};
+
+//The JavaScript way
+var myObserver = {
+  next: function(val) {console.log(val)},
+  error: function(err) {console.log(err)},
+  error: function() {console.log('completed')},
+}
+// Execute with the observer object
+myObservable.subscribe(myObserver);
+// Using arrow functions
+myObservable.subscribe(value => console.log(value))
+```
+
 ## pipe() function.
 Simily:  
 Think of it as a phisical pipe that water can flow through and as the water flows we can plug in different types of filters(in RxJs - pipable Operators). ```observableInstance.pipe(operator())``` eg: ```map(), catchError()```
