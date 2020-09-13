@@ -38,6 +38,17 @@ const colorRed = 0; const colorGreen = 1; const colorBlue = 2;
 Enum Color = { Red, Green, Blue } // Red, Green, Blue automatically gets incremented values 0, 1, 2
 let backgroundColor = Color.Red;
 ```
+## Type assersions
+```typescript
+let message = 'abc'; // message is of type string. So can call String specific functions like message.endsWith(..) etc.
+//and
+let message; // this is of type any. So typescript gets confused with message.endsWith(..) is called
+message = 'abc';
+// For this use type assersions.
+let endsWithC = (<string>message).endsWith('c'); // returns boolean.
+// can also use
+let endsWithC2 = (message as string).endsWith('c') // does the same thing.
+```
 ## Typescript Arrow functions
 In the above example, **sum** is an arrow function, **"a: number, b: number"** is a parameter type, **"number"** is the return type, the arrow notation **=>** separates the function parameter and the function body.
 ```typescript
@@ -45,4 +56,21 @@ let sum = (a: number, b: number): number => {
             return a + b;  
 }  
 console.log(sum(20, 30)); //returns 50  
+//JavaScript way
+let log = function(message) { console.log(message); }
+//Can do with arrow functions
+let doLog = message => console.log(message);
+// if there are no parameters
+let doLog2 = () => console.log('hello');
+```
+
+## Custom types
+```typescript
+let drawPoint = (x,y) => { ... }
+// can also pass a point object instead of x and y
+let drawPoint = (point) => { ... }  // But problem of this is you can call drawPoint('Some String');
+//you can call that function
+drowPoint({ x : 1, y : 2 });
+// Its a good idea to annotate the input 'point' parameter (inline annotation) with a custom type.
+let drawPoint = (point : { x : number, y : number }) => { ... } 
 ```
