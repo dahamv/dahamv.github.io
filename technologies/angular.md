@@ -314,15 +314,6 @@ export class DataService {
     getCustomers() : Observable<ICustomer[]> { }
 }
 ```
-## Typescript Arrow functions
-In the above example, **sum** is an arrow function, **"a: number, b: number"** is a parameter type, **"number"** is the return type, the arrow notation **=>** separates the function parameter and the function body.
-```typescript
-let sum = (a: number, b: number): number => {  
-            return a + b;  
-}  
-console.log(sum(20, 30)); //returns 50  
-```
-
 ## Obervables
 Not part of angular, but from rxjs (reactive extention for java script). Used for Async operations. You can subscribe to observables. Its a wrapper arround some data source(stream of values). Can be **synchronous and asynchronous.**  
 With HTTP observable observes for 1 response. But observables can be used with WebSockets and can observe a stream of data.   
@@ -372,3 +363,4 @@ see [list of RsJs operators](https://rxjs-dev.firebaseapp.com/guide/operators)
   ).subscribe(result => console.log(result));
 ```
 
+https://scrimba.com/p/pQxesM/cQrzNs3
