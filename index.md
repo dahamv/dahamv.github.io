@@ -4,7 +4,8 @@
 [Spring Security](technologies/spring-security.md)  
 [Hibernate](technologies/hibernate.md)  
 [Angular](technologies/angular.md) 
-[TypeScript](technologies/typesript.md)
+[TypeScript](technologies/typesript.md)  
+[Functional Programming](technologies/functionalProgramming.md)  
 
 ## Cheetsheets
 
