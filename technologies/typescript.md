@@ -26,7 +26,18 @@ Other Javascript versions.
 - ES2016
 - ES 2017
 
+## TypeScript Types and Enums
+```typescript
+let a : number;  let b : boolean ..... , string , any
+let c : number[] = [1,2,3];
 
+//Enums
+//in Vanila Javascript
+const colorRed = 0; const colorGreen = 1; const colorBlue = 2;
+//with Typescript Enums
+Enum Color = { Red, Green, Blue } // Red, Green, Blue automatically gets incremented values 0, 1, 2
+let backgroundColor = Color.Red;
+```
 ## Typescript Arrow functions
 In the above example, **sum** is an arrow function, **"a: number, b: number"** is a parameter type, **"number"** is the return type, the arrow notation **=>** separates the function parameter and the function body.
 ```typescript
