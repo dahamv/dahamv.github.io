@@ -80,3 +80,11 @@ intereface Point {
 }
 let drowPoint = (point: Point) => { ... }
 ```
+## Interfaces
+```typescript
+interface Point {
+    x: number,
+    y: number,
+    draw: () => void // a function named draw take no parameters and returns void.
+}
+```
