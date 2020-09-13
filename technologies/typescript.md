@@ -73,4 +73,10 @@ let drawPoint = (point) => { ... }  // But problem of this is you can call drawP
 drowPoint({ x : 1, y : 2 });
 // Its a good idea to annotate the input 'point' parameter (inline annotation) with a custom type.
 let drawPoint = (point : { x : number, y : number }) => { ... } 
+// You can also do this using an Interface.
+intereface Point {
+    x : number, 
+    y : number 
+}
+let drowPoint = (point: Point) => { ... }
 ```
