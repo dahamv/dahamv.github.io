@@ -142,8 +142,13 @@ const multipy = x => y => x * y;
 const pluck = key => object => object[key];
 
 const discount = myltiply(0.98); //2% discount.
-const tax = myltiply(1.0925); // 0.0925% tax
+const tax = myltiply(1.0925); // 9.25% tax
 
+const request = defaults => options => {
+    options = Object.assign({}, defaults, options);
+    //fetch method syntax "let promise = fetch(url, [options])"
+    return fetch(options.url, options).then(resp => resp.json());
+}
 const customRequest = request({
     headers: {'X-Custom';'myKey'}
 });
