@@ -54,11 +54,12 @@ console.log(studObj1.age); // 15
 ## Returning functions
 
 ```javascript
+//Note that x get stored in the first function. This is a good way to avoid repetition.
 const createAdder = (x) => {
   return (y) => x + y;
 }
-const add3 = createAdder(3);
-const add4 = createAdder(4);
+const add3 = createAdder(3); // 3 is stored inside the add3 function 
+const add4 = createAdder(4); // 4 is stored insode the add4 function
 add3(5); // returns 8
 add4(5); //returns 9
 ```
