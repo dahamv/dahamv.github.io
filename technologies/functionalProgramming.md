@@ -100,7 +100,7 @@ console.log(upperName('Jet')); //JET
 const createAdder = (x) => {
   return (y) => x + y;
 }
-//can write the above function with one line using => functions
+//can write the above function with one line using => functions. This is called CURRYING in functional programming
 const createAdder = x => y => x + y;
 
 //same thing in old ES5 javascript
@@ -121,7 +121,7 @@ var add5 = sum.bind(null, 5); // with bind() null --> a, 5 --> b and the new fun
 add5(7); //returns 12
 ```
 
-# Using Partial functions
+## Using Partial functions
 
 ```javascript
 const add = (x,y) => x + y;
@@ -133,3 +133,23 @@ const partial = (fn,...args) => {
     return (...otherArgs) => { return fn(...args, ...otherArgs)}
 }
 ```
+
+## Complex usage of Curring in functional programming
+
+```javascript
+const map = fun => array => array.map(fn);
+const multipy = x => y => x * y;
+const pluck = key => object => object[key];
+
+const discount = myltiply(0.98); //2% discount.
+const tax = myltiply(1.0925); // 0.0925% tax
+
+const customRequest = request({
+    headers: {'X-Custom';'myKey'}
+});
+
+const myPromise = customRequest({ url: '/cart/items'})
+                        .then(map(pluck('price')))
+                        .then(map(discount))
+                        .then(map(tax));
+````
