@@ -50,34 +50,6 @@ Student.prototype.age = 15; // can also asign a function.
 var studObj1 = new Student();
 console.log(studObj1.age); // 15
 ```
-
-## Returning functions
-
-```javascript
-//Note that x get stored in the first function. This is a good way to avoid repetition.
-const createAdder = (x) => {
-  return (y) => x + y;
-}
-const add3 = createAdder(3); // 3 is stored inside the add3 function 
-const add4 = createAdder(4); // 4 is stored insode the add4 function
-add3(5); // returns 8
-add4(5); //returns 9
-```
-
-## Bad functional programming vs Good
-```javascript
-//BAD since statefull (mutable - subject to change)
-let name = 'My Name';
-const getName = () => name;
-const setName = (newName) => name = newName;
-const printUpperName = () => console.log(name.toUpperCase());
-printUpperName(); //MY NAME
-
-//GOOD since stateless (immutable - the logic doesn't change. only inputs
-const upperName = (name) => name.toUpperCase();
-console.log(upperName('Jerremy')); // JERREMY
-console.log(upperName('Jet')); //JET
-```
 ## Self executing functions
 ```javascript
 //In this way function name() can be called from any place. If there is another library
@@ -104,4 +76,51 @@ main(); // have to call main function. otherwise this code is not executed.
     function name() { return userName;}
   }
 )();
+```
+# Functional Programming
+
+## Returning functions ( Higer order pattern in functional programming )
+
+```javascript
+//Note that x get stored in the first function. This is a good way to avoid repetition.
+const createAdder = (x) => {
+  return (y) => x + y;
+}
+const add3 = createAdder(3); // 3 is stored inside the add3 function 
+const add4 = createAdder(4); // 4 is stored insode the add4 function
+add3(5); // returns 8
+add4(5); //returns 9
+//Same thing with the function.bind() - 
+var sum = function(a, b) {
+  return a + b;
+};
+var add5 = sum.bind(null, 5); // with bind() null --> a, 5 --> b and the new function add5(a) will return a + 5
+add5(7); //returns 12
+```
+
+## Bad functional programming vs Good
+```javascript
+//BAD since statefull (mutable - subject to change)
+let name = 'My Name';
+const getName = () => name;
+const setName = (newName) => name = newName;
+const printUpperName = () => console.log(name.toUpperCase());
+printUpperName(); //MY NAME
+
+//GOOD since stateless (immutable - the logic doesn't change. only inputs
+const upperName = (name) => name.toUpperCase();
+console.log(upperName('Jerremy')); // JERREMY
+console.log(upperName('Jet')); //JET
+```
+# Using Partial functions
+
+```javascript
+const add = (x,y) => x + y;
+const partial = (fn,...args) => fn.bind(null, ...args);
+const add4 = partial(add, 4);
+console.log(add4(2)) //returns 6
+//Another way
+const partial = (fn,...args) => {
+    return (...otherArgs) => { return fn(...args, ...otherArgs)}
+}
 ```
