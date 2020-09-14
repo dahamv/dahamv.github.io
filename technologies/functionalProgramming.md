@@ -63,7 +63,7 @@ add3(5); // returns 8
 add4(5); //returns 9
 ```
 
-## Bad programming vs Good programming
+## Bad functional programming vs Good
 ```javascript
 //BAD since statefull (mutable - subject to change)
 let name = 'My Name';
