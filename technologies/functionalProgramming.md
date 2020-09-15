@@ -16,6 +16,41 @@ const log = (...args) => { console.log(...args); };
 log('Hello',' ','World','!'); // Hello World!
 ```
 
+```js
+//before ES5 annonymous functions
+var anon = function (a, b) { return a + b };
+//with ES6 => functions
+// we could write the above example as:
+var anon = (a, b) => a + b;
+// or
+var anon = (a, b) => { return a + b };
+// if we only have one parameter we can loose the parentheses
+var anon = a => a;
+// and without parameters
+var () => {} // noop
+
+// this looks pretty nice when you change something like:
+[1,2,3,4].filter(function (value) {return value % 2 === 0});
+// to:
+[1,2,3,4].filter(value => value % 2 === 0);
+```
+Note: **One of the major advantages of arrow functions is that it does not have it's own ```this``` value.**   
+However there are some gotchas you should be aware of:   
+
+- This should be pretty obvious, but because this is lexically bound you can't change it; call() and apply() will not be able to provide another value for this.
+- There is no arguments variable:
+```js
+(function () {console.log(arguments)})(1, 2); // will output [1, 2]
+
+(() => console.log(arguments))(1, 2); // will raise ReferenceError: arguments is not defined
+```
+- Be careful when returning object literals
+```js
+(() => {foo: 1})() // this will return undefined. 'foo: 1' is interpreted as a statement composed of a label and the literal 1
+
+// the correct way should be wrapping it with parenthesis
+(() => ({foo: 1}))() // returns Object {foo: 1}
+```
 ## rest operator
 
 ```javascript
