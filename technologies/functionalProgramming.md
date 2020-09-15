@@ -137,24 +137,28 @@ const partial = (fn,...args) => {
 ## Complex usage of Curring in functional programming
 
 ```javascript
-const map = fun => array => array.map(fn);
-const multipy = x => y => x * y;
+const map = fn => array => array.map(fn);
+const multiply = x => y => x * y;
 const pluck = key => object => object[key];
 
-const discount = myltiply(0.98); //2% discount.
-const tax = myltiply(1.0925); // 9.25% tax
+const discount = multiply(0.98); //2% discount.
+const tax = multiply(1.0925); // 9.25% tax
 
 const request = defaults => options => {
     options = Object.assign({}, defaults, options);
-    //fetch method syntax "let promise = fetch(url, [options])"
-    return fetch(options.url, options).then(resp => resp.json());
+    console.log(options);
+    return fetch(options.url)
+            .then(resp => resp.json())
+            .catch(error => console.log(error));
 }
 const customRequest = request({
-    headers: {'X-Custom';'myKey'}
+    headers: {'X-Custom':'myKey'}
 });
 
-const myPromise = customRequest({ url: '/cart/items'})
+customRequest({ url: 'https://dahamv.free.beeceptor.com/price'})
                         .then(map(pluck('price')))
                         .then(map(discount))
-                        .then(map(tax));
+                        .then(map(tax))
+                        .then(data => console.log(data))
+                        .catch(function(error) {console.log(error)}); 
 ````
