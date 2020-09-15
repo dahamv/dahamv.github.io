@@ -169,6 +169,24 @@ customRequest({ url: 'https://dahamv.free.beeceptor.com/price'}) //returns the j
 ## Composing Closures. i.e. The output of f(x) is input of the g(x) -> g(f(x))
 In the above example map() is calld 3 times. It iterates the array 3 times. Its expensive. So to do it at once..
 ```javascript
-//create a componse function
+//create a compose function
 compose(tax, discount, pluck('price'));
+```
+
+## Optimizing recursive call functions.
+
+```javascript
+//not optimised
+const factorial = (n) => {
+        if(n < 2) return 1;
+        //To complete the multiplication step the recursive function should return.
+        // So the called function is put in call stack. It will give Stack overflow error for large numbers.
+        return n * factorial(n-1); 
+}
+
+//optimized. This is called Tail call optimization.
+const factorial = (n, accum = 1) => {
+    if(n < 2) return accum;
+    return factorial(n-1, n * accum);
+}
 ```
