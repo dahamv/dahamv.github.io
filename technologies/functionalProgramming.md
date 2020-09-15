@@ -137,8 +137,10 @@ const partial = (fn,...args) => {
 ## Complex usage of Curring in functional programming
 
 ```javascript
+//These are called curried functions in functional programming.
 const map = fn => array => array.map(fn);
 const multiply = x => y => x * y;
+//you give pluck(key) a key and it gives you back a fn the expects an object
 const pluck = key => object => object[key];
 
 const discount = multiply(0.98); //2% discount.
@@ -155,10 +157,18 @@ const customRequest = request({
     headers: {'X-Custom':'myKey'}
 });
 
-customRequest({ url: 'https://dahamv.free.beeceptor.com/price'})
-                        .then(map(pluck('price')))
-                        .then(map(discount))
-                        .then(map(tax))
+customRequest({ url: 'https://dahamv.free.beeceptor.com/price'}) //returns the json [{"price": 5}, {"price": 10}, {"price": 3}] from endpoint.                       
+                        //Attahing then(fn) callbacks for the promise.
+                        //map expects a fn. So give it the fn to pluck out the price.
+                        .then(map(pluck('price'))) // gives [5,10,3]
+                        .then(map(discount)) // gives [4.9, 9.8, 2.94]
+                        .then(map(tax)) // gives [5.35, 10.71, 3.21]
                         .then(data => console.log(data))
                         .catch(function(error) {console.log(error)}); 
 ````
+## Composing Closures. i.e. The output of f(x) is input of the g(x) -> g(f(x))
+In the above example map() is calld 3 times. It iterates the array 3 times. Its expensive. So to do it at once..
+```javascript
+//create a componse function
+compose(tax, discount, pluck('price'));
+```
