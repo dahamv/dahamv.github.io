@@ -1,5 +1,12 @@
 **[Home](../index.md)**  
-
+## Javascript object literals
+```js
+var myObject = {
+    sProp: 'some string value',
+    numProp: 2,
+    bProp: false
+};
+```
 ## Arrow functions AKA lambda functions.
 https://www.vinta.com.br/blog/2015/javascript-lambda-and-arrow-functions/
 
