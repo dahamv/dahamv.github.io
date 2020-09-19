@@ -1,6 +1,6 @@
 ## Technologies
-[CSS](technologies/html/css.md)
-[SASS](technologies/html/sass.md)
+[CSS](technologies/html/css.md)  
+[SASS](technologies/html/sass.md)  
 [Spring](technologies/spring/spring.md)  
 [Spring Boot](technologies/spring/spring-boot.md)  
 [Spring Security](technologies/spring/spring-security.md)  
