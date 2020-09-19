@@ -1,4 +1,6 @@
 **[Home](../../index.md)**  
 
 ## CSS selectors
-<img src="/assets/images/css-selectors.png" alt="drawing" width="600"/>
+<img src="/assets/images/css-selectors.png" alt="drawing" width="600"/>  
+
+<a> is a link.
