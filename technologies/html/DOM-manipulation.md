@@ -1,3 +1,4 @@
+**[Home](../../index.md)**  
 ```js
 // EXAMINE THE DOCUMENT OBJECT //
 
