@@ -5,7 +5,7 @@
 [Spring Boot](technologies/spring/spring-boot.md)  
 [Spring Security](technologies/spring/spring-security.md)  
 [Hibernate](technologies/hibernate.md)  
-[Angular](technologies/angular.md) 
+[Angular](technologies/angular.md)  
 [TypeScript](technologies/typesript.md)  
 [Functional Programming](technologies/functionalProgramming.md)  
 
