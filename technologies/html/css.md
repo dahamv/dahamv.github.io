@@ -3,4 +3,4 @@
 ## CSS selectors
 <img src="/assets/images/css-selectors.png" alt="drawing" width="600"/>  
 
-<a> is a link.
+"<a>" is a link.
