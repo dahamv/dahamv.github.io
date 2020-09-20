@@ -306,7 +306,8 @@ Position property values:
    page(html document) since it doesn't have a relative parent element. Will mess up the layout of the webpage.*/
    position:reletive;
    background-image:url('./path/to/img');
-   background-position:100px 200px; /*pushed from the border.  .*/
+   /*pushed from the border. The first value is the horizontal position and the second value is the vertical.*/
+   background-position:100px 200px; 
    background-possition:center center; /*Can also do this or "center top" etc*/
    backgroup-repeat:no-repeat; /*since the image is pushed it will repeat inside the box. to stop that*/
 }
@@ -356,7 +357,7 @@ Position property values:
 
 ## Sample webpage
 
-Using html 5 symantic elements like <header> <nav> <aside> etc.   
+Using html 5 symantic elements (element name is self discriptive) like <header> <nav> <aside> <section> etc.   
 
 <img src="/assets/images/sampleWebpageCSS.png" alt="drawing" width="600"/> 
 
@@ -369,6 +370,7 @@ Using html 5 symantic elements like <header> <nav> <aside> etc.
 </head>
 <body>
 	<header id="main-header">
+		<!--container should be inside header since we can set the bg-color to go across the entire page.-->
 		<div class="container">
 			<h1>My Website</h1>
 		</div>
@@ -407,5 +409,91 @@ Using html 5 symantic elements like <header> <nav> <aside> etc.
 	</footer>
 </body>
 </html>
+```
+
+```css
+body{
+	background-color:#f4f4f4; /*light grey*/
+	color:#555; /*dark gray*/
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	line-height:1.6em;
+	margin:0;
+}
+.container{
+	width:80%;
+	margin:auto;
+	overflow:hidden; /*There will be no scrollbars even if something goes outside of its container*/
+}
+#main-header{
+	background-color:coral; /*light orenge*/
+	color:#fff; /*white*/
+}
+#navbar{
+	background-color:#333; /*dark gray*/
+	color:#fff; /*white*/
+}
+#navbar ul{
+	padding:0;
+	list-style: none; /*get rid of the bullet points*/
+}
+#navbar li{
+	display:inline; /*change the display from block(default) to inline. So that all links will be in one line.*/
+}
+#navbar a{
+	color:#fff; /*white*/
+	text-decoration: none; /*To remove the underlines.*/
+	font-size:18px;
+	padding-right:15px; /*To add space between nav items.*/
+}
+#showcase{
+	background-image:url('../images/showcase.jpg');
+	background-position:center right; /*sets the bg-image possition to the center-horizontally, right-vertically*/
+	/*with min-hight the size of showcase will responsively grow when the browser windows is made small. Otherwise the text will over flow*/
+	min-height:300px; 
+	margin-bottom:30px; /*push whats under the showcase down a bit*/
+	text-align: center; /*text will be in the center even when the window is made small.*/
+}
+#showcase h1{
+	color:#fff; /*white*/
+	font-size:50px;
+	line-height: 1.6em;
+	padding-top:30px;
+}
+#main{
+	float:left;
+	width:70%;
+	padding:0 30px;
+	box-sizing: border-box;
+}
+#sidebar{
+	float:right;
+	width:30%;
+	background: #333; /*dark gray*/
+	color:#fff; /*white*/
+	padding:10px;
+	box-sizing: border-box;
+}
+#main-footer{
+	background: #333;
+	color:#fff;
+	text-align: center;
+	padding:20px;
+	margin-top:40px;
+}
+/*This is a CSS3 rule to include a block of CSS properties only if a certain condition is true.*/
+/*only effective when the width of the document width is 600px*/
+@media(max-width:600px){
+	/*main and sidebar go on top of eachother*/
+	#main{
+		width:100%;
+		float:none;
+	}
+
+	#sidebar{
+		width:100%;
+		float:none;
+	}
+}
 ```
 ## Flex Box
