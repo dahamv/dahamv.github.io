@@ -60,7 +60,8 @@ p{
 }
 ```
 Wrapping the body contents in a div.  
-NOTE: Divs, h1-6s always start with a newline. There are other elements like this
+NOTE: Block level element like divs, h1-6s, inputs always start with a newline.   
+      lables are inline. You can change it to become a block level element (display:block)    
 
 ```HTML
 <body>
@@ -108,5 +109,88 @@ NOTE: Divs, h1-6s always start with a newline. There are other elements like thi
 
 ```HTML
 <div class="catogories">
+   <h2>Catogories</h2>
+   <ul>
+      <li><a href="#">category 1</a></li>
+      ...
+      <li><a href="#">category 4</a></li>
+   </ul>
 </div>
+```
+```css
+.catogories{
+   border: 1px #ccc solid; /*color gray*/
+   padding: 10px;
+   border-radious:15px; /*now border has curved edges*/
+}
+.catogories h2{
+   text-align:center;
+}
+.catogoris ul{
+   /*uls have about 40 px default padding. so make it 0*/
+   padding:0;
+   padding-left;20px;
+   /*bullets style - default is disc(the small circle). Put "none" to getrid of bullets. Can also do this in li*/
+   list-style:square;
+}
+.catogories li{
+   padding-bottom:6px;
+   border-bottom:dotted 1px #333;
+   list-style-image: url('../images/check.png');
+}
+```
+
+## States of elements
+
+```css
+/*globally for all links */
+a{
+   text-decoration:none; /*to get rid of default underlines of links*/
+   color:#000 /*defulat links color is bule. change it to black*/
+}
+/*links have states. To change hover state styles*/
+a:hover{
+   color:red; /*when hover over links they turn red.*/
+}
+a:active{
+   color:green; /*When a link is clicked it changes its color to gree for a sec.*/
+}
+a:visited{
+   color:yellow; /*when the link is visited its color changes to yellow*/
+}
+```
+
+## Styling forms
+
+```HTML
+<form class="my-form">
+   <div class="form-group">
+      <label>Name: </label>
+      <input type="text" name="name">
+   </div>
+   <div class="form-group">
+      <label>Email: </label>
+      <input type="text" name="email">
+   </div>
+  <input type="submit" value="Submit">
+</form> 
+```
+
+```css
+.my-form{
+   padding:20px;
+   
+}
+/*form-group inside my-form*/
+.my-form .form-group{
+   padding-bottom:15px;
+}
+.my-form lable{
+   /*change all lables in my-form into block level elements*/
+   display:block; 
+}
+.my-form input{
+   padding:8px;
+   width:100%; /*of its container*/
+}
 ```
