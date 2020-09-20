@@ -43,6 +43,7 @@ Padding, Border, Margin are properties.
 - Padding - space between the element and its boarder/edge. **Space Inside**
 - Border - Not used much but the border-width can be set for top, right, bottom, left.
 - Margin - the space outside the border. **Space Outside** 
+
 ```css
 p{
    margin-top:5px;
@@ -59,6 +60,7 @@ p{
 }
 ```
 Wrapping the body contents in a div  
+
 ```HTML
 <body>
    <div class="container">
