@@ -353,4 +353,55 @@ Position property values:
    background:grey;
 }
 ```
+
+## Sample webpage
+<img src="/assets/images/sampleWebpageCSS.png" alt="drawing" width="600"/> 
+```HTML
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Website</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<header id="main-header">
+		<div class="container">
+			<h1>My Website</h1>
+		</div>
+	</header>
+
+	<nav id="navbar">
+		<div class="container">
+			<ul>
+				<li><a href="#">Home</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Services</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<section id="showcase">
+		<div class="container">
+			<h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			</h1>
+		</div>
+	</section>
+
+	<div class="container">
+		<section id="main">
+			<h1>Welcome</h1>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.....</p>
+		</section>
+		<aside id="sidebar">
+			<p>Lorem ipsum dolor sit amet, consectetur.......</p>
+		</aside>
+	</div>
+
+	<footer id="main-footer">
+		<p>Copyright &copy; 2017 My Website</p>
+	</footer>
+</body>
+</html>
+```
 ## Flex Box
