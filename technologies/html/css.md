@@ -140,7 +140,7 @@ NOTE: Block level element like divs, h1-6s, inputs always start with a newline.
 }
 ```
 
-## States of elements
+## adding states to elements
 
 ```css
 /*globally for all links */
@@ -148,7 +148,7 @@ a{
    text-decoration:none; /*to get rid of default underlines of links*/
    color:#000 /*defulat links color is bule. change it to black*/
 }
-/*links have states. To change hover state styles*/
+/*links can have states. To change hover state styles*/
 a:hover{
    color:red; /*when hover over links they turn red.*/
 }
@@ -172,14 +172,17 @@ a:visited{
       <label>Email: </label>
       <input type="text" name="email">
    </div>
-  <input type="submit" value="Submit">
+   <div class="form-group">
+      <label>Message: </label>
+      <textarea name="message"></textarea>
+   </div>
+  <input class="button" type="submit" value="Submit">
 </form> 
 ```
 
 ```css
 .my-form{
-   padding:20px;
-   
+   padding:20px; 
 }
 /*form-group inside my-form*/
 .my-form .form-group{
@@ -189,8 +192,52 @@ a:visited{
    /*change all lables in my-form into block level elements*/
    display:block; 
 }
-.my-form input{
+/*since the submit button is also an input, when [type="text"] is added it will disregard the button*/
+.my-form input[type="text"], .myform textarea{
    padding:8px;
    width:100%; /*of its container*/
 }
+/*You can add this button class to a link as well. <a class="button" href="#"></a>*/
+.button{
+   background-color:#333; /*dark gray*/
+   color:#fff /*white*/
+   padding:10px 15px;
+   border:none;
+}
+/*add a hover state to button class*/
+.button:hover{
+   background:red;
+   color:#fff;
+}
 ```
+
+## Alignment and floating
+
+```HTML
+<!-- by default they are placed on top of eachother.
+<div class="block">
+   <h3>Heading</h3>
+   <p>some paragraph ....</p>
+</div>
+<div class="block">
+   <h3>Heading</h3>
+   <p>some paragraph ....</p>
+</div>
+<div class="block">
+   <h3>Heading</h3>
+   <p>some paragraph ....</p>
+</div>
+```
+```css
+.block{
+   /*now these blocks are placed horizontally*/
+   float:left; 
+   width:33.3% /*since there are 3 of them*/
+   border:1px solid #ccc;
+   padding:10px;
+   /*because of the padding and the border eventhough the width is 33.3% the last div will go to the next line. To avoid that*/
+   box-sizing:borderbox; /*it will take the border and padding and will apply to this 33.3% */
+}
+```
+
+## Flex Box
