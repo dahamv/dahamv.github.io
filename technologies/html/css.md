@@ -21,5 +21,36 @@ body {
   
   /* Same as above */
   font : bold 16px Arial, Helvetica, sans-serif;
+  
+  /* em is a unit in css for responsive pages. */
+  line-hight : 1.5em; /*hight between two lines in a paragraph. */
+  margin:0; /* there is a margin around the body. make it 0. Otherwise you will see that when the background color changes.*/
+}
+```
+<img src="/assets/images/BoxModel.png" alt="drawing" width="600"/>  
+Wrapping the body contents in a div
+```html
+<body>
+   <div class="container">
+      <div class="box-1"> 
+         <h1>heading</h1>
+         <p> some paragraph </p>
+      </div>
+   </div>
+</body>
+```
+```css
+/*to target a class use a dot . */
+.box-1{
+   background-color : #333 /*shortcut for #333333 dark gray*/
+   color : #fff /*sortcut for #ffffff i.e. white*/
+}
+
+/*To push the contents to the middle a bit. Otherwise the contents will start from the edge*/
+.container{
+   width:960px; /*width of the container. 960px is a popular width for websites*/
+   /*The best practice is to set it to a percentage so that when the window is made small the container width will be responsive*/
+   width:80%;
+   margin:auto; /*sets a margin to both sides. And its auto. So the container is pushed to the very middle*/
 }
 ```
