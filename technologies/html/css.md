@@ -28,8 +28,8 @@ body {
 }
 ```
 <img src="/assets/images/BoxModel.png" alt="drawing" width="400"/>  
-Wrapping the body contents in a div
-```html
+Wrapping the body contents in a div   
+```HTML
 <body>
    <div class="container">
       <div class="box-1"> 
