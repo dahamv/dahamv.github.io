@@ -27,7 +27,7 @@ body {
   margin:0; /* there is a margin around the body. make it 0. Otherwise you will see that when the background color changes.*/
 }
 ```
-<img src="/assets/images/BoxModel.png" alt="drawing" width="600"/>  
+<img src="/assets/images/BoxModel.png" alt="drawing" width="400"/>  
 Wrapping the body contents in a div
 ```html
 <body>
