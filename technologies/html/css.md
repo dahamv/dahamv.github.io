@@ -212,6 +212,7 @@ a:visited{
 ```
 
 ## Alignment and floating
+Note: see float clearing hack (https://www.w3schools.com/howto/howto_css_clearfix.asp)  
 
 ```HTML
 <!-- by default they are placed on top of eachother.
@@ -227,8 +228,15 @@ a:visited{
    <h3>Heading</h3>
    <p>some paragraph ....</p>
 </div>
+
+<!-- Elements after a floating element will flow around it. Use the "clearfix" hack to fix the problem: -->
+<div class="clr"></div>
+<!--Now can do other floting and stuff-->
 ```
 ```css
+.clr{
+   clear:both; /*this will clear any floats above it*/
+}
 .block{
    /*now these blocks are placed horizontally*/
    float:left; 
