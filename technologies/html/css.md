@@ -6,6 +6,15 @@
 "< a >" is a link.
 
 ```css
+/*for every element*/
+*{
+   /*Reset the default margin/padding values */
+   /* there is a margin around the body. make it 0. Otherwise you will see that when the background color changes.*/
+   margin:0; 
+   /*h1-6 by default have padding so remove that*/
+   padding:0; 
+}
+
 body {
    /*colors can be with #fontnumber, rgb(v1,v2,v3), color name - red,green,yellow and html5 color names like coral */
   background-color : #f4f4f4  /* light gray; */
@@ -24,7 +33,7 @@ body {
   
   /* em is a unit in css for responsive pages. */
   line-hight : 1.5em; /*hight between two lines in a paragraph. */
-  margin:0; /* there is a margin around the body. make it 0. Otherwise you will see that when the background color changes.*/
+  
 }
 ```
 ## CSS Box Model
@@ -33,7 +42,7 @@ Content can be any eliment div, a, p, h etc.
 Padding, Border, Margin are properties.
 - Padding - space between the element and its boarder/edge. **Space Inside**
 - Border - Not used much but the border-width can be set for top, right, bottom, left.
-- Margin - the space outside the border. **Space Outside**
+- Margin - the space outside the border. **Space Outside** 
 ```css
 p{
    margin-top:5px;
@@ -65,7 +74,7 @@ Wrapping the body contents in a div
 .box-1{
    background-color : #333 /*shortcut for #333333 dark gray*/
    color : #fff /*sortcut for #ffffff i.e. white*/
-   /*5px wide red solid (border width color and style*/
+   /*5px wide red solid (border width color and style(solid/dotted/dashed)*/
    border: 5px red solid;
 }
 
