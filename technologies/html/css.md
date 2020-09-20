@@ -59,7 +59,8 @@ p{
    /*Same way with PADDING*/
 }
 ```
-Wrapping the body contents in a div  
+Wrapping the body contents in a div.  
+NOTE: Divs, h1-6s always start with a newline. There are other elements like this
 
 ```HTML
 <body>
@@ -97,5 +98,15 @@ Wrapping the body contents in a div
    font-weight:800;
    font-style:italic;
    text-decoration:underline;
+   text-transform:uppercase;
+   letter-spacing:0.2em; /*space between letters. use em units for this*/
+   word-spacing:1em;
 }
+```
+
+## Styling unorderd lists;
+
+```HTML
+<div class="catogories">
+</div>
 ```
