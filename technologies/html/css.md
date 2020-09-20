@@ -78,6 +78,9 @@ Wrapping the body contents in a div
    color : #fff /*sortcut for #ffffff i.e. white*/
    /*5px wide red solid (border width color and style(solid/dotted/dashed)*/
    border: 5px red solid;
+   
+   padding: 20px; /*add some space between the border and content.*
+   margin-top: 20px 0; /*top and bottom 20px. left and right 0*/
 }
 
 /*To push the contents to the middle a bit. Otherwise the contents will start from the edge*/
@@ -86,5 +89,13 @@ Wrapping the body contents in a div
    /*The best practice is to set it to a percentage so that when the window is made small the container width will be responsive*/
    width:80%;
    margin:auto; /*sets a margin to both sides. And its auto. So the container is pushed to the very middle*/
+}
+
+/*Targeting h1 inside box-1*/
+.box-1 h1 {
+   font-family:Tahoma;
+   font-weight:800;
+   font-style:italic;
+   text-decoration:underline;
 }
 ```
