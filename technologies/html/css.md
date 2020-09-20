@@ -229,7 +229,7 @@ Note: see float clearing hack (https://www.w3schools.com/howto/howto_css_clearfi
    <p>some paragraph ....</p>
 </div>
 
-<!-- Elements after a floating element will flow around it. Use the "clearfix" hack to fix the problem: -->
+<!-- Elements after a floating element will flow around it and will be a mess. Use the "clearfix" hack to fix the problem: -->
 <div class="clr"></div>
 <!--Now can do other floting and stuff-->
 ```
@@ -248,4 +248,31 @@ Note: see float clearing hack (https://www.w3schools.com/howto/howto_css_clearfi
 }
 ```
 
+### Creating a sidebar with floating
+
+```HTML
+<div id="main-block">
+   <h3>Heading</h3>
+   <p>some paragraph ....</p>
+</div>
+<div id="sidebar">
+   <p>some other paragraph ....</p>
+</div>
+```
+```css 
+#main-block{
+   float:left;
+   width:70%;  
+   padding:15px;
+   box-sizing:border-box; /*To stop sidebar comming down because of the padding*/
+}
+#sidebar{
+   float:right;
+   width:30%;
+   background-color:#333;/*dark gray*/
+   color:#fff; /*text color is white*/
+   padding:15px;
+   box-sizing:border-box; /*To stop sidebar comming down because of the padding*/
+}
+```
 ## Flex Box
