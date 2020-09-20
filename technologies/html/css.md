@@ -306,7 +306,8 @@ Position property values:
    page(html document) since it doesn't have a relative parent element. Will mess up the layout of the webpage.*/
    position:reletive;
    background-image:url('./path/to/img');
-   background-position:100px 200px; /*pushed from the border. Can also do background-possition:center center/ center top etc.*/
+   background-position:100px 200px; /*pushed from the border.  .*/
+   background-possition:center center; /*Can also do this or "center top" etc*/
    backgroup-repeat:no-repeat; /*since the image is pushed it will repeat inside the box. to stop that*/
 }
 .p-box h1{   
@@ -323,6 +324,33 @@ Position property values:
 .fix-me{
    position:fixed;
    top:400px; /*will be fixed 400px from the top of the browser no matter how much we scroll*/
+}
+```
+
+## Psudo Classes
+
+```HTML
+<ul class="my-list">
+   <li>List 1</li>
+   <li>List 2</li>
+   <li>List 3</li>
+   ...
+   <li>List 10</li>
+</ul>
+```
+
+```css
+.my-list li:first-child{
+   background:red; /*changes the bg color of List 1. No need to say background-color. since its red CSS knows.*/   
+}
+.my-list li:last-child{
+   background:blue;
+}
+.my-list li:nth-child(5){ /*5th child*/
+   background:yellow;
+}
+.my-list li:nth-child(even){ /*all the even children*/
+   background:grey;
 }
 ```
 ## Flex Box
