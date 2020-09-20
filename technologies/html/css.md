@@ -355,7 +355,9 @@ Position property values:
 ```
 
 ## Sample webpage
+
 <img src="/assets/images/sampleWebpageCSS.png" alt="drawing" width="600"/> 
+
 ```HTML
 <!DOCTYPE html>
 <html>
