@@ -258,6 +258,7 @@ Note: see float clearing hack (https://www.w3schools.com/howto/howto_css_clearfi
 <div id="sidebar">
    <p>some other paragraph ....</p>
 </div>
+<div class="clr"></div>
 ```
 ```css 
 #main-block{
@@ -273,6 +274,55 @@ Note: see float clearing hack (https://www.w3schools.com/howto/howto_css_clearfi
    color:#fff; /*text color is white*/
    padding:15px;
    box-sizing:border-box; /*To stop sidebar comming down because of the padding*/
+}
+```
+
+## Positioning in CSS
+
+Position property values:   
+- Static(default) - renders the document inorder of the document flow.
+- Reletive - element is positioned relative to its normal position. Can add properties like top, right, left, bottom.
+- Absolute - Will allow us to target whatever possition we want inside of a relative element.
+- Fixed - Fixed possition to the browser window. No matter how much we scroll it will always be in the same position.
+- Initial - sets the property to its default value.
+- Inherit - will inherit the property of its parent element.
+
+```HTML
+<div class="p-box">
+   <h1>Heading</h1>
+   <h2>Good Bye</h2>
+   <p>some paragraph ....</p>
+</div>
+
+<a class="fix-me button" href="#">Mylink</a>
+```
+```css
+.p-box{
+   width:800px;
+   hight:500px;
+   border:1px solid #000; /*black*/
+   margin-top:30px;
+   /*if position:reletive is not defined for this div, its child h1 will be positioned 40px from the very top of the 
+   page(html document) since it doesn't have a relative parent element. Will mess up the layout of the webpage.*/
+   position:reletive;
+   background-image:url('./path/to/img');
+   background-position:100px 200px; /*pushed from the border. Can also do background-possition:center center/ center top etc.*/
+   backgroup-repeat:no-repeat; /*since the image is pushed it will repeat inside the box. to stop that*/
+}
+.p-box h1{   
+   /*will be possitioned 40px from the border of the parent div. since the parent is positioned reletive*/
+   position:absolute:
+   top:40px; 
+   left:200px; /*push 200px from the left.*/
+}
+.p-box h2{
+   position:absolute:
+   bottom:40px; 
+   right:200px;   
+}
+.fix-me{
+   position:fixed;
+   top:400px; /*will be fixed 400px from the top of the browser no matter how much we scroll*/
 }
 ```
 ## Flex Box
