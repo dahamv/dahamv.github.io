@@ -27,10 +27,29 @@ body {
   margin:0; /* there is a margin around the body. make it 0. Otherwise you will see that when the background color changes.*/
 }
 ```
-## Box Model
+## CSS Box Model
 <img src="/assets/images/BoxModel.png" alt="drawing" width="400"/>   
+Content can be any eliment div, a, p, h etc.  
+Padding, Border, Margin are properties.
+- Padding - space between the element and its boarder/edge. **Space Inside**
+- Border - Not used much but the border-width can be set for top, right, bottom, left.
+- Margin - the space outside the border. **Space Outside**
+```css
+p{
+   margin-top:5px;
+   margin-right:10px;
+   margin-bottom:5px;
+   margin-left:10px;
+   /*short way top, rigtht, bottom, left (remember:clockwise)*/
+   margin:5px 10px 5px 10px;
+   /*if top - bottom and right - left are the same (remember vertical, horizontal*/
+   margin:5px 10px;
+   /*if all margins are equal*/
+   margin:5px;
+   /*Same way with PADDING*/
+}
+```
 Wrapping the body contents in a div  
-
 ```HTML
 <body>
    <div class="container">
@@ -46,6 +65,8 @@ Wrapping the body contents in a div
 .box-1{
    background-color : #333 /*shortcut for #333333 dark gray*/
    color : #fff /*sortcut for #ffffff i.e. white*/
+   /*5px wide red solid (border width color and style*/
+   border: 5px red solid;
 }
 
 /*To push the contents to the middle a bit. Otherwise the contents will start from the edge*/
