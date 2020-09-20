@@ -356,6 +356,8 @@ Position property values:
 
 ## Sample webpage
 
+Using html 5 symantic elements like <header> <nav> <aside> etc.   
+
 <img src="/assets/images/sampleWebpageCSS.png" alt="drawing" width="600"/> 
 
 ```HTML
