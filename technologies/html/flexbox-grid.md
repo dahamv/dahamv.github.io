@@ -43,5 +43,13 @@ justify properties - horizontally
 
 <img src="/assets/images/cssGridLines.png" alt="drawing" width="600"/>  
 
+```css
+/*To make Items span across grids*/
+/*As an item property*/
+.item1 {
+  grid-column: 1 / 5; /*span from column line 1 to 5*/
+  grid-column: 1 / span 3; /*start from column line 1 and span 3 column lines*/
+}
+```
 https://www.w3schools.com/css/css_grid.asp
 
