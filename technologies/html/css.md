@@ -215,7 +215,7 @@ a:visited{
 Note: see float clearing hack (https://www.w3schools.com/howto/howto_css_clearfix.asp)  
 
 ```HTML
-<!-- by default they are placed on top of eachother.
+<!-- by default they are placed on top of eachother. -->
 <div class="block">
    <h3>Heading</h3>
    <p>some paragraph ....</p>
