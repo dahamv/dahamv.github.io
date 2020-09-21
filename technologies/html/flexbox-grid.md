@@ -11,3 +11,12 @@ A CSS3 layout to arrange items within a container easily.
 - Order of elements can be changed without changing HTML
 
 https://jsfiddle.net/bradtraversy/bu0ecodm/1/
+
+### Flex container properties
+
+- flex-direction - Row or column
+- flex-wrap
+- flex-flow
+- justify-content
+- align-items
+- align-content
