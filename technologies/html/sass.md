@@ -46,7 +46,7 @@ You CAN'T include .scss files in <link rel="stylesheet" href="css/mystyle.scss">
 ```
 
 ### Using loops to programatically create css classes
-```scss
+```css
 // Margin & padding classes
 $spaceamounts: (1,2,3,4,5);
 
