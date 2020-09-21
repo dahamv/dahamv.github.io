@@ -12,6 +12,8 @@ There are 2 extentions .sass and .scss(recomended since its backword compatible 
   make the file as **_base.scss** so that SCSS compiler doesn't compile it. and you can use it with @use.
 - supports **Functions** and **Mixins**. Functions return something. Mixins only do placing the CSS.
 - supports Inheritance. 
+- can use Operators for calculations. + - / *
+- can use Conditionals in mixins and functions.. if else with @if and @else
 
 ### Mixins and Functions
 
