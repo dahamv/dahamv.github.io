@@ -9,8 +9,9 @@ You CAN'T include .scss files in <link rel="stylesheet" href="css/mystyle.scss">
 - Had variables: eg - $primary-color:blue;
 - supports nesting.
 - supports Modules: Can brakeup CSS into seperate files and import. Regular CSS can also have seperate CSS files but the browser does multiple HTTP calls to get those files.   
-  SASS preprocessor can collect all files and make one big CSS file. **@use 'base'** (to use base.scss)   
-  make the file as **_base.scss** so that SCSS compiler doesn't compile it and you can use it with **@use**. These underscore files are called **partials**.
+  SASS preprocessor can collect all files and make one big CSS file. **@use 'base'**. 
+  make the file as **_base.scss** so that SCSS compiler doesn't compile it and you can use it with **@use**. These underscore files are called **partials**.   
+  can use **@import** to import an partial file.
 - supports **Functions** and **Mixins**. Functions return something. Mixins only do placing the CSS.
 - supports Inheritance. 
 - can use Operators for calculations. + - / *
