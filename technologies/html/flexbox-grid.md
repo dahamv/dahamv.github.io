@@ -37,4 +37,6 @@ https://www.w3schools.com/css/tryit.asp?filename=trycss3_flexbox_website2
 Flex-box - one dimentional layout  
 CSS Grids - two dimentional layout
 
+There are Grid container properties and Grid item properties. 
+https://www.w3schools.com/css/css_grid.asp
 
