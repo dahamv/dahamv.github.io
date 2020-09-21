@@ -84,3 +84,22 @@ $spaceamounts: (1,2,3,4,5);
   border-color: green;
 }
 ```
+
+### Mobile specific media queries
+
+```scss
+// _mobile.scss
+@media(max-width: 700px) { // smart phones usually have < 700px wide screen.
+  .showcase {
+    height: 400px;
+
+    &-content { // & is the parent ie .showcase. So this is .showcase-content (child)
+      text-align: center;
+
+      img {
+        display: none; // dont show the image in the small screens
+      }
+    }
+  }
+}
+```
