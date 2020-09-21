@@ -51,10 +51,10 @@ You CAN'T include .scss files in <link rel="stylesheet" href="css/mystyle.scss">
 $spaceamounts: (1,2,3,4,5);
 
 @each $space in $spaceamounts {
-  .m-#{$space} {
-    margin: #{$space}rem;
+  .m-#{$space} {  // creates m-1, m-2 ... m-5
+    margin: #{$space}rem; // in rem units
   }
-  .my-#{$space} {
+  .my-#{$space} {  // creates my-1, my-2 ... my-5
     margin: #{$space}rem 0;
   }
 
