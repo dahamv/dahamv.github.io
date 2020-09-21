@@ -330,6 +330,8 @@ Position property values:
 
 ## Psudo Classes
 
+Can be used with divs and other elements.   
+
 ```HTML
 <ul class="my-list">
    <li>List 1</li>
