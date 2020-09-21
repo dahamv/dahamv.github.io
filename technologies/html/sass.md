@@ -55,7 +55,7 @@ $spaceamounts: (1,2,3,4,5);
     margin: #{$space}rem; // in rem units
   }
   .my-#{$space} {  // creates my-1, my-2 ... my-5
-    margin: #{$space}rem 0;
+    margin: #{$space}rem 0; //top and bottom -> $space, left and right -> 0
   }
 
   .p-#{$space} {
