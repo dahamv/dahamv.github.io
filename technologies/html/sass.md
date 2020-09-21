@@ -25,8 +25,45 @@ You CAN'T include .scss files in <link rel="stylesheet" href="css/mystyle.scss">
   font-size: 25px;
 }
 .mycssclass {
-  @include myMixin;
+  @include myMixin; /*adds the properties in the mixin*/
   background-color: green;
+}
+
+/*Set text color based on background. Otherwise the text will be unreadable*/
+@function set-text-color($color) {
+  @if(lightness($color) > 70) { /*if its a light color*/
+    @return #333; /*dard gray*/
+  } @else {
+    @return #fff; /*white*/
+  }
+}
+
+/*Set background & text color*/
+@mixin set-background($color) {
+  background-color: $color;
+  color: set-text-color($color) /*since text should be readable*/
+}
+```
+
+### Using loops to programatically create css classes
+```scss
+// Margin & padding classes
+$spaceamounts: (1,2,3,4,5);
+
+@each $space in $spaceamounts {
+  .m-#{$space} {
+    margin: #{$space}rem;
+  }
+  .my-#{$space} {
+    margin: #{$space}rem 0;
+  }
+
+  .p-#{$space} {
+    padding: #{$space}rem;
+  }
+  .py-#{$space} {
+    padding: #{$space}rem 0;
+  }
 }
 ```
 
