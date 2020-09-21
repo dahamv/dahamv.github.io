@@ -10,7 +10,6 @@ A CSS3 layout to arrange items within a container easily.
 - Container margins do not collapse within margins of its contents.
 - Order of elements can be changed without changing HTML
 
-https://jsfiddle.net/bradtraversy/bu0ecodm/1/
 
 ### Flex container properties
 
@@ -23,9 +22,12 @@ https://jsfiddle.net/bradtraversy/bu0ecodm/1/
 
 ### Flex item properties
 
-- order
-- flex-grow
-- flex-shrink
-- flex-basis
-- flex
-- align-self
+- order - specifies the order of the flex items.
+- flex-grow - how much a flex item will grow relative to the rest of the flex items.
+- flex-shrink - how much a flex item will shrink relative to the rest of the flex items.
+- flex-basis - specifies the initial length of a flex item.
+- flex - a shorthand property for the flex-grow, flex-shrink, and flex-basis properties.
+- align-self - specifies the alignment for the selected item inside the flexible container.
+
+https://www.w3schools.com/css/tryit.asp?filename=trycss3_flexbox_image_gallery
+https://www.w3schools.com/css/tryit.asp?filename=trycss3_flexbox_website2
