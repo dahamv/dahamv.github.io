@@ -16,7 +16,7 @@ A CSS3 layout to arrange items within a container easily.
 - flex-direction - Row or column
 - flex-wrap - Get the contents in the container to the next line if browser window is shrinked and there's not enough space.
 - flex-flow - This is a shorthand property for setting both the **flex-direction** and **flex-wrap** propertie (eg: column nowrap)
-- justify-content - get the items in the container to the left end(flex-start), center, right end(flex-end) or distribute evenly.
+- justify-content - get the items in the container to the left end(flex-start), center, right end(flex-end) or distribute evenly. (Horizontally)
 - align-items - similer to justify-content, but considers vertically also. eg: center
 - align-content - The baseline (horizontal line through the middle) aligns the flex items (of different sizes) such as their baselines aligns:
 
