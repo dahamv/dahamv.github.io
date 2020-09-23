@@ -38,3 +38,17 @@ All node.js core modules can be fount at - https://nodejs.org/docs/latest-v13.x/
 - url module - analizes a given url. (get the hostname/parameters etc. and add parameters.)
 - Events module
    - can create Events using EventEmiters
+   
+   ```js
+      const EventEmiter = require('events');
+      //JS ES6 class
+      class MyEmiter extends EventEmiter {
+      
+      }
+      //Init Emitter object
+      const myEmitter = new MyEmiter();
+      //EventListner 
+      myEmitter.on('myEvent', () => console.log('Evnet Fired!')); // register an event named myEvent with its callback()
+      //Init event
+      myEmitter.emit('myEvent'); // will fire event and the callback() will run -> Event Fired! printed on console.
+   ```
