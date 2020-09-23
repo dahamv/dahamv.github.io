@@ -44,3 +44,5 @@ Filtering / Transforming Observables
 Promises to Observables
 Many helpful operators
 Error handling
+
+https://youtu.be/ei7FsoXKPl0?t=2177
