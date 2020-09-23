@@ -59,4 +59,5 @@ const error = true;
 ...
 createPost(post3).then(getPosts).catch(err => console.log(err));
 ```
-If f1, f2,f3...fn all return
+If f1, f2,f3...fn all return Promises we can do    
+```f1.then(f2).then(f3)....then(fn).then(()=> {//something to be done when fn resolves})```
