@@ -11,4 +11,4 @@ Reactive Programming
   - Memory/Cache
   
 ## Streams
-<img src="/assets/images/rxjs-stream.png" alt="drawing" width="600" height="300"/>
+<img src="/assets/images/rxjs-stream.png" alt="drawing" width="600"/>
