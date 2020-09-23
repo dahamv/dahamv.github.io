@@ -19,4 +19,19 @@ let insertionSort = (inputArr) => {
 
 console.log(insertionSort(array));
 ```
+## Callbacks
+
+```js
+const posts = [
+    {title:'post 1', body: 'post body 1'},
+    {title:'post 2', body: 'post body 2'}
+];
+getPosts = () => setTimeout(()=>posts.forEach((post)=>console.log(post)),1000); //console log posts after 1 sec
+createPost = (post, callback) => setTimeout(()=>{
+                                        posts.push(post);
+                                        callback();
+                                        },2000);
+const post3 = {title:'post 3', body: 'post body 3'};
+createPost(post3,getPosts()); //console logs all 3 posts after 3 secs (1+2)
+```
 
