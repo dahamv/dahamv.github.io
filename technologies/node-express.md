@@ -90,3 +90,20 @@ const logger = (req, res, next) => {
    next(); // You have to call the next middleware function on the stack.
 }
 ```
+
+## Router
+To handle HTTP requests.
+```js
+//in membersapi.js file add the routes to handle GET, POST etc.
+const express = require('express');
+const router = express.Router();
+const members = require(./members); //in memebers.js file it has all members in an array : const members = [...]
+//handle GET request
+router.get('/', (req,res) => res.json(members));//send back all members in JSON array
+module.exports = router; //have to export it to use from the app.
+
+//in index.js or server.js
+...
+//members api routes.
+app.use('/api/members', require('membersapi');
+```
