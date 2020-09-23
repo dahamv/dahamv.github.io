@@ -1,4 +1,4 @@
-**[Home](../index.md)**  
+**[Home](../../index.md)**  
 - TypeScript is a supperset of JavaScript.
 - Browsers don't understand Typescript. Only Javascript. So have to be compile (transpiled) to Javascript.
 - Java: Stong static typing. Typescript: has Strong-static typing is optional. But its useful to catch a lot of bugs in compile time. Its useful to debug.
