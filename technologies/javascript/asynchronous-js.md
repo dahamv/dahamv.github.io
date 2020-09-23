@@ -1,4 +1,5 @@
 **[Home](../../index.md)**  
+
 ```javascript
 //insertion sort
 var array = [5, 6, 3];
@@ -18,3 +19,4 @@ let insertionSort = (inputArr) => {
 
 console.log(insertionSort(array));
 ```
+
