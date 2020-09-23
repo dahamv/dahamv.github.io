@@ -27,7 +27,18 @@ Reactive Programming
   ```
 - Observables from scratch
 	```js
-  const source$
+  const source$ = new rx.Observable(observer => {
+  	console.log('Creating observable');
+	observer.next('Hello World'); //emiting an event
+	observer.next('Hello World2');
+	setTimeout(()=> observer.next('Hello World3'), 3000); //emit next value after 3 secs.
+	observer.complete(); // this will call f3 of the subscriber.
+  });
+  source$.subscribe(x => console.log(x), f2, f3);
+  //To throw an error
+  observer.error(new Error('Something wrong...')); // calls the f2 of the subscriber. But will not hit f3
+  //to hit f3 even when there is an error.
+  source$.catch(err => rx.Observable.of(err)).subscribe(f1,f2,f3); // of takes anything and fires an observalbe.
   ```
 Filtering / Transforming Observables
 Promises to Observables
