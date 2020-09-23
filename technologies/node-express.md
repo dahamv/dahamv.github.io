@@ -1,13 +1,13 @@
 **[Home](../index.md)**  
 
-## NodeJS
+# NodeJS
 - Its a javascript runtime. To run javascript on serverside. Its not a framework like expressJS.  
 - NPM - Node package manger to install 3rd party libraries.  
 - The installed packages are store in node_modules folder   
 - All dependencies are listed in package.json   
 - NPM scripts can be created to run certain tasks like - run a server.   
 
-### Nodes Event loop
+## Nodes Event loop
 - Single threaded
 - Supoorts concurrency via events and callbacks
 - EventEmitter class is used to bind events and listners.   
@@ -60,3 +60,33 @@ All node.js core modules can be fount at - https://nodejs.org/docs/latest-v13.x/
          res.end();
       }).listen(5000, () => console.log('Server running ...'));
    ```
+   
+# Express JS
+
+```npm install express```   
+A framework that runs on node.js   
+
+```js
+//in server.js - added to the script in package.json as the start script.
+const express = require('express');
+const app = express();
+// create the route for the / for a GET.
+app.get('/', (req, res) => {
+   res.send('<h1>Hello World!</h1>');
+});
+const PORT = process.env.PORT || 5000; // first check the env var for the port number.
+app.listen(PORT, () => console.log(`Server started on port: ${PORT}`))
+// Now can run the express with command : node server
+```
+
+## Midleware functions in Express (like mediators in Synapse)
+
+```js
+...
+const app = express();
+//middleware function. All middleware funcitons are put on a stack.
+const logger = (req, res, next) => {
+   console.log('Hello ');
+   next(); // You have to call the next middleware function on the stack.
+}
+```
