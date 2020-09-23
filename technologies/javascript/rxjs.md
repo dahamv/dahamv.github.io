@@ -16,8 +16,19 @@ Reactive Programming
 ## Examining data streams from events
 
 
-Creating observables from Array like objects
-Observables from scratch
+- Can create observables from Array like objects - arrays, sets, maps 
+  ```js
+  //adding $ for a stream variable is a convention.
+  const array$ = rx.Observable.from(array)
+  //f1- run for all events
+  //f2- run if error
+  //f3- run when completed.
+  array$.subscribe(f1,f2,f3); 
+  ```
+- Observables from scratch
+	```js
+  const source$
+  ```
 Filtering / Transforming Observables
 Promises to Observables
 Many helpful operators
