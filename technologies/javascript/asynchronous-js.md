@@ -54,4 +54,9 @@ createPost = post => {
 };
 
 createPost(post3).then(getPosts);
+//Error catching, if there is an error
+const error = true;
+...
+createPost(post3).then(getPosts).catch(err => console.log(err));
 ```
+If f1, f2,f3...fn all return
