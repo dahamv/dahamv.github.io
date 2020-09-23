@@ -52,3 +52,11 @@ All node.js core modules can be fount at - https://nodejs.org/docs/latest-v13.x/
       //Init event
       myEmitter.emit('myEvent'); // will fire event and the callback() will run -> Event Fired! printed on console.
    ```
+- Http Module - can create an HTTP server.
+   ```js
+      const http = require('http');
+      http.createServer((req, res) => {
+         res.write('Hello World');
+         res.end();
+      }).listen(5000, () => console.log('Server running ...'));
+   ```
