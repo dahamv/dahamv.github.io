@@ -35,7 +35,58 @@ createPost = (post, callback) => setTimeout(()=>{
 const post3 = {title:'post 3', body: 'post body 3'};
 createPost(post3,getPosts()); //console logs all 3 posts after 3 secs (1+2)
 ```
+### Callback Hell
+```js
+const getBeef = nextStep => {
+  const beef = 'Fresh Beef';
+  console.log(beef);
+  nextStep(beef);
+};
+
+const cookBeef = (beef, nextStep) => {
+  const cookedBeef = 'Cooked the '+ beef;
+  console.log(cookedBeef);
+  nextStep(cookedBeef)
+};
+
+const getBuns = nextStep => {
+  const buns = 'Soft buns';
+  console.log(buns);
+  nextStep(buns);
+}
+
+const putBeefBetweenBuns = (buns, beef, nextStep) => {
+  const burger = 'Nice burger made with ' + beef + ' put between ' + buns;
+  console.log(burger);
+  nextStep(burger);
+}
+
+const serveBurger = (burger) => {
+console.log(burger + ' is served!')
+}
+
+//Callback hell.
+const makeBurger = nextStep => {
+  getBeef(function(beef) {
+    cookBeef(beef, function(cookedBeef) {
+      getBuns(function(buns) {
+        putBeefBetweenBuns(buns, beef, function(burger) {
+          serveBurger(burger);
+        });
+      });
+    });
+  });
+};
+makeBurger();
+```
 ## Promises
+First of all, a Promise is an object. There are 3 states of the Promise object:
+
+- **Pending**: Initial State, before the Promise succeeds or fails
+- **Resolved**: Completed Promise ```.then()```
+- **Rejected**: Failed Promise ```.catch()```
+
+
 
 ```js
 //Same code using promises. Leave getPosts as it is.
@@ -59,5 +110,16 @@ const error = true;
 ...
 createPost(post3).then(getPosts).catch(err => console.log(err));
 ```
-If f1, f2,f3...fn all return Promises we can do    
+**If f1, f2,f3...fn all return Promises we can do**     
 ```f1.then(f2).then(f3)....then(fn).then(()=> {//something to be done when fn resolves})```
+
+## Promise.all()
+Instead of calling f1.then(f2).then(f3)....then(fn) .... you can do ```Promise.all()```
+
+```js
+const promise1 = Promise.resolve('Hello World');
+const promise2 = 10; // how the heck?
+const promise3 = new Promise((resolve, reject) => setTimeout(resolve, 2000, 'Good Bye'));
+
+Promise.all([promise1, promise2, promise3]).then(values => console.log(values));
+```
