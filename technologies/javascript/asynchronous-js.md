@@ -129,6 +129,26 @@ First of all, a Promise is an object. There are 3 states of the Promise object:
 - **Pending**: Initial State, before the Promise succeeds or fails
 - **Resolved**: Completed Promise ```.then()```
 - **Rejected**: Failed Promise ```.catch()```
+ ### resolve() in a promise
+ ```js
+var promise1 = Promise.resolve(17468);  
+//debug: promise1 objects protype values have:
+//[[PromiseState]]: "fulfilled"
+//[[PromiseResult]]: 17468
+promise.then(function(val) { //debug: val is 17468
+    console.log(val); 
+});
+
+const promise2 = new Promise((resolve, reject) => { 
+       setTimeout(() => { 
+           resolve([89, 45, 323]); 
+       }, 5000); 
+      }); 
+  
+promise2.then(values => { 
+    console.log(values[1]); 
+}); 
+ ```
 
 ```js
 const myFridge = ['Fresh Beef'];
