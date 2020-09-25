@@ -126,10 +126,13 @@ makeBurger();
 ## Promises
 First of all, a Promise is an object. There are 3 states of the Promise object:
 
-- **Pending**: Initial State, before the Promise succeeds or fails
-- **Resolved**: Completed Promise ```.then()```
-- **Rejected**: Failed Promise ```.catch()```
- ### resolve() in a promise
+- **pending**: initial state, neither fulfilled nor rejected.
+- **fulfilled**: meaning that the operation was completed successfully.
+- **rejected**: meaning that the operation failed.
+
+ ### Rsolve in a promise
+```Promise.resolve(value);``` and ```resolve``` patermeter in Promise inner annonymous function are different.
+#### Promise.resolve()
  ```js
 var promise1 = Promise.resolve(17468);  
 //debug: promise1 objects protype values have:
@@ -139,15 +142,17 @@ promise.then(function(val) { //debug: val is 17468
     console.log(val); 
 });
 
+//debug: before 3 secs from calling .then() promise2 is in pending state.
 const promise2 = new Promise((resolve, reject) => { 
-       setTimeout(() => { 
-           resolve([89, 45, 323]); 
-       }, 5000); 
-      }); 
-  
+      setTimeout(() => { 
+          //debug: when resoleved is called after 3 secs, promise 2 is in fulfilled state.
+          resolve([89, 45, 323]); 
+      }, 3000); 
+  }); 
+//debug:The resolved array is passed into the fn in then(fn())
 promise2.then(values => { 
     console.log(values[1]); 
-}); 
+});  
  ```
 
 ```js
