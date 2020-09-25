@@ -75,18 +75,6 @@ First of all, a Promise is an object. There are 3 states of the Promise object:
 - ```Promise.resolve()``` takes in any value or a Promise and **returns a/the Promise**.
 - ```Promise.prototype.then(fn1,fn2)``` method takes in 2 callback functions for the **fulfilled** and **rejected** and **returns a Promise**. fn1 is mapped to ```resolve```
 
-### Return value of Promise.prototype.then(fn1, fn2)
-
-**Returns a Promise** according to the following rules.        
-If a handler function fn1 or fn2 (on fulfilled or on rejected):      
-
-- returns a **value**, the **returned promise** gets resolved with the returned value as its value. ```[[PromiseState]]: "fulfilled" [[PromiseResult]]: value```
-- doesn't return anything, the **returned promise** gets resolved with an undefined value. ```[[PromiseState]]: "fulfilled" [[PromiseResult]]: undefined```
-- throws an error, **returned promise** gets rejected with the thrown error as its value. ```[[PromiseState]]: "rejected" [[PromiseResult]]: Error```
-- returns an already fulfilled promise, **returned promise** gets fulfilled with that promise's value as its value. ```[[PromiseState]]: "fulfilled" [[PromiseResult]]: callbackPromiseVal```
-- returns an already rejected promise, **returned promise** gets rejected with that promise's value as its value. ```[[PromiseState]]: "rejected" [[PromiseResult]]: callbackPromiseVal```
-- returns another pending promise object, the resolution/rejection of the **returned promise** will be subsequent to the resolution/rejection of the promise returned by the handler. Also, the resolved value of the **returned promise** will be the same as the resolved value of the promise returned by the handler. ```[[PromiseState]]: "pending" [[PromiseResult]]: undefined```
-
 ```js
 let promise1 = new Promise((resolve, reject) => {
   //Using setTimeout(...) to simulate async code. Note: setTimeOut() DOES NOT WAIT !!!
@@ -119,6 +107,54 @@ promise3.then(values => {
     console.log(values[1]); 
 });  
  ```
+ 
+### Return value of Promise.prototype.then(fn1, fn2)
+
+**Returns a Promise** according to the following rules.        
+If a handler function fn1 or fn2 (on fulfilled or on rejected):      
+
+- returns a **value**, the **returned promise** gets resolved with the returned value as its value. ```[[PromiseState]]: "fulfilled" [[PromiseResult]]: value```
+- doesn't return anything, the **returned promise** gets resolved with an undefined value. ```[[PromiseState]]: "fulfilled" [[PromiseResult]]: undefined```
+- throws an error, **returned promise** gets rejected with the thrown error as its value. ```[[PromiseState]]: "rejected" [[PromiseResult]]: Error```
+- returns an already fulfilled promise, **returned promise** gets fulfilled with that promise's value as its value. ```[[PromiseState]]: "fulfilled" [[PromiseResult]]: callbackPromiseVal```
+- returns an already rejected promise, **returned promise** gets rejected with that promise's value as its value. ```[[PromiseState]]: "rejected" [[PromiseResult]]: callbackPromiseVal```
+- returns another pending promise object, the resolution/rejection of the **returned promise** will be subsequent to the resolution/rejection of the promise returned by the handler. Also, the resolved value of the **returned promise** will be the same as the resolved value of the promise returned by the handler. ```[[PromiseState]]: "pending" [[PromiseResult]]: undefined```
+
+```js
+//Rightaway resolved with 'foo'
+Promise.resolve('foo')
+  //Above resolved value 'foo' is passed in to the below annonymous function.
+  .then(string => {
+    return new Promise(function(resolve, reject) {
+      setTimeout(function() {
+        string += 'bar';
+        console.log("First Then: " + string)
+        resolve(string);
+      }, 1);
+    });
+  })
+  // Following fn1 callback is called only when above returned promise is resolved.
+  // so the  'foobar' is passed into the below fn1 callback
+  .then(string => {
+    //Remember: setTimeout doesn't wait.
+    setTimeout(() => {
+      string += 'baz';
+      console.log("Second Then; " + string);
+    }, 1)
+    return string; //so straight away returned befor 'baz' is added.
+    //So the returned promise from then() is resolved with the returnd value. i.e. 'foobar'
+  })
+ //Since above promise is resolved with 'foobar' its passed into the following fn1 callback
+  .then(string => {
+    console.log("Last Then: " + string);
+  });
+
+//Output is:
+//First Then: foobar
+//Last Then: foobar
+//Second Then; foobarbaz
+```
+
 ## Callbacks
 
 ```js
