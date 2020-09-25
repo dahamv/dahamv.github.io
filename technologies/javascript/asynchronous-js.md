@@ -86,7 +86,68 @@ First of all, a Promise is an object. There are 3 states of the Promise object:
 - **Resolved**: Completed Promise ```.then()```
 - **Rejected**: Failed Promise ```.catch()```
 
+```js
+const myFridge = ['Fresh Beef'];
+const myOven = ['Soft buns'];
+const getBeef = (fridge) => {   
+  return new Promise((resolve, reject) => {
+    if (fridge) {
+      const beef = 'Got '+ fridge[0];
+      console.log(beef);
+      resolve(beef);
+    } else {
+      reject(new Error('No more beef!'));
+    }
+  });
+};
 
+const cookBeef = (beef) => {  
+  return new Promise((resolve, reject) => {
+    if (beef) {
+      const cookedBeef = 'Cooked the '+ beef;
+      console.log(cookedBeef);
+      resolve(cookedBeef);
+    } else {
+      reject(new Error('Cannot cook Beef!'));
+    }
+  });
+};
+
+const getBuns = (oven) => {  
+  return new Promise((resolve, reject) => {
+    if (oven) {
+      const buns = 'Got ' + oven[0];
+      console.log(buns);
+      resolve(buns);
+    } else {
+      reject(new Error('Cannot get buns'));
+    }
+  });
+}
+
+const putBeefBetweenBuns = (buns, beef) => {
+  return new Promise((resolve, reject) => {
+    if (buns && beef) {
+      const burger = 'Nice burger made with ' + beef + ' put between ' + buns;
+      console.log(burger);
+      resolve(burger);
+    } else {
+      reject(new Error('Cannot do the making'));
+    }
+  });
+}
+
+const serveBurger = (burger) => {
+console.log(burger + ' is served!')
+}
+
+const makeBurger = () => {
+  const cookedBeef = getBeef(myFridge).then(cookBeef)
+  .then((cookedBeef) => console.log(cookedBeef) );
+  //console.log(cookedBeef);
+  //.then(getBuns(myOven)).then(putBeefBetweenBuns);
+};
+```
 
 ```js
 //Same code using promises. Leave getPosts as it is.
