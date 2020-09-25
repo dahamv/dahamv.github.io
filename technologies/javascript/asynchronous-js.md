@@ -130,8 +130,10 @@ First of all, a Promise is an object. There are 3 states of the Promise object:
 - **fulfilled**: meaning that the operation was completed successfully.
 - **rejected**: meaning that the operation failed.
 
-```Promise.resolve(value);``` and ```resolve``` patermeter in Promise inner annonymous function are different.
-
+```Promise.resolve(value);``` and ```resolve``` patermeter - annonymous function in a Promise  ```new Promise((resolve, reject) => {...});``` are different.
+- Promise.resolve() takes in any value or a Promise and returns a/the Promise.
+- Promise.prototype.then() method takes in 2 callback functions for the **fulfilled** and **rejected**.
+      .then(fn1,fn2) -> fn1 is mapped to ```resolve```
 ```js
 //resolve is the function we pass in the Promise.prototype.then(fn-resolve, fn-reject)
 let promise1 = new Promise((resolve, reject) => {
@@ -145,7 +147,7 @@ let promise1 = new Promise((resolve, reject) => {
 //[[PromiseState]]: "pending"
 //[[PromiseResult]]: undefined
 promise1.then((successMessage) => {
-  // successMessage is what's passed in the resolve(...) function above.
+  // this annonymous fn is what's passed in as resolve above. So "Success!" is passed in as successMessage.
   console.log("Yay! " + successMessage) 
 });
 
@@ -154,7 +156,7 @@ var promise2 = Promise.resolve(17468);
 //debug: promise2 objects protype values have:
 //[[PromiseState]]: "fulfilled"
 //[[PromiseResult]]: 17468
-promise2.then(function(val) { //debug: val is 17468
+promise2.then(function(val) { //debug: the resolved value 17468 is passed as val
     console.log(val); 
 });
 
@@ -170,7 +172,10 @@ promise3.then(values => {
     console.log(values[1]); 
 });  
  ```
+### Chaining Promises
+The then method returns a Promise which allows for method chaining.    
 
+If the function passed as handler to then returns a Promise, an equivalent Promise will be exposed to the subsequent then in the method chain. The below snippet simulates asynchronous code with the setTimeout function.
 ```js
 const myFridge = ['Fresh Beef'];
 const myOven = ['Soft buns'];
