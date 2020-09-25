@@ -28,7 +28,7 @@ let propList = Object.getOwnPropertyNames(Object.getPrototypeOf(obj1));
 console.log(propList);
 ```
 
-## This in JS
+## this in JS
 A functin inside an object is a method.  **this** in that method refers to the obj.
 in a regular function (not a part of an obj) -> **this** referes to the global object -> **window** object in browsers and **global** in node.
 ```js
