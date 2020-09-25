@@ -130,27 +130,43 @@ First of all, a Promise is an object. There are 3 states of the Promise object:
 - **fulfilled**: meaning that the operation was completed successfully.
 - **rejected**: meaning that the operation failed.
 
- ### Rsolve in a promise
 ```Promise.resolve(value);``` and ```resolve``` patermeter in Promise inner annonymous function are different.
-#### Promise.resolve()
- ```js
-var promise1 = Promise.resolve(17468);  
-//debug: promise1 objects protype values have:
+
+```js
+//resolve is the function we pass in the Promise.prototype.then(fn-resolve, fn-reject)
+let promise1 = new Promise((resolve, reject) => {
+  // We call resolve(...) annonymous function after the asynchronous task we did was successful, and reject(...) when it failed.
+  // Here we use setTimeout(...) to simulate async code. 
+  setTimeout( function() {
+    resolve("Success!")  // call the resolve annonymous function
+  }, 250) 
+}) 
+//debug: At this point (before calling then) promise1 prototype values are
+//[[PromiseState]]: "pending"
+//[[PromiseResult]]: undefined
+promise1.then((successMessage) => {
+  // successMessage is what's passed in the resolve(...) function above.
+  console.log("Yay! " + successMessage) 
+});
+
+//promise2 is an already resolved Promise. beause of Promise.resolve();
+var promise2 = Promise.resolve(17468);  
+//debug: promise2 objects protype values have:
 //[[PromiseState]]: "fulfilled"
 //[[PromiseResult]]: 17468
-promise.then(function(val) { //debug: val is 17468
+promise2.then(function(val) { //debug: val is 17468
     console.log(val); 
 });
 
-//debug: before 3 secs from calling .then() promise2 is in pending state.
-const promise2 = new Promise((resolve, reject) => { 
+//debug: until 3 secs from calling .then() promise3 is in pending state. Since it takes 3 secs to call resolve annonymous fn.
+const promise3 = new Promise((resolve, reject) => { 
       setTimeout(() => { 
           //debug: when resoleved is called after 3 secs, promise 2 is in fulfilled state.
           resolve([89, 45, 323]); 
       }, 3000); 
   }); 
 //debug:The resolved array is passed into the fn in then(fn())
-promise2.then(values => { 
+promise3.then(values => { 
     console.log(values[1]); 
 });  
  ```
