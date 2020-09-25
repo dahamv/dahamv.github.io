@@ -1,23 +1,67 @@
 **[Home](../../index.md)**  
+Javascript is not a classbased language, its a prototype based language. 
+## JS prototypes
+Even JS obj will have a prototype object attached. Its gonna have all the default things that parent obj has. The prototype object can have a prototype object.    
+obj -> prototype obj -> its prototype obj -> ... -> parent Object prototype (its prototype will be null).    
+eg: methods like **toString()**, **valueOf()**, **isPropertyOf()**, **hasOwnProperty()** etc.
+```js
+let obj1 = {
+ prop1 = () => console.log('prop1');
+}
+obj1.prop(); // will print 'prop1'
+//Eventhogh toString() is not a function defined, we can still call it
+obj1.toString(); //This wont throw an error since its attached to the obj prototype.
+obj1.prop2(); // will throw an error after going throug the prototype chain.
+let obj2 = {
+ prop2 = () => console.log('prop2');
+}
+//You can set the prototype of an obj.
+Object.setPrototypeof(obj2, obj1);
+//Now you can call
+obj2.prop1();
+//To list all numarable properties of an object upto its parent prototype Object.
+for (let prop in obj2) {
+    console.log(prop); // output: prop2 prop1
+}
+//To list all properties of the parent prototype object
+let propList = Object.getOwnPropertyNames(Object.getPrototypeOf(obj1));
+console.log(propList);
+```
 
-```javascript
-//insertion sort
-var array = [5, 6, 3];
-let insertionSort = (inputArr) => {
-    let length = inputArr.length;
-    for (let i = 1; i < length; i++) {
-        let key = inputArr[i];
-        let j = i - 1;
-        while (j >= 0 && inputArr[j] > key) {
-            inputArr[j + 1] = inputArr[j];
-            j = j - 1;
-        }
-        inputArr[j + 1] = key;
-    }
-    return inputArr;
+## This in JS
+A functin inside an object is a method.  **this** in that method refers to the obj.
+in a regular function (not a part of an obj) -> **this** referes to the global object -> **window** object in browsers and **global** in node.
+```js
+const video = {
+    title: 'a',
+    play(){ console.log(this);}
 };
+vidio.play(); //prints the video object
 
-console.log(insertionSort(array));
+video.stop = () => console.log(this);
+video.stop(); //will still print the video object. since stop is a method of video obj.
+
+const playVideo = () => console.log(this); 
+playVideo();//prints the window object.
+
+//A constructor function
+const Video = (title) => {
+    this.title = title;
+    console.log(this);
+}
+const v = new Video('b'); // new keyword creates a new empty object {} and make 'this' of the consctructor fuction to point to the empty object.
+
+//in callback functions since they are regular functions this referes to the window object.
+const video = {
+    title : 'a',
+    tags : ['a','b','c'],
+    showTags() {
+        //this -> video obj
+        this.tags.forEach(tag => console.log(this.title, tag));  //Error: last this referes to window obj since its an anonymous function
+        //solution
+        this.tags.forEach(tag => {console.log(this.title, tag)} , this); // in the forEach function we can pass the 'this' of video obj to the this of the anonymous fn.
+    }
+}
 ```
 ## Callbacks
 
@@ -184,3 +228,23 @@ const promise3 = new Promise((resolve, reject) => setTimeout(resolve, 2000, 'Goo
 
 Promise.all([promise1, promise2, promise3]).then(values => console.log(values));
 ```
+
+
+```javascript
+//insertion sort
+var array = [5, 6, 3];
+let insertionSort = (inputArr) => {
+    let length = inputArr.length;
+    for (let i = 1; i < length; i++) {
+        let key = inputArr[i];
+        let j = i - 1;
+        while (j >= 0 && inputArr[j] > key) {
+            inputArr[j + 1] = inputArr[j];
+            j = j - 1;
+        }
+        inputArr[j + 1] = key;
+    }
+    return inputArr;
+};
+
+console.log(insertionSort(array));
