@@ -63,6 +63,62 @@ const video = {
     }
 }
 ```
+
+## Promises
+First of all, a Promise is an object. There are 3 states of the Promise object:
+
+- **pending**: initial state, neither fulfilled nor rejected.
+- **fulfilled**: meaning that the operation was completed successfully.
+- **rejected**: meaning that the operation failed.
+
+```Promise.resolve(value);``` and ```resolve``` patermeter - annonymous function in a Promise  ```new Promise((resolve, reject) => {...});``` are different.
+- ```Promise.resolve()``` takes in any value or a Promise and **returns a/the Promise**.
+- ```Promise.prototype.then(fn1,fn2)``` method takes in 2 callback functions for the **fulfilled** and **rejected** and **returns a Promise**. fn1 is mapped to ```resolve```
+
+### Return value of Promise.prototype.then(fn1, fn2)
+
+**Returns a Promise** according to the following rules.        
+If a handler function fn1 or fn2 (on fulfilled or on rejected):      
+
+- returns a **value**, the **returned promise** gets resolved with the returned value as its value. ```[[PromiseState]]: "fulfilled" [[PromiseResult]]: value```
+- doesn't return anything, the **returned promise** gets resolved with an undefined value. ```[[PromiseState]]: "fulfilled" [[PromiseResult]]: undefined```
+- throws an error, **returned promise** gets rejected with the thrown error as its value. ```[[PromiseState]]: "rejected" [[PromiseResult]]: Error```
+- returns an already fulfilled promise, **returned promise** gets fulfilled with that promise's value as its value. ```[[PromiseState]]: "fulfilled" [[PromiseResult]]: callbackPromiseVal```
+- returns an already rejected promise, **returned promise** gets rejected with that promise's value as its value. ```[[PromiseState]]: "rejected" [[PromiseResult]]: callbackPromiseVal```
+- returns another pending promise object, the resolution/rejection of the **returned promise** will be subsequent to the resolution/rejection of the promise returned by the handler. Also, the resolved value of the **returned promise** will be the same as the resolved value of the promise returned by the handler. ```[[PromiseState]]: "pending" [[PromiseResult]]: undefined```
+
+```js
+let promise1 = new Promise((resolve, reject) => {
+  // Here we use setTimeout(...) to simulate async code. 
+  setTimeout( function() {
+    resolve("Success!")  // call the resolve (fn1) annonymous function
+  }, 250) 
+}) 
+//debug: At this point (before calling then) promise1 prototype values are [[PromiseState]]: "pending" [[PromiseResult]]: undefined
+promise1.then((successMessage) => {
+  // this annonymous fn is what's passed in as resolve above. So "Success!" is passed in as successMessage.
+  console.log("Yay! " + successMessage) 
+});
+
+//promise2 is an already resolved Promise. beause of Promise.resolve();
+var promise2 = Promise.resolve(17468);  
+//debug: promise2 objects protype values have: [[PromiseState]]: "fulfilled" [[PromiseResult]]: 17468
+promise2.then(function(val) { //debug: the resolved value 17468 is passed as val
+    console.log(val); 
+});
+
+//debug: until 3 secs from calling .then() promise3 is in pending state. Since it takes 3 secs to call resolve annonymous fn1.
+const promise3 = new Promise((resolve, reject) => { 
+      setTimeout(() => { 
+          //debug: when resoleved is called after 3 secs, promise 2 is in fulfilled state.
+          resolve([89, 45, 323]); 
+      }, 3000); 
+  }); 
+//debug:The resolved array is passed into fn1 in then(fn1,..)
+promise3.then(values => { 
+    console.log(values[1]); 
+});  
+ ```
 ## Callbacks
 
 ```js
@@ -123,60 +179,6 @@ const makeBurger = nextStep => {
 };
 makeBurger();
 ```
-## Promises
-First of all, a Promise is an object. There are 3 states of the Promise object:
-
-- **pending**: initial state, neither fulfilled nor rejected.
-- **fulfilled**: meaning that the operation was completed successfully.
-- **rejected**: meaning that the operation failed.
-
-```Promise.resolve(value);``` and ```resolve``` patermeter - annonymous function in a Promise  ```new Promise((resolve, reject) => {...});``` are different.
-- ```Promise.resolve()``` takes in any value or a Promise and **returns a/the Promise**.
-- ```Promise.prototype.then(fn1,fn2)``` method takes in 2 callback functions for the **fulfilled** and **rejected** and **returns a Promise**. fn1 is mapped to ```resolve```
-
-### Return value of Promise.prototype.then(fn1, fn2)
-
-**Returns a Promise** according to the following rules.        
-If a handler function fn1 or fn2 (on fulfilled or on rejected):      
-
-- returns a **value**, the **returned promise** gets resolved with the returned value as its value. ```[[PromiseState]]: "fulfilled" [[PromiseResult]]: value```
-- doesn't return anything, the **returned promise** gets resolved with an undefined value. ```[[PromiseState]]: "fulfilled" [[PromiseResult]]: undefined```
-- throws an error, **returned promise** gets rejected with the thrown error as its value. ```[[PromiseState]]: "rejected" [[PromiseResult]]: Error```
-- returns an already fulfilled promise, **returned promise** gets fulfilled with that promise's value as its value. ```[[PromiseState]]: "fulfilled" [[PromiseResult]]: callbackPromiseVal```
-- returns an already rejected promise, **returned promise** gets rejected with that promise's value as its value. ```[[PromiseState]]: "rejected" [[PromiseResult]]: callbackPromiseVal```
-- returns another pending promise object, the resolution/rejection of the promise returned by then will be subsequent to the resolution/rejection of the promise returned by the handler. Also, the resolved value of the promise returned by then will be the same as the resolved value of the promise returned by the handler.
-```js
-let promise1 = new Promise((resolve, reject) => {
-  // Here we use setTimeout(...) to simulate async code. 
-  setTimeout( function() {
-    resolve("Success!")  // call the resolve (fn1) annonymous function
-  }, 250) 
-}) 
-//debug: At this point (before calling then) promise1 prototype values are [[PromiseState]]: "pending" [[PromiseResult]]: undefined
-promise1.then((successMessage) => {
-  // this annonymous fn is what's passed in as resolve above. So "Success!" is passed in as successMessage.
-  console.log("Yay! " + successMessage) 
-});
-
-//promise2 is an already resolved Promise. beause of Promise.resolve();
-var promise2 = Promise.resolve(17468);  
-//debug: promise2 objects protype values have: [[PromiseState]]: "fulfilled" [[PromiseResult]]: 17468
-promise2.then(function(val) { //debug: the resolved value 17468 is passed as val
-    console.log(val); 
-});
-
-//debug: until 3 secs from calling .then() promise3 is in pending state. Since it takes 3 secs to call resolve annonymous fn1.
-const promise3 = new Promise((resolve, reject) => { 
-      setTimeout(() => { 
-          //debug: when resoleved is called after 3 secs, promise 2 is in fulfilled state.
-          resolve([89, 45, 323]); 
-      }, 3000); 
-  }); 
-//debug:The resolved array is passed into fn1 in then(fn1,..)
-promise3.then(values => { 
-    console.log(values[1]); 
-});  
- ```
 ### Chaining Promises
 The then method returns a Promise which allows for method chaining.    
 
