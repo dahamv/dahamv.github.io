@@ -1,7 +1,7 @@
 **[Home](../../index.md)**  
 Javascript is not a classbased language, its a prototype based language. 
-## JS prototypes
-Even JS obj will have a prototype object attached. Its gonna have all the default things that parent obj has. The prototype object can have a prototype object.    
+## Javascript prototypes
+Every Javascript obj will have a prototype object attached. Its gonna have all the default things that parent obj has. The prototype object can have a prototype object.    
 obj -> prototype obj -> its prototype obj -> ... -> parent Object prototype (its prototype will be null).    
 eg: methods like **toString()**, **valueOf()**, **isPropertyOf()**, **hasOwnProperty()** etc.
 ```js
@@ -28,7 +28,7 @@ let propList = Object.getOwnPropertyNames(Object.getPrototypeOf(obj1));
 console.log(propList);
 ```
 
-## this in JS
+## this in Javascript
 A functin inside an object is a method.  **this** in that method refers to the obj.
 in a regular function (not a part of an obj) -> **this** referes to the global object -> **window** object in browsers and **global** in node.
 ```js
