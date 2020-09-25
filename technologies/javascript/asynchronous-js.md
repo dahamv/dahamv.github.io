@@ -89,7 +89,7 @@ If a handler function fn1 or fn2 (on fulfilled or on rejected):
 
 ```js
 let promise1 = new Promise((resolve, reject) => {
-  // Here we use setTimeout(...) to simulate async code. 
+  //Using setTimeout(...) to simulate async code. Note: setTimeOut() DOES NOT WAIT !!!
   setTimeout( function() {
     resolve("Success!")  // call the resolve (fn1) annonymous function
   }, 250) 
