@@ -164,43 +164,53 @@ const promise3 = new Promise((resolve, reject) => setTimeout(resolve, 2000, 'Goo
 
 Promise.all([promise1, promise2, promise3]).then(values => console.log(values));
 ```
+## Async / Await
+Without calling ```promise.then()``` we can use async and await
+```js
+const promise1 = new Promise((resolve, reject) => 
+            setTimeout(()=> resolve('Hello World'), 2000));
+(async printHelloWorld => {
+  const data = await promise1;
+  console.log(data);
+})();                          
+```
 
 ## Callback Hell
+Asynchronous code is simulated with the setTimeout() function.   
 ```js
-const getBeef = nextStep => {
-  const beef = 'Fresh Beef';
-  console.log(beef);
-  nextStep(beef);
+const myFridge = ['Fresh Beef'];
+const myOven = ['Soft buns'];
+
+const getBeef = callBack => {
+  const beef = myFridge[0];
+  setTimeout(()=> {console.log(beef); callBack(beef);}, 2000);
 };
 
-const cookBeef = (beef, nextStep) => {
+const cookBeef = (beef, callBack) => {
   const cookedBeef = 'Cooked the '+ beef;
-  console.log(cookedBeef);
-  nextStep(cookedBeef)
+  setTimeout(()=> {console.log(cookedBeef); callBack(cookedBeef);}, 3000);
 };
 
-const getBuns = nextStep => {
-  const buns = 'Soft buns';
-  console.log(buns);
-  nextStep(buns);
+const getBuns = callBack => {
+  const buns = myOven[0];
+  setTimeout(()=> {console.log(buns); callBack(buns);}, 1000);
 }
 
-const putBeefBetweenBuns = (buns, beef, nextStep) => {
+const putBeefBetweenBuns = (buns, beef, callBack) => {
   const burger = 'Nice burger made with ' + beef + ' put between ' + buns;
-  console.log(burger);
-  nextStep(burger);
+  setTimeout(()=> {console.log(burger); callBack(burger);}, 1000);
 }
 
 const serveBurger = (burger) => {
-console.log(burger + ' is served!')
+setTimeout(()=> console.log(burger + ' is served!'), 1000);
 }
 
 //Callback hell.
-const makeBurger = nextStep => {
-  getBeef(function(beef) {
-    cookBeef(beef, function(cookedBeef) {
-      getBuns(function(buns) {
-        putBeefBetweenBuns(buns, beef, function(burger) {
+const makeBurger = () => {
+  getBeef((beef) => {
+    cookBeef(beef, (cookedBeef) => {
+      getBuns((buns) => {
+        putBeefBetweenBuns(buns, cookedBeef, (burger) => {
           serveBurger(burger);
         });
       });
@@ -208,12 +218,13 @@ const makeBurger = nextStep => {
   });
 };
 makeBurger();
+
 ```
 ### Chaining Promises
 The then method returns a Promise which allows for method chaining.    
 
 If the function passed as handler to then returns a Promise, an equivalent Promise will be exposed to the subsequent then in the method chain.   
-The below snippet simulates asynchronous code with the setTimeout function.     
+    
 
 ```js
 const myFridge = ['Fresh Beef'];
@@ -266,7 +277,7 @@ const serveBurger = (burger) => {
   setTimeout(()=> console.log(burger + ' is served!'), 1000);
 }
 
-//Since you have to wait for two promises.
+//Since you have to wait for two promises to complete. Promise.all waits until all promises are completed.
 Promise.all([getBeef().then(cookBeef), getBuns()])
               .then(data => putBeefBetweenBuns(data[0],data[1]))
               .then(serveBurger)
