@@ -206,7 +206,7 @@ setTimeout(()=> console.log(burger + ' is served!'), 1000);
 }
 
 //Callback hell.
-const makeBurger = () => {
+(() => {
   getBeef((beef) => {
     cookBeef(beef, (cookedBeef) => {
       getBuns((buns) => {
@@ -216,8 +216,7 @@ const makeBurger = () => {
       });
     });
   });
-};
-makeBurger();
+})();
 
 ```
 ### Chaining Promises
