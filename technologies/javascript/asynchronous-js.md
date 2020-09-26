@@ -64,7 +64,7 @@ const video = {
 }
 ```
 
-## Promises
+## Promises ES6
 First of all, a Promise is an object. There are 3 states of the Promise object:
 
 - **pending**: initial state, neither fulfilled nor rejected.
