@@ -40,9 +40,20 @@ Reactive Programming
   //to hit f3 even when there is an error.
   source$.catch(err => rx.Observable.of(err)).subscribe(f1,f2,f3); // of takes anything and fires an observalbe.
   ```
-Filtering / Transforming Observables
-Promises to Observables
-Many helpful operators
-Error handling
+## Observables from a Promise
+
+```js
+const myPromise = new Promise((resolve, reject) =>{
+   //simulate async operation
+   setTimeout(() => {
+   	resolve('Hello from promise');
+   },3000);
+});
+//the following callback fn is what is called with resolve(..) above.
+myPromise.then(x=> console.log(x))
+```
+Promises to Observables  
+Many helpful operators  
+Error handling  
 
 https://youtu.be/ei7FsoXKPl0?t=2177
