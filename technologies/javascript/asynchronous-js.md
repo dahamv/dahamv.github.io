@@ -75,9 +75,21 @@ Book = (title, author, year) => {
 }
 //A prototype function
 Book.prototype.getSummery = () => {
+//Using Template literal with back ticks. Part of ES6. No need concatnation with + sign.
  return `${this.title} was written by ${this.author} in year ${this.year}`;
 }
-//Inheritance
+//Inheritance on Magazine constructor fucntion.
+//So here Magazine inherits Book.
+Magazine = (title, author, year, month) => {
+ Book.call(this, title, author, year); //With call() an object can use a method belonging to another object. Call Book fn on Magazine obj.
+ this.month = month; //Now Magazin obj will have all 4 variables.
+}
+//Instantiate - but this won't have the prototype function.
+const mag1 = new Magazine('Mag1','John','2020','Jan')
+//Inherite prototype
+Magazine.prototype = Object.create(Book.prototype); // Now a new Magazine obj can be created and can call getSummery on it.
+//To change prototype constructor from Book to Magazine use
+Magazine.prototype.constructor = Magazine;
 ```
 
 ## Promises ES6
