@@ -159,7 +159,7 @@ Instead of calling f1.then(f2).then(f3)....then(fn) .... you can do ```Promise.a
 
 ```js
 const promise1 = Promise.resolve('Hello World');
-const promise2 = 10; // how the heck?
+const promise2 = 10; //in Promise.all() it is considered as a promise resolved to 10.
 const promise3 = new Promise((resolve, reject) => setTimeout(resolve, 2000, 'Good Bye'));
 
 Promise.all([promise1, promise2, promise3]).then(values => console.log(values));
@@ -167,12 +167,14 @@ Promise.all([promise1, promise2, promise3]).then(values => console.log(values));
 ## Async / Await
 A special syntax to work with promises easily.    
 an **async** function always returns a promise. Other values are wrapped in a resolved promise automatically.
+
 ```js
 async function f() {
   return 1;
 }
 f().then(alert); // 1
 ```
+
 Without calling ```promise.then()``` we can use **await**. it makes JavaScript wait until that promise settles and returns its result.   
 ```js
 const promise1 = new Promise((resolve, reject) => 
