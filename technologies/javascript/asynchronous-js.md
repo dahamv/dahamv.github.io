@@ -64,6 +64,21 @@ const video = {
     }
 }
 ```
+## Inheritance in Javascript
+
+```js
+//Constructor function. Conventianally first letter Uppercase.
+Book = (title, author, year) => {
+ this.title = title;
+ this.author = author;
+ this.year = year;
+}
+//A prototype function
+Book.prototype.getSummery = () => {
+ return `${this.title} was written by ${this.author} in year ${this.year}`;
+}
+//Inheritance
+```
 
 ## Promises ES6
 First of all, a Promise is an object. There are 3 states of the Promise object:
