@@ -92,6 +92,43 @@ Magazine.prototype = Object.create(Book.prototype); // Now a new Magazine obj ca
 Magazine.prototype.constructor = Magazine;
 ```
 
+## Object.create() ES5
+
+```js
+//Create the prototypes first
+const bookProtos = {
+ getSummery: () => {...logic...},
+ getAge: () => {...logic...}
+}
+//Create object
+const book1 = Object.create(bookProtos);
+book1.titile = 'Book1';
+book1.author = 'John'
+book1.year = '2020'
+```
+
+## Classes ES6
+Same stuff above can be done with classes. No need to deal with prototypes.
+
+```js
+class Book {
+ constructor(title, author, year) {
+  this.title ......
+ }
+ getSummery() {....}
+ //Can also have static methods
+ static topBookStore() {...} //call Book.topBookStore();
+}
+
+//Can have subclasses
+Magazine extends Book {
+ constructor(title, author, year, month) {
+  super(titile, author, year);
+  this.month = month;
+ }
+}
+```
+
 ## Promises ES6
 First of all, a Promise is an object. There are 3 states of the Promise object:
 
