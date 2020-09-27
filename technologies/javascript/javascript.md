@@ -1,4 +1,5 @@
 **[Home](../../index.md)**  
+
 Javascript is not a classbased language, its a prototype based language. 
 ## Javascript prototypes
 Every Javascript obj will have a prototype object attached. Its gonna have all the default things that parent obj has. The prototype object can have a prototype object.    
