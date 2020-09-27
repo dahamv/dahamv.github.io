@@ -165,7 +165,15 @@ const promise3 = new Promise((resolve, reject) => setTimeout(resolve, 2000, 'Goo
 Promise.all([promise1, promise2, promise3]).then(values => console.log(values));
 ```
 ## Async / Await
-Without calling ```promise.then()``` we can use async and await
+A special syntax to work with promises easily.    
+an **async** function always returns a promise. Other values are wrapped in a resolved promise automatically.
+```js
+async function f() {
+  return 1;
+}
+f().then(alert); // 1
+```
+Without calling ```promise.then()``` we can use **await**. it makes JavaScript wait until that promise settles and returns its result.   
 ```js
 const promise1 = new Promise((resolve, reject) => 
             setTimeout(()=> resolve('Hello World'), 2000));
@@ -279,5 +287,17 @@ const serveBurger = (burger) => {
 //Since you have to wait for two promises to complete. Promise.all waits until all promises are completed.
 Promise.all([getBeef().then(cookBeef), getBuns()])
               .then(data => putBeefBetweenBuns(data[0],data[1]))
-              .then(serveBurger)
+              .then(serveBurger);
+              
+//Using Async and Await
+const makeBurger = async () => {
+  const beef = await getBeef();
+  const cookedBeef = await cookBeef(beef);
+  const buns = await getBuns();
+  const burger = await putBeefBetweenBuns(cookedBeef, buns);
+  return burger;
+};
+
+// Make and serve burger
+makeBurger().then(serveBurger);
 ```
