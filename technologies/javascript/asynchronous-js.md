@@ -29,6 +29,7 @@ console.log(propList);
 ```
 
 ## this in Javascript
+In a function definition, **this** refers to the "owner" of the function.   
 A functin inside an object is a method.  **this** in that method refers to the obj.
 in a regular function (not a part of an obj) -> **this** referes to the global object -> **window** object in browsers and **global** in node.
 ```js
