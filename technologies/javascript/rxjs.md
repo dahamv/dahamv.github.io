@@ -12,6 +12,7 @@ Reactive Programming
   
 ## Streams
 <img src="/assets/images/rxjs-stream.png" alt="drawing" width="600"/>
+
 ## Observables and operators
 In short, an observable is simply a **function** that are able to give multiple values over time, either synchronously or asynchronously.   
 operators are functions that return Observables. There are two types of operators    
@@ -31,7 +32,8 @@ operators are functions that return Observables. There are two types of operator
   array$.subscribe(f1,f2,f3); 
   ```
 - Observables from scratch
-	```js
+
+```js
   const source$ = new rx.Observable(observer => {
   	console.log('Creating observable');
 	observer.next('Hello World'); //emiting an event
@@ -44,7 +46,8 @@ operators are functions that return Observables. There are two types of operator
   observer.error(new Error('Something wrong...')); // calls the f2 of the subscriber. But will not hit f3
   //to hit f3 even when there is an error.
   source$.catch(err => rx.Observable.of(err)).subscribe(f1,f2,f3); // of takes anything and fires an observalbe.
-  ```
+```
+  
 ## Observables from a Promise
 
 ```js
