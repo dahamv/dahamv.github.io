@@ -117,12 +117,15 @@ Rx.Observable.concact(source1$, source2$) // source2 starts emiting once source1
 //*****************************
 //MERGE MAP
 //to stop double subscribes. eg:
-Rx.Observable.of('Hello')
+Rx.Observable.of('Hello') 
 	.subscribe(v => {
-		Rx.Observable.of(v + ' World') //string concactnation
-			.subscribe(x => console.log(x)); // prints 'Hello World'
+		Rx.Observable.of(v + ' World!') //string concactnation
+			.subscribe(x => console.log(x)); // prints 'Hello World!'. But this method has some problems at cirtain places.
 	})
-//Do the samething with mergeMap()
+//Better solution - Do the samething with mergeMap()
+Rx.Observable.of('Hello')
+	.mergeMap(v => return Rx.Observable.of(v + ' World!'))
+	.subscribe(x => console.log(x));
 
 //*****************************
 //CONCACT MAP
