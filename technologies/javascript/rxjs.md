@@ -12,9 +12,14 @@ Reactive Programming
   
 ## Streams
 <img src="/assets/images/rxjs-stream.png" alt="drawing" width="600"/>
+## Observables and operators
+In short, an observable is simply a **function** that are able to give multiple values over time, either synchronously or asynchronously.   
+operators are functions that return Observables. There are two types of operators    
+- Pipable operators - eg: ```map(), filter()```. Can be piped with ```myObserver.pipe(operator())```     
+		 they take one Observable as input and generate another Observable as output      
+- Creation operators - standalone functions to create a new Observable. eg: ```of(1,2,3), from(['a','b','c'])```
 
 ## Examining data streams from events
-
 
 - Can create observables from Array like objects - arrays, sets, maps 
   ```js
@@ -55,7 +60,32 @@ source$.subscribe(x => console.log(x));
 //same as myPromise.then(x => console.log(x));
 ```
 ## Interval, Timer and Range (RxJs operators)
-Many helpful operators  
+
+See full list of operators: https://rxjs-dev.firebaseapp.com/guide/operators
+
+These methods are valueble when testing. 
+
+```js
+//Interval emits numbers 0,1,2,3,... every 1 sec and continues.
+const source$ = Rx.Observable.interval(1000);
+//to emit only 5 numbers
+const source$ = Rx.Observable.interval(1000).take(5);
+
+//Timer is similer. Start emitting after 5secs from page load and emits
+//emits numbers 0,1,2,3, .... in 1sec interval.
+const source$ = Rx.Observable.timer(5000,1000).take(5);
+
+//Range emits 10 numbers starting from 5. Emited all at once. 
+const source$ = Rx.Observable.range(5,10);
+```
+
+## Map and Pluck
+
+```js
+const source$ = Rx.Observable.interval(1000)
+		.take(5)
+		.map(v => v *2); //Similar to Array.prototype.map()
+```
 Error handling  
 
 https://youtu.be/ei7FsoXKPl0?t=2177
