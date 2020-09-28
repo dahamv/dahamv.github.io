@@ -232,3 +232,26 @@ const factorial = (n, accum = 1) => {
     return factorial(n-1, n * accum);
 }
 ```
+
+## Pipe and Compose functions 
+Check this article out: https://www.freecodecamp.org/news/pipe-and-compose-in-javascript-5b04004ac937/
+
+```js
+pipe = (...fns) => (x) => fns.reduce((v, f) => f(v), x);
+getName = (person) => person.name;
+uppercase = (string) => string.toUpperCase();
+get6Characters = (string) => string.substring(0, 6);
+reverse = (string) =>
+  string
+    .split('')
+    .reverse()
+    .join('');
+
+const result = pipe(
+  getName,
+  uppercase,
+  get6Characters,
+  reverse
+)({ name: 'Buckethead' }); //since pipe returns a fn you can pipe(....)(the-argument-to-the-returnd-fn)
+console.log(result);
+```
