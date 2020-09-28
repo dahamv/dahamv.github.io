@@ -62,32 +62,65 @@ const source$ = Rx.Observable.fromPromise(myPromise);
 source$.subscribe(x => console.log(x));
 //same as myPromise.then(x => console.log(x));
 ```
-## Interval, Timer and Range (RxJs operators)
+## RxJs operators
 
 See full list of operators: https://rxjs-dev.firebaseapp.com/guide/operators
 
 These methods are valueble when testing. 
 
 ```js
-//Interval emits numbers 0,1,2,3,... every 1 sec and continues.
+//INTERVAL
+//emits numbers 0,1,2,3,... every 1 sec and continues.
 const source$ = Rx.Observable.interval(1000);
 //to emit only 5 numbers
 const source$ = Rx.Observable.interval(1000).take(5);
 
-//Timer is similer. Start emitting after 5secs from page load and emits
+//TIMER
+//Similer to interval. Start emitting after 5secs from page load and emits
 //emits numbers 0,1,2,3, .... in 1sec interval.
 const source$ = Rx.Observable.timer(5000,1000).take(5);
 
-//Range emits 10 numbers starting from 5. Emited all at once. 
+//RANGE
+//Emits 10 numbers starting from 5. Emited all at once. 
 const source$ = Rx.Observable.range(5,10);
-```
 
-## Map and Pluck
-
-```js
+//MAP
+//Similar to Array.prototype.map(). It creates a new Observable. The subscriber gets output 0,2,4,6,8
 const source$ = Rx.Observable.interval(1000)
 		.take(5)
-		.map(v => v *2); //Similar to Array.prototype.map()
+		.map(v => v *2);
+//PLUCK
+const users = [ {name:'Will', age:34},{name:'Tom', age:33},{name:'Jack', age:35}]
+const users$ = Rx.Observable.from(users).pluck('name'); //gets Will, Tom, Jack
+
+//MERGE
+//can merge two or more Observables
+Rx.Observable.of('Hello')
+		.merge(Rx.Observable.of('World!'))
+		.subscribe(x => console.log(x)); // Outputs 'Hello' and 'World' seperately
+Rx.Observable.interval(5000)
+		.merge(Rx.Observable.interval(1000))
+		.take(25).subscribe(...) // Both emit values together
+//you can also
+Rx.Observable.merge(source1$, source2$, ... ) //All source observables emit at the same time.
+
+//CONCACT
+//can concatnate observables one right after another.
+Rx.Observable.concact(source1$, source2$) // source2 starts emiting once source1 is finished.
+
+//MERGE MAP
+//to stop double subscribes. eg:
+Rx.Observable.of('Hello')
+	.subscribe(v => {
+		Rx.Observable.of(v + ' World') //string concactnation
+			.subscribe(x => console.log(x)); // prints 'Hello World'
+	})
+
+
+//CONCACT MAP
+
+//SWITCH MAP
+
 ```
 Error handling  
 
