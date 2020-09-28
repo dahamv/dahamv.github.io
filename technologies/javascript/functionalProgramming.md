@@ -237,15 +237,13 @@ const factorial = (n, accum = 1) => {
 Check this article out: https://www.freecodecamp.org/news/pipe-and-compose-in-javascript-5b04004ac937/
 
 ```js
+//How to the pipe fn is created with functional programming
 pipe = (...fns) => (x) => fns.reduce((v, f) => f(v), x);
+//the 4 functions we want to pipe
 getName = (person) => person.name;
 uppercase = (string) => string.toUpperCase();
 get6Characters = (string) => string.substring(0, 6);
-reverse = (string) =>
-  string
-    .split('')
-    .reverse()
-    .join('');
+reverse = (string) => string.split('').reverse().join('');
 
 const result = pipe(
   getName,
@@ -254,4 +252,16 @@ const result = pipe(
   reverse
 )({ name: 'Buckethead' }); //since pipe returns a fn you can pipe(....)(the-argument-to-the-returnd-fn)
 console.log(result);
+```
+
+```js
+//It’s just pipe() in the other direction.
+compose = (...fns) => (x) => fns.reduceRight((v, f) => f(v), x);
+const val2 = compose(
+  reverse,
+  get6Characters,
+  uppercase,
+  getName
+)({ name: 'Buckethead' });
+console.log(val2);
 ```
