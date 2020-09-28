@@ -49,10 +49,12 @@ const myPromise = new Promise((resolve, reject) =>{
    	resolve('Hello from promise');
    },3000);
 });
-//the following callback fn is what is called with resolve(..) above.
-myPromise.then(x=> console.log(x))
+//create an observable.
+const source$ = Rx.Observable.fromPromise(myPromise);
+source$.subscribe(x => console.log(x));
+//same as myPromise.then(x => console.log(x));
 ```
-Promises to Observables  
+## Interval, Timer and Range (RxJs operators)
 Many helpful operators  
 Error handling  
 
