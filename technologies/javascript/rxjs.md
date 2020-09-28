@@ -128,13 +128,6 @@ Rx.Observable.of('Hello')
 	.subscribe(x => console.log(x));
 
 //*****************************
-//CONCACT MAP
-
-
-//*****************************
 //SWITCH MAP
-
+//Transforms the items that are emitted by an observable into observables and flattens the emissions.
 ```
-Error handling  
-
-https://youtu.be/ei7FsoXKPl0?t=2177
