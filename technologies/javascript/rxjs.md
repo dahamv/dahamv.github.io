@@ -70,38 +70,39 @@ See full list of operators: https://rxjs-dev.firebaseapp.com/guide/operators
 
 These methods are valueble when testing. 
 
+### interval, timer and range
 ```js
-//INTERVAL
 //emits numbers 0,1,2,3,... every 1 sec and continues.
 const source$ = interval(1000);
 //to emit only 5 numbers
 const source$ = interval(1000).pipe(take(5));
 
-//*****************************
-//TIMER
+//Timer
 //Similer to interval. Start emitting after 5secs from page load and emits
 //emits numbers 0,1,2,3, .... in 1sec interval.
 const source$ = timer(5000,1000).pipe(take(5));
 
-//*****************************
-//RANGE
+//Range
 //Emits 10 numbers starting from 5. Emited all at once. 
 const source$ = range(5,10);
-
-//*****************************
-//MAP
+```
+### map
+```js
 //Similar to Array.prototype.map(). It doesn't create a new Observable. The subscriber gets output 0,2,4,6,8
 const source$ = interval(1000)
       .pipe(take(5))
       .pipe(map(v => v *2));
+```
 
-//*****************************
-//PLUCK
+### pluck
+
+```js
 const users = [ {name:'Will', age:34},{name:'Tom', age:33},{name:'Jack', age:35}]
 const names$ = from(users).pipe(pluck('name')); //gets Will, Tom, Jack
+```
 
-//*****************************
-//MERGE
+### merge and concat
+```js
 //can merge two or more Observables
 //import { merge } from 'rxjs/operators';
 const mergedSource$ = of('Hello')
@@ -114,7 +115,7 @@ interval(500).pipe(take(10))  //emits 10 integers every 1/2 sec
 //import { merge } from 'rxjs';
 const merged$ = merge(source1$, source2$, ... ) //All source observables emit at the same time.
 
-//*****************************
+
 //CONCACT
 //can concatnate observables one right after another.
 const concatnated$ = concat(source1, source2); // source2 starts emiting once source1 is finished.
