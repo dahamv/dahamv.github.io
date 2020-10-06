@@ -25,7 +25,7 @@ operators are functions that return Observables. There are two types of operator
 - Can create observables from Array like objects - arrays, sets, maps 
   ```js
   //adding $ for a stream variable is a convention.
-  const array$ = rx.Observable.from(array)
+  const array$ = from(['a','b','c']);
   //f1- run for all events
   //f2- run if error
   //f3- run when completed.
@@ -34,17 +34,19 @@ operators are functions that return Observables. There are two types of operator
 - Observables from scratch
 
 ```js
-  const source$ = new rx.Observable(observer => {
+const source$ = new Observable(observer => {
   	console.log('Creating observable');
 	observer.next('Hello World'); //emiting an event
-	observer.next('Hello World2');
-	setTimeout(()=> observer.next('Hello World3'), 3000); //emit next value after 3 secs.
-	observer.complete(); // this will call f3 of the subscriber.
+  	observer.next('Hello World2');
+    	observer.error(new Error('Something wrong...')); // calls the f2 of the subscriber. But will not hit f3
+	setTimeout(()=> {
+      	    observer.next('Hello World3');
+            observer.complete(); // this will call f3 of the subscriber.
+      	}, 3000); //emit next value after 3 secs. 
   });
-  source$.subscribe(x => console.log(x), f2, f3);
-  //To throw an error
-  observer.error(new Error('Something wrong...')); // calls the f2 of the subscriber. But will not hit f3
+  source$.subscribe(f1, f2, f3);
   //to hit f3 even when there is an error.
+  //check!!!!!!!
   source$.catch(err => rx.Observable.of(err)).subscribe(f1,f2,f3); // of takes anything and fires an observalbe.
 ```
   
