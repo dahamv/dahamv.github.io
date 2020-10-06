@@ -139,14 +139,17 @@ If you are still in the middle of one task and your boss gives you something els
 //MERGE MAP
 //The overachieving multitasker. You immediately begin working on everything your boss gives you as soon as he/she assigns it.
 //Without mergemap you have to use double subscribes. eg:
-of('Hello').subscribe(v => {
-			of(v + ' World!') //string concactnation
-				.subscribe(x => console.log(x)); // prints 'Hello World!'. But this method has some problems at cirtain places.
-		})
-//Better solution - Do the samething with mergeMap()
-of('Hello')
-	.pipe(mergeMap(v => { return of(v + ' World!')}))
-	.subscribe(x => console.log(x));
+
+const source = of('Pete','Mike', 'Joe'); //emits Strings
+const mappedSource = source.pipe(map( name=>  of('My name is ' + name ))); //name is a string. Emits created inner observables
+mappedSource.subscribe(
+      // handle inner observables which emits strings.
+      innerObsv => innerObsv.subscribe(innerString => console.log(innerString))
+)
+
+//Better solution with mergeMap()
+//have to return the inner observable 
+source.pipe(mergeMap(v => { return of('My name is ' + v)})).subscribe(x => console.log(x));
 
 //*****************************
 //SWITCH MAP
