@@ -103,19 +103,21 @@ const names$ = from(users).pipe(pluck('name')); //gets Will, Tom, Jack
 //*****************************
 //MERGE
 //can merge two or more Observables
-Rx.Observable.of('Hello')
-		.merge(Rx.Observable.of('World!'))
-		.subscribe(x => console.log(x)); // Outputs 'Hello' and 'World' seperately
-Rx.Observable.interval(5000)
-		.merge(Rx.Observable.interval(1000))
-		.take(25).subscribe(...) // Both emit values together
-//you can also
-Rx.Observable.merge(source1$, source2$, ... ) //All source observables emit at the same time.
+//import { merge } from 'rxjs/operators';
+const mergedSource$ = of('Hello')
+			.pipe(merge(of('World!'))); // Outputs 'Hello' and 'World' seperately
+			
+interval(500).pipe(take(10))  //emits 10 integers every 1/2 sec
+        .pipe(merge(interval(1000).pipe(take(25)))) // emits 25 integers every sec
+		.subscribe(x => console.log(x)) // Both emit values together
+//you can also do
+//import { merge } from 'rxjs';
+const merged$ = merge(source1$, source2$, ... ) //All source observables emit at the same time.
 
 //*****************************
 //CONCACT
 //can concatnate observables one right after another.
-Rx.Observable.concact(source1$, source2$) // source2 starts emiting once source1 is finished.
+const concatnated$ = concat(source1, source2); // source2 starts emiting once source1 is finished.
 ```
 
 ## Rxjs Flattening Operators
@@ -137,14 +139,13 @@ If you are still in the middle of one task and your boss gives you something els
 //MERGE MAP
 //The overachieving multitasker. You immediately begin working on everything your boss gives you as soon as he/she assigns it.
 //Without mergemap you have to use double subscribes. eg:
-Rx.Observable.of('Hello') 
-	.subscribe(v => {
-		Rx.Observable.of(v + ' World!') //string concactnation
-			.subscribe(x => console.log(x)); // prints 'Hello World!'. But this method has some problems at cirtain places.
-	})
+of('Hello').subscribe(v => {
+			of(v + ' World!') //string concactnation
+				.subscribe(x => console.log(x)); // prints 'Hello World!'. But this method has some problems at cirtain places.
+		})
 //Better solution - Do the samething with mergeMap()
-Rx.Observable.of('Hello')
-	.mergeMap(v => return Rx.Observable.of(v + ' World!'))
+of('Hello')
+	.pipe(mergeMap(v => { return of(v + ' World!')}))
 	.subscribe(x => console.log(x));
 
 //*****************************
