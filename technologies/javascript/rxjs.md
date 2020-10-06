@@ -46,8 +46,8 @@ const source$ = new Observable(observer => {
   });
   source$.subscribe(f1, f2, f3);
   //to hit f3 even when there is an error.
-  //check!!!!!!!
-  source$.catch(err => rx.Observable.of(err)).subscribe(f1,f2,f3); // of takes anything and fires an observalbe.
+  source$.pipe(catchError(val => of(`I caught: ${val}`)))
+      .subscribe(f1, f2, f3);
 ```
   
 ## Observables from a Promise
@@ -60,7 +60,7 @@ const myPromise = new Promise((resolve, reject) =>{
    },3000);
 });
 //create an observable.
-const source$ = Rx.Observable.fromPromise(myPromise);
+const source$ = fromPromise(myPromise);
 source$.subscribe(x => console.log(x));
 //same as myPromise.then(x => console.log(x));
 ```
@@ -73,31 +73,32 @@ These methods are valueble when testing.
 ```js
 //INTERVAL
 //emits numbers 0,1,2,3,... every 1 sec and continues.
-const source$ = Rx.Observable.interval(1000);
+const source$ = interval(1000);
 //to emit only 5 numbers
-const source$ = Rx.Observable.interval(1000).take(5);
+const source$ = interval(1000).pipe(take(5));
 
 //*****************************
 //TIMER
 //Similer to interval. Start emitting after 5secs from page load and emits
 //emits numbers 0,1,2,3, .... in 1sec interval.
-const source$ = Rx.Observable.timer(5000,1000).take(5);
+const source$ = timer(5000,1000).pipe(take(5));
 
 //*****************************
 //RANGE
 //Emits 10 numbers starting from 5. Emited all at once. 
-const source$ = Rx.Observable.range(5,10);
+const source$ = range(5,10);
 
 //*****************************
 //MAP
 //Similar to Array.prototype.map(). It doesn't create a new Observable. The subscriber gets output 0,2,4,6,8
-const source$ = Rx.Observable.interval(1000)
-		.take(5).map(v => v *2);
+const source$ = interval(1000)
+      .pipe(take(5))
+      .pipe(map(v => v *2));
 
 //*****************************
 //PLUCK
 const users = [ {name:'Will', age:34},{name:'Tom', age:33},{name:'Jack', age:35}]
-const users$ = Rx.Observable.from(users).pluck('name'); //gets Will, Tom, Jack
+const names$ = from(users).pipe(pluck('name')); //gets Will, Tom, Jack
 
 //*****************************
 //MERGE
