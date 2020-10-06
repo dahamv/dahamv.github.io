@@ -101,7 +101,7 @@ const users = [ {name:'Will', age:34},{name:'Tom', age:33},{name:'Jack', age:35}
 const names$ = from(users).pipe(pluck('name')); //gets Will, Tom, Jack
 ```
 
-### merge and concat
+### merge
 ```js
 //can merge two or more Observables
 //import { merge } from 'rxjs/operators';
@@ -114,9 +114,10 @@ interval(500).pipe(take(10))  //emits 10 integers every 1/2 sec
 //you can also do
 //import { merge } from 'rxjs';
 const merged$ = merge(source1$, source2$, ... ) //All source observables emit at the same time.
+```
+### concat
 
-
-//CONCACT
+```js
 //can concatnate observables one right after another.
 const concatnated$ = concat(source1, source2); // source2 starts emiting once source1 is finished.
 ```
@@ -135,9 +136,9 @@ Source observable is your boss, and you are the flattening operator.
 When the boss gives some work (source emits a new value), you begin to work on a new task (creating a new inner observable).     
 If you are still in the middle of one task and your boss gives you something else to do, how do you handle the situation?    
 
+### mergeMap
+
 ```js
-//*****************************
-//MERGE MAP
 //The overachieving multitasker. You immediately begin working on everything your boss gives you as soon as he/she assigns it.
 //Without mergemap you have to use double subscribes. eg:
 
@@ -151,17 +152,18 @@ mappedSource.subscribe(
 //Better solution with mergeMap()
 //have to return the inner observable 
 source.pipe(mergeMap(v => { return of('My name is ' + v)})).subscribe(x => console.log(x));
+```
 
-//*****************************
-//SWITCH MAP
+### switchMap
+```js
 //Drop everything you were already doing and immediately begin the new task. This means only the latest and greatest values are provided.
-
-//*****************************
-//CONCACT MAP
+```
+### concatMap
+```js
 //You add your boss’s request to the end of your to-do list, but you completely finish whatever you were currently working on, and then you begin work on the next task. 
 //You eventually finish everything, and you do so in order.
-
-//*****************************
-//EXHAUST MAP
+```
+### exhaustMap
+```js
 //You completely ignore new requests from your boss until you are done with what you are working on, and only then do you begin listening for new tasks.
 ```
