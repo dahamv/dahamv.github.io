@@ -136,12 +136,7 @@ Source observable is your boss, and you are the flattening operator.
 When the boss gives some work (source emits a new value), you begin to work on a new task (creating a new inner observable).     
 If you are still in the middle of one task and your boss gives you something else to do, how do you handle the situation?    
 
-### mergeMap
-
 ```js
-//The overachieving multitasker. You immediately begin working on everything your boss gives you as soon as he/she assigns it.
-//Without mergemap you have to use double subscribes. eg:
-
 //returns an observable which emits strings 'A{param}', 'B{param}' ...
 const getDataObsrv = (number) => {
     //need the delay to see the difference between mergeMap() and switchMap()
@@ -150,7 +145,11 @@ const getDataObsrv = (number) => {
 }
 // an observable which emits numbers 1,2,3,4
 const numbersObsrv = from([1,2,3,4]);
+```
+### mergeMap
 
+```js
+//The overachieving multitasker. You immediately begin working on everything your boss gives you as soon as he/she assigns it.
 // using a regular map but has to use subscribe() twice
 numbersObsrv.pipe(
   map(number => getDataObsrv(number)),
@@ -174,6 +173,7 @@ numbersObsrv.pipe(
 // using map and switchAll
 numbersObsrv.pipe(
   map(number => getDataObsrv(number)),
+  //SwitchAll cancels the previous subscription and subscribes to the new one
   switchAll()
 ).subscribe(val => console.log(val));
 
