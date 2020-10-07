@@ -142,16 +142,29 @@ If you are still in the middle of one task and your boss gives you something els
 //The overachieving multitasker. You immediately begin working on everything your boss gives you as soon as he/she assigns it.
 //Without mergemap you have to use double subscribes. eg:
 
-const source = of('Pete','Mike', 'Joe'); //emits Strings
-const mappedSource = source.pipe(map( name=>  of('My name is ' + name ))); //name is a string. Emits created inner observables
-mappedSource.subscribe(
-      // handle inner observables which emits strings.
-      innerObsv => innerObsv.subscribe(innerString => console.log(innerString))
-)
+//returns an observable which emits strings 'A{param}', 'B{param}' ...
+const getDataObsrv = (number) => {
+    const letters$ = from(['A','B','C','D']);
+    return letters$.pipe(map(letter => `${letter}${number}`))
+}
+// an observable which emits numbers 1,2,3,4
+const numbersObsrv = from([1,2,3,4]);
 
-//Better solution with mergeMap()
-//have to return the inner observable 
-source.pipe(mergeMap(v => { return of('My name is ' + v)})).subscribe(x => console.log(x));
+// using a regular map but has to use subscribe() twice
+numbersObsrv.pipe(
+  map(number => getDataObsrv(number)),
+).subscribe(dataObsrv =>  dataObsrv.subscribe(val => console.log(val)));
+
+// using map and mergeAll
+numbersObsrv.pipe(
+  map(number => getDataObsrv(number)),
+  mergeAll()
+).subscribe(val =>  console.log(val));
+
+// Better solution: using mergeMap
+numbersObsrv.pipe(
+  mergeMap(number => getDataObsrv(number))
+).subscribe(val => console.log(val));
 ```
 
 ### switchMap
