@@ -137,11 +137,11 @@ When the boss gives some work (source emits a new value), you begin to work on a
 If you are still in the middle of one task and your boss gives you something else to do, how do you handle the situation?    
 
 ```js
-//returns an observable which emits strings 'A{param}', 'B{param}' ...
+//returns an observable which emits strings 'A{num}', 'B{num}' 
+//and in a second 'C{num}', 'D{num}'
 const getDataObsrv = (number) => {
-    //need the delay to see the difference between mergeMap() and switchMap()
-    const letters$ = from(['A','B','C','D']).pipe(delay(1000));
-    return letters$.pipe(map(letter => `${letter}${number}`))
+    const letters$ = from(['A','B']).pipe(merge(from(['C','D']).pipe(delay(1000))));
+    return letters$.pipe(map(letter => `${number}${letter}`))
 }
 // an observable which emits numbers 1,2,3,4
 const numbersObsrv = from([1,2,3,4]);
@@ -152,16 +152,20 @@ const numbersObsrv = from([1,2,3,4]);
 //The overachieving multitasker. You immediately begin working on everything your boss gives you as soon as he/she assigns it.
 // using a regular map but has to use subscribe() twice
 numbersObsrv.pipe(
-  map(number => getDataObsrv(number)),
-).subscribe(dataObsrv =>  dataObsrv.subscribe(val => console.log(val)));
+  map(number => getDataObsrv(number))
+  //first subscribe() gets 4 observables<string> for the 4 numbers straight away
+  //second subscribe() subscribes to the 4 observables seperately
+  //each second subscription gets 4 strings with a delay in between.
+).subscribe(val => val.subscribe(data => console.log(data)));
 
 // using map and mergeAll
 numbersObsrv.pipe(
   map(number => getDataObsrv(number)),
+  //non of the subscriptions are flattened after the delay
   mergeAll()
 ).subscribe(val =>  console.log(val));
 
-// Better solution: using mergeMap
+//using mergeMap
 numbersObsrv.pipe(
   mergeMap(number => getDataObsrv(number))
 ).subscribe(val => console.log(val));
@@ -173,7 +177,7 @@ numbersObsrv.pipe(
 // using map and switchAll
 numbersObsrv.pipe(
   map(number => getDataObsrv(number)),
-  //SwitchAll cancels the previous subscription and subscribes to the new one
+  //after the delay all subscriptions except the last second subscription are flattened
   switchAll()
 ).subscribe(val => console.log(val));
 
