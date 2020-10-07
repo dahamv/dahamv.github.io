@@ -144,7 +144,8 @@ If you are still in the middle of one task and your boss gives you something els
 
 //returns an observable which emits strings 'A{param}', 'B{param}' ...
 const getDataObsrv = (number) => {
-    const letters$ = from(['A','B','C','D']);
+    //need the delay to see the difference between mergeMap() and switchMap()
+    const letters$ = from(['A','B','C','D']).pipe(delay(1000));
     return letters$.pipe(map(letter => `${letter}${number}`))
 }
 // an observable which emits numbers 1,2,3,4
@@ -170,6 +171,16 @@ numbersObsrv.pipe(
 ### switchMap
 ```js
 //Drop everything you were already doing and immediately begin the new task. This means only the latest and greatest values are provided.
+// using map and switchAll
+numbersObsrv.pipe(
+  map(number => getDataObsrv(number)),
+  switchAll()
+).subscribe(val => console.log(val));
+
+// Better solution: using switchMap
+numbersObsrv.pipe(
+  switchMap(number => getDataObsrv(number))
+).subscribe(val => console.log(val));
 ```
 ### concatMap
 ```js
