@@ -135,20 +135,27 @@ Eg:  ```switchMap```, ```concatMap```, ```mergeMap```, and ```exhaustMap```.
 
 ```js
 //returns an observable which emits strings 'A{num}', 'B{num}' 
-//and in a second 'C{num}', 'D{num}'
+//and in a delayTime 'C{num}:delayTime', 'D{num}:delayTime'
 const getDataObsrv = (number) => {
-    const letters$ = from(['A','B']).pipe(merge(from(['C','D']).pipe(delay(1000))));
-    return letters$.pipe(map(letter => `${number}${letter}`))
+  //random time between 1 and 5 seconds
+  const delayTime = Math.floor(Math.random() * 5000) + 1;
+  console.log('delayTime: '+ delayTime);
+  const letters$ = from(['A','B']).pipe(
+          merge(from(['C:'+delayTime,'D:'+delayTime]).pipe(delay(delayTime)))
+          );
+  return letters$.pipe(map(letter => `${number}${letter}`))
 }
-// an observable which emits numbers 1,2,3,4
-const numbersObsrv = from([1,2,3,4]);
+// an observable which emits 1,2,3 and after 5 secs 4,5
+const numbersObsrv = from([1,2,3]).pipe(
+          merge(from([4,5]).pipe(delay(5000)))
+          );;
 
 // using a regular map - same as mergeMap()
 numbersObsrv.pipe(
   map(number => getDataObsrv(number))
-  //first subscribe() gets 4 observables<string> for the 4 numbers straight away
-  //second subscribe() subscribes to the 4 observables seperately
-  //each second subscription gets 4 strings with a 1sec delay in between.
+  //first subscribe() gets 5 observables<string> for 1,2,3 numbers straight away and 2 observables for 4,5 after 5 secs
+  //second subscribe() subscribes to the 5 observables seperately
+  //each second subscription gets 4 strings A,B,C,D with a delayTime in between.
 ).subscribe(val => val.subscribe(data => console.log(data),
                                  alert, 
                                  () => console.log('completed2')) // 4 second subscriptions to the 4 "inner observable"s 
@@ -161,11 +168,11 @@ numbersObsrv.pipe(
 // using map and mergeAll
 numbersObsrv.pipe(
   map(number => getDataObsrv(number)),
-  //non of the subscriptions are flattened after the delay. All observables are merged so 1 subscription
+  //non of the subscriptions are flattened after the delay. All observables are merged so 1 subscription. Doesn't consider the order.
   mergeAll()
 ).subscribe(val =>  console.log(val),alert,()=> console.log('completed'));
 
-//using mergeMap
+//same using mergeMap
 numbersObsrv.pipe(
   mergeMap(number => getDataObsrv(number))
 ).subscribe(val => console.log(val),alert,()=> console.log('completed'));
@@ -181,7 +188,7 @@ numbersObsrv.pipe(
   switchAll()
 ).subscribe(val => console.log(val),alert, ()=> console.log('completed'));
 
-// Better solution: using switchMap
+// same using switchMap
 numbersObsrv.pipe(
   switchMap(number => getDataObsrv(number))
 ).subscribe(val => console.log(val),alert, ()=> console.log('completed'));
@@ -189,10 +196,30 @@ numbersObsrv.pipe(
 
 ### concatMap
 ```js
-//You add your boss’s request to the end of your to-do list, but you completely finish whatever you were currently working on, and then you begin work on the next task. 
-//You eventually finish everything, and you do so in order.
+//eventually completely finishes all subscriptions, and its done so in order.
+// using map and concatAll
+numbersObsrv.pipe(
+  map(number => getDataObsrv(number)),
+  //considers the order. Waits till the first inner observable completes to start the next one.
+  concatAll()
+).subscribe(val => console.log(val),alert, ()=> console.log('completed'));
+
+// same using concatMap. looks like slightly modified but same output.
+numbersObsrv.pipe(
+  concatMap(number => getDataObsrv(number))
+).subscribe(val => console.log(val),alert, ()=> console.log('completed'));
 ```
 ### exhaustMap
 ```js
-//You completely ignore new requests from your boss until you are done with what you are working on, and only then do you begin listening for new tasks.
+// using map and exhaust
+numbersObsrv.pipe(
+  map(number => getDataObsrv(number)),
+  //considers the order. Waits till the first inner observable completes to start the next one.
+  exhaust()
+).subscribe(val => console.log(val),alert, ()=> console.log('completed'));
+
+// same using exhaustMap
+numbersObsrv.pipe(
+  exhaustMap(number => getDataObsrv(number))
+).subscribe(val => console.log(val),alert, ()=> console.log('completed'));
 ```
