@@ -27,15 +27,19 @@
   
 **HTML template** --> Derectives/child componenets to do the redering       
 
-### Componenets and Modules
+### Componenets
 
-Componenets hava a **Selector** = ```<app-custormer></app-custormer>```
+A componenet hava a **Selector** = ```<app-custormer></app-custormer>```
 
 - **Imports** - ES2015 import statements
 - **Decorators** - Matadata about the components. ```@Componenet({selector:..,templateUrl:..})```. All decorators are functions.
   - **selector** - tag name for this componenet.```selector:app-custormers```
   - **template** - ```templateUrl:./customers/componenet.html```
 - **Class** - Get data in and out of the template thats rendered in the UI. ```export class CustomersComponenet```. Another componenet can import.
+
+ ### Modules
+
+Act like buckets to organize componenets and services. An angular app should have atleast one module - App module.
 
 ### main.ts
 First thing that really fires up at runtime is **main.ts**. (Normally don't have to mess with this much).
