@@ -131,10 +131,7 @@ Eg:  ```switchMap```, ```concatMap```, ```mergeMap```, and ```exhaustMap```.
 - **If there is only one value** emitted from the source or **there is a long time between emissions** to do inner calculations before there is a new value from the source observable, **there is no difference in how the flattening operators behave**
 - The difference come when there are **multiple overlapping emissions from the source**.
 
-### An analogy
-Source observable is your boss, and you are the flattening operator.    
-When the boss gives some work (source emits a new value), you begin to work on a new task (creating a new inner observable).     
-If you are still in the middle of one task and your boss gives you something else to do, how do you handle the situation?    
+### Example using map()
 
 ```js
 //returns an observable which emits strings 'A{num}', 'B{num}' 
@@ -154,42 +151,42 @@ numbersObsrv.pipe(
   //each second subscription gets 4 strings with a 1sec delay in between.
 ).subscribe(val => val.subscribe(data => console.log(data),
                                  alert, 
-                                 () => console.log('completed2')) // 4 second subscriptions
+                                 () => console.log('completed2')) // 4 second subscriptions to the 4 "inner observable"s 
             ,alert, 
-            () => console.log('completed1')); //1 first subscription
+            () => console.log('completed1')); //1 first subscription to the "higher-order observable" (or Observable<Observable<T>>)
 ```
 ### mergeMap
 
 ```js
-//The overachieving multitasker. You immediately begin working on everything your boss gives you as soon as he/she assigns it.
 // using map and mergeAll
 numbersObsrv.pipe(
   map(number => getDataObsrv(number)),
-  //non of the subscriptions are flattened after the delay
+  //non of the subscriptions are flattened after the delay. All observables are merged so 1 subscription
   mergeAll()
-).subscribe(val =>  console.log(val));
+).subscribe(val =>  console.log(val),alert,()=> console.log('completed'));
 
 //using mergeMap
 numbersObsrv.pipe(
   mergeMap(number => getDataObsrv(number))
-).subscribe(val => console.log(val));
+).subscribe(val => console.log(val),alert,()=> console.log('completed'));
 ```
 
 ### switchMap
 ```js
-//Drop everything you were already doing and immediately begin the new task. This means only the latest and greatest values are provided.
 // using map and switchAll
 numbersObsrv.pipe(
   map(number => getDataObsrv(number)),
   //after the delay all subscriptions except the last second subscription are flattened
+  //only the most recent inner observable may be subscribed to at any point in time.
   switchAll()
-).subscribe(val => console.log(val));
+).subscribe(val => console.log(val),alert, ()=> console.log('completed'));
 
 // Better solution: using switchMap
 numbersObsrv.pipe(
   switchMap(number => getDataObsrv(number))
-).subscribe(val => console.log(val));
+).subscribe(val => console.log(val),alert, ()=> console.log('completed'));
 ```
+
 ### concatMap
 ```js
 //You add your boss’s request to the end of your to-do list, but you completely finish whatever you were currently working on, and then you begin work on the next task. 
