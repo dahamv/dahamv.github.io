@@ -26,9 +26,11 @@
 <img src="/assets/images/AngularBigPicture.png" alt="drawing" width="400" height="300"/>
   
 **HTML template** --> Derectives/child componenets to do the redering       
-**Selector** = ```<app-custormer></app-custormer>```
 
 ### Componenets and Modules
+
+Componenets hava a **Selector** = ```<app-custormer></app-custormer>```
+
 - **Imports** - ES2015 import statements
 - **Decorators** - Matadata about the components. ```@Componenet({selector:..,templateUrl:..})```. All decorators are functions.
   - **selector** - tag name for this componenet.```selector:app-custormers```
