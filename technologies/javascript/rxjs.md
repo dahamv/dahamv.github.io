@@ -145,19 +145,23 @@ const getDataObsrv = (number) => {
 }
 // an observable which emits numbers 1,2,3,4
 const numbersObsrv = from([1,2,3,4]);
+
+// using a regular map - same as mergeMap()
+numbersObsrv.pipe(
+  map(number => getDataObsrv(number))
+  //first subscribe() gets 4 observables<string> for the 4 numbers straight away
+  //second subscribe() subscribes to the 4 observables seperately
+  //each second subscription gets 4 strings with a 1sec delay in between.
+).subscribe(val => val.subscribe(data => console.log(data),
+                                 alert, 
+                                 () => console.log('completed2')) // 4 second subscriptions
+            ,alert, 
+            () => console.log('completed1')); //1 first subscription
 ```
 ### mergeMap
 
 ```js
 //The overachieving multitasker. You immediately begin working on everything your boss gives you as soon as he/she assigns it.
-// using a regular map but has to use subscribe() twice
-numbersObsrv.pipe(
-  map(number => getDataObsrv(number))
-  //first subscribe() gets 4 observables<string> for the 4 numbers straight away
-  //second subscribe() subscribes to the 4 observables seperately
-  //each second subscription gets 4 strings with a delay in between.
-).subscribe(val => val.subscribe(data => console.log(data)));
-
 // using map and mergeAll
 numbersObsrv.pipe(
   map(number => getDataObsrv(number)),
