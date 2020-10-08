@@ -124,7 +124,7 @@ const concatnated$ = concat(source1, source2); // source2 starts emiting once so
 
 ## Rxjs Flattening Operators
 
-Eg:  ```switchMap```, ```concatMap```, ```mergeMap```, and ```exhaustMap```. 
+Eg:  ```mergeMap```, ```switchMap```, ```concatMap``` and ```exhaustMap```. 
 - Like all pipeable operators, they begin with a source observable that is emitting values.
 - Each emitted value from the source observable is mapped to another observable. (note that ```map``` doesn't create a new observable)
 - The inner observable is then **"lifted"** up into the primary pipeline, so what comes out of the other side of a flattening operator is always the **inner observable**.
@@ -172,7 +172,7 @@ numbersObsrv.pipe(
                                  alert, 
                                  () => console.log('completed2')) // 4 second subscriptions to the 4 "inner observable"s 
             ,alert, 
-            () => console.log('completed1')); //1 first subscription to the "higher-order observable" (or Observable<Observable<T>>)
+            () => console.log('completed1')); //1 first subscription to the "higher-order observable" (Observable<Observable<T>>)
 ```
 ### mergeMap
 
@@ -180,7 +180,7 @@ numbersObsrv.pipe(
 // using map and mergeAll
 numbersObsrv.pipe(
   map(number => getDataObsrv(number)),
-  //non of the subscriptions are flattened after the delay. All observables are merged so 1 subscription. Doesn't consider the order.
+  //All observables are merged so 1 subscription. Doesn't consider the order.
   mergeAll()
 ).subscribe(val =>  console.log(val),alert,()=> console.log('completed'));
 
@@ -195,7 +195,6 @@ numbersObsrv.pipe(
 // using map and switchAll
 numbersObsrv.pipe(
   map(number => getDataObsrv(number)),
-  //after the delay all subscriptions except the last second subscription are flattened
   //only the most recent inner observable may be subscribed to at any point in time.
   switchAll()
 ).subscribe(val => console.log(val),alert, ()=> console.log('completed'));
