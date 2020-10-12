@@ -375,7 +375,7 @@ see [list of RsJs operators](https://rxjs-dev.firebaseapp.com/guide/operators)
 - Routing allows to define a part of a page where the component are going to be loaded dynamically
 - ```<router-outlet></router-outlet>``` tells where on the page when the user navigates to a url do we wan't to load the different component.
 
-A General Rule - Every feature will have at least one module associated with it. Its benificial for maintanance and potentially for routing.
+A General Rule - Every feature will have at least one module associated with it. Its benificial for maintanance and potentially for routing. So **one feature -> one module**
 
 ### App-routing module
 ```js
@@ -387,3 +387,5 @@ A General Rule - Every feature will have at least one module associated with it.
 })
 export class AppRoutingModule { }
 ```
+
+
