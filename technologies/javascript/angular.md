@@ -369,4 +369,21 @@ see [list of RsJs operators](https://rxjs-dev.firebaseapp.com/guide/operators)
   ).subscribe(result => console.log(result));
 ```
 
-https://scrimba.com/p/pQxesM/cQrzNs3
+## Routing
+- Routes can hook a specific URL to a componenet.
+- componenets can be loaded into a ```<router-outlet></router-outlet>```
+- Routing allows to define a part of a page where the component are going to be loaded dynamically
+- ```<router-outlet></router-outlet>``` tells where on the page when the user navigates to a url do we wan't to load the different component.
+
+A General Rule - Every feature will have at least one module associated with it. Its benificial for maintanance and potentially for routing.
+
+### App-routing module
+```js
+@NgModule({
+  //You only call forRoot one time in an application.
+  imports: [RouterModule.forRoot(routes)],
+  //So that any module which imports app-routing module has access to RouterModule.
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+```
