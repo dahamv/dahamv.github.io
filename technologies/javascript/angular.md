@@ -387,5 +387,7 @@ A General Rule - Every feature will have at least one module associated with it.
 })
 export class AppRoutingModule { }
 ```
+Good explanation of pathMatch: full
+https://stackoverflow.com/questions/42992212/in-angular-what-is-pathmatch-full-and-what-effect-does-it-have
 
 
