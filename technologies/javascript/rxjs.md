@@ -125,6 +125,7 @@ const concatnated$ = concat(source1, source2); // source2 starts emiting once so
 ## Rxjs Flattening Operators
 
 Eg:  ```mergeMap```, ```switchMap```, ```concatMap``` and ```exhaustMap```. 
+- Flattening just means — **subscribing inside a subscribe**
 - Like all pipeable operators, they begin with a source observable that is emitting values.
 - Each emitted value from the source observable is mapped to another observable. (note that ```map``` doesn't create a new observable)
 - The inner observable is then **"lifted"** up into the primary pipeline, so what comes out of the other side of a flattening operator is always the **inner observable**.
